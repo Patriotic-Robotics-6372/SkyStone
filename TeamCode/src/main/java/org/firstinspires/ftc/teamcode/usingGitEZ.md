@@ -15,10 +15,15 @@
 ## Commit from Android Studio to GitHub
 - Go to Terminal
 - Type in:
+
 > git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone
+
 > git add --all
+
 > git commit -m "Commit message goes here"
+
 > git push origin master
+
 * If this does not work, try putting Git under Program Files or changing the PATH variable in windows so that "git" refers to the git program.
 
 ## GitHub to Android Studio 

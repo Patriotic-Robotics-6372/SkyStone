@@ -32,7 +32,7 @@ git commit -m "Commit message goes here"
 git push origin master
 ```
 
-* If this does not work, try putting Git under Program Files or changing the PATH variable in windows so that "git" refers to the git program.
+* If this does not work, try putting Git under Program Files or changing the PATH variable in windows so that "git" refers to the git program. (or if you're like me, sometimes it just works when you restart the computer)
 
 ## GitHub to Android Studio 
 - File

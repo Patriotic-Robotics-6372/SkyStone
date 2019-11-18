@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Stable.Teleop;
+package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
+import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
 
 /*
     author: Jacob Marinas

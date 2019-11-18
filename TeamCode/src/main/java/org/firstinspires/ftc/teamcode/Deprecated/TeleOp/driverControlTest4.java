@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.unused.teleop;
+package org.firstinspires.ftc.teamcode.Deprecated.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

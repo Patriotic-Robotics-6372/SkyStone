@@ -17,7 +17,7 @@
 - Type in:
 
 ```powershell
-terminal git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone
+git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone
 ```
 
 ```powershell

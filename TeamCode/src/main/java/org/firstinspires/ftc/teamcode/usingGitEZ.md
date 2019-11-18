@@ -16,21 +16,21 @@
 - Go to Terminal
 - Type in:
 
-'''powershell
+```powershell
 terminal git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone
-'''
+```
 
-'''powershell
+```powershell
 git add --all
-'''
+```
 
-'''powershell
+```powershell
 git commit -m "Commit message goes here"
-'''
+```
 
-'''powershell
+```powershell
 git push origin master
-'''
+```
 
 * If this does not work, try putting Git under Program Files or changing the PATH variable in windows so that "git" refers to the git program.
 
@@ -44,8 +44,8 @@ git push origin master
 ## Updating changes made in GitHub to Android Studio
 - Go to Terminal
 - Type in: 
-'''powershell 
+```powershell 
 git pull origin master
-'''
+```
 
 __Jacob Marinas__

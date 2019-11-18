@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 This folder contains the latest, newest, possibly untested code. Having seperate folders for Stable and CuttingEdge is important because if I want to make changes with the code, it could mess up the program, and if we only have one file that's the stable one, then it wastes time undoing the changes I made. So instead, I'm going to make changes in a different file, that way the original file is still going to work while also being able to experiment with new things.
-=======
-This folder contains the latest, newest, possibly untested code. Having seperate folders for Stable and CuttingEdge is important because if I want to make changes with the code, it could mess up the program, and if we only have one file that's the stable one, then it wastes time undoing the changes I made. So instead, I'm going to make changes in a different file, that way the original file is still going to work while also being able to experiment with new th
->>>>>>> 95a3bbd626589779a6f1655eee77c8ff16ae529b
+

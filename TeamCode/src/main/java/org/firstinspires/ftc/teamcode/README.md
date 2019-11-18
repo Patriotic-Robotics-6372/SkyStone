@@ -2,7 +2,7 @@
 
 Workflow:
 
-1) Code starts in CuttingEdge
+1) New / Updated Code starts in CuttingEdge
 - Tests are made to CuttingEdge program
 - If it works, push to Stable
 2) Stable programs

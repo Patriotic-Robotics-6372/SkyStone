@@ -16,13 +16,13 @@
 - Go to Terminal
 - Type in:
 
-> git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone
+'git remote add origin https://github.com/Patriotic-Robotics-6372/SkyStone'
 
-> git add --all
+'git add --all'
 
-> git commit -m "Commit message goes here"
+'git commit -m "Commit message goes here"'
 
-> git push origin master
+'git push origin master'
 
 * If this does not work, try putting Git under Program Files or changing the PATH variable in windows so that "git" refers to the git program.
 
@@ -36,4 +36,6 @@
 ## Updating changes made in GitHub to Android Studio
 - Go to Terminal
 - Type in: 
-> git pull origin master
+'git pull origin master'
+
+__Jacob Marinas__

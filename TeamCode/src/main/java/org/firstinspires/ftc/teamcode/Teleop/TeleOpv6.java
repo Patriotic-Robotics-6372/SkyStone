@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="Driver Control Prototype")
-public class TeleOp_PR_v6 extends OpMode {
+public class TeleOpv6 extends OpMode {
 
     private DcMotor backLeft, backRight, frontLeft, frontRight,
             lift,

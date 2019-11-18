@@ -6,7 +6,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Hardware.PRRobot;
 
-@TeleOp (name = 'Driver Control w/ PRRobot');
+/*
+    author: Jacob Marinas
+    date: 11/18/19
+    desc: teleop w/ PRRobot. left side / right side goes forwards / backwards, strafe, pivot, lift, intake.
+ */
+
+@TeleOp(name = 'Driver Control w/ PRRobot')
 public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters
     PRRobot prBot =
@@ -14,11 +20,13 @@ public class TeleOpv7 extends OpMode {
     @Override
     public void init() {
         prBot.init(HardwareMap);
-        prBot.float();
+        prBot.noBrake();
+        prBot.start();
     }
     @Override
     public void loop() {
         // define controller variables
+        // should we define this in PRRobot? even if autonomous doesn't require it...
         prBot.leftStick1 = gamepad1.left_stick_y;
         prBot.rightStick1 = -gamepad1.right_stick_y;
         prBot.dpadLeft1 = gamepad1.dpad_left;

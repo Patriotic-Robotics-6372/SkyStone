@@ -8,6 +8,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+/*
+    author: Jacob Marinas
+    date: 11/18/19
+    desc: defines robot for use in autonomous and teleop; included is robotStatus() made by me
+          needs parameters for baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed where double is between 0 and 1 (max speed)
+          open and close, where int is between 180 and 0
+ */
+
 public class PRRobot {
 
     // defining motors and servos
@@ -61,7 +69,7 @@ public class PRRobot {
 
     public void init(HardwareMap hwMap){
 
-        // init variables to phone
+        // init hardwaremap variables to phone
 
         backLeft = hwMap.dcMotor.get("backLeft");
         backRight = hwMap.dcMotor.get("backRight");
@@ -93,6 +101,8 @@ public class PRRobot {
     public void start() {
         runtime.reset();
     }
+
+    // autonomous functions
 
     public void goForward (double leftPower, double rightPower){
         frontRight.setPower(rightPower);
@@ -132,7 +142,7 @@ public class PRRobot {
         backRight.setPower(rightPower);
     }
 
-    public void float(){
+    public void noBrake(){
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -154,9 +164,11 @@ public class PRRobot {
         intake: open, neutral, closed
         pivot: down, neutral, up
         strafe: left, neutral, right
-    */
+        */
 
     public void robotStatus() {
+
+        // used to check how the robot is doing
 
         fL = frontLeft.getPower();
         fR = frontRight.getPower();

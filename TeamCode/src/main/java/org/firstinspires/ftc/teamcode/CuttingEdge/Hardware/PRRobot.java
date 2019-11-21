@@ -54,6 +54,8 @@ public class PRRobot {
 
     public ElapsedTime runtime = new ElapsedTime();
 
+    public HardwareMap hwMap;
+
     // constructor
 
     public PRRobot(double baseSpeed, double pivotIntakeSpeed, double strafeSpeed, double liftSpeed, double open, double close) {

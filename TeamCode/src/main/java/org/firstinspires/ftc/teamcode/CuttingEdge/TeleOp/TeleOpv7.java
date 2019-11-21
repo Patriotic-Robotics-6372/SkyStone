@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.Hardware;
 
 import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
 
@@ -17,9 +18,10 @@ public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters
     PRRobot prBot =
             new PRRobot(1, .8, 1, 0.8, 180, 0);
+    //hwMap = new HardwareMap();
     @Override
     public void init() {
-        prBot.init(HardwareMap);
+        prBot.init(hardwareMap);
         prBot.noBrake();
         prBot.start();
     }

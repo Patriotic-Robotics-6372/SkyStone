@@ -87,11 +87,12 @@ public class PRRobot {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        /*
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+         */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -171,7 +172,7 @@ public class PRRobot {
     public void robotStatus() {
 
         // used to check how the robot is doing
-
+        /*
         fL = frontLeft.getPower();
         fR = frontRight.getPower();
         bL = backLeft.getPower();
@@ -253,5 +254,7 @@ public class PRRobot {
         telemetry.addData("controller2: ", controller2);
         telemetry.addData("TimeElapsed: ", runtime);
         telemetry.update();
+        */
+
     }
 }

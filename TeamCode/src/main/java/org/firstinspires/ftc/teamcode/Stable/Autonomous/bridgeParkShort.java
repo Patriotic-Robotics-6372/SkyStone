@@ -31,7 +31,7 @@ public class bridgeParkShort extends LinearOpMode {
 
         waitForStart();
 
-        goForward(1,1,800);
+        goForward(1,1,2800);
     }
 
     public void goForward (double leftPower, double rightPower,int milliseconds){

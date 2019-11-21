@@ -56,6 +56,8 @@ public class PRRobot {
 
     public HardwareMap hwMap;
 
+    public Telemetry telemetry;
+
     // constructor
 
     public PRRobot(double baseSpeed, double pivotIntakeSpeed, double strafeSpeed, double liftSpeed, double open, double close) {
@@ -66,8 +68,6 @@ public class PRRobot {
         this.open = open;
         this.close = close;
     }
-
-    public static Telemetry telemetry;
 
     public void init(HardwareMap hwMap){
 
@@ -87,12 +87,11 @@ public class PRRobot {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
-        /*
+
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-         */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -107,40 +106,40 @@ public class PRRobot {
 
     // autonomous functions
 
-    public void goForward (double leftPower, double rightPower){
+    public void goForward(double leftPower, double rightPower){
         frontRight.setPower(rightPower);
         frontLeft.setPower(leftPower);
         backRight.setPower(rightPower);
         backLeft.setPower(leftPower);
     }
 
-    public void goBackward (double leftPower, double rightPower){
+    public void goBackward(double leftPower, double rightPower){
         frontRight.setPower(rightPower);
         frontLeft.setPower(leftPower);
         backRight.setPower(rightPower);
         backLeft.setPower(leftPower);
     }
 
-    public void pivotRightTurn (double leftPower, double rightPower){
+    public void pivotRightTurn(double leftPower, double rightPower){
         frontRight.setPower(-rightPower);
         frontLeft.setPower (leftPower);
         backRight.setPower(-rightPower);
         backLeft.setPower(rightPower);
     }
 
-    public void pivotLeftTurn (double leftPower, double rightPower){
+    public void pivotLeftTurn(double leftPower, double rightPower){
         frontRight.setPower(rightPower);
         frontLeft.setPower(-leftPower);
         backRight.setPower(rightPower);
         backLeft.setPower(-leftPower);
     }
 
-    public void pointRightTurn (double leftPower){
+    public void pointRightTurn(double leftPower){
         frontLeft.setPower(leftPower);
         backLeft.setPower(leftPower);
     }
 
-    public void pointLeftTurn (double rightPower){
+    public void pointLeftTurn(double rightPower){
         frontRight.setPower(rightPower);
         backRight.setPower(rightPower);
     }
@@ -169,10 +168,10 @@ public class PRRobot {
         strafe: left, neutral, right
         */
 
-    public void robotStatus() {
+    public void robotStatus(Telemetry telemetry) {
 
         // used to check how the robot is doing
-        /*
+
         fL = frontLeft.getPower();
         fR = frontRight.getPower();
         bL = backLeft.getPower();
@@ -254,7 +253,6 @@ public class PRRobot {
         telemetry.addData("controller2: ", controller2);
         telemetry.addData("TimeElapsed: ", runtime);
         telemetry.update();
-        */
 
     }
 }

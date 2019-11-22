@@ -1,3 +1,3 @@
 ## test
 
-This commit is from Android Studio, daodnapasdh
+This commit is from Android Studio

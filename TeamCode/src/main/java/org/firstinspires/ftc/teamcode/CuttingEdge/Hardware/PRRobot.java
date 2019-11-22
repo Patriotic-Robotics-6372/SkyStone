@@ -162,7 +162,7 @@ public class PRRobot {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void speedChange(int increase, int sign){
+    public void speedChange(double increase, int sign){
         baseSpeed += increase * sign;
         strafeSpeed += increase * sign;
     }

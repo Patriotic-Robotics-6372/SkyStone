@@ -22,7 +22,7 @@ public class TeleOpv7 extends OpMode {
     @Override
     public void init() {
         prBot.init(hardwareMap);
-        prBot.brake();
+        prBot.noBrake();
         prBot.start();
     }
     @Override
@@ -135,12 +135,10 @@ public class TeleOpv7 extends OpMode {
         }
 
         if (prBot.dpadUp1) {
-            prBot.baseSpeed = 1;
-            prBot.strafeSpeed = 1;
+            prBot.speedChange(.1, 1);
         }
         if (prBot.dpadDown1) {
-            prBot.baseSpeed = 0.5;
-            prBot.strafeSpeed = 0.5;
+            prBot.speedChange(.1, -1);
         }
 
         if (prBot.b2) {
@@ -162,11 +160,11 @@ public class TeleOpv7 extends OpMode {
         }
 
         if (prBot.x2) {
-            prBot.liftSpeed = 0.5;
+            prBot.liftSpeed -= .1;
         }
 
         if (prBot.y2) {
-            prBot.liftSpeed = 1;
+            prBot.liftSpeed += .1;
         }
 
         if (prBot.rightBumper2) {

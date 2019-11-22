@@ -162,6 +162,13 @@ public class PRRobot {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+    public void speedChange(int increase, int sign){
+        baseSpeed += increase * sign;
+        strafeSpeed += increase * sign;
+    }
+
+
+
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /
         leftSide: backwards, neutral, forwards

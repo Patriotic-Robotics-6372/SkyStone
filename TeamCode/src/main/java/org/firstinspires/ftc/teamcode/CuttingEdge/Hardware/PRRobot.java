@@ -88,10 +88,14 @@ public class PRRobot {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        /*
+
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+         */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);

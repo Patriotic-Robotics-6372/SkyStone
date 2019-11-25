@@ -126,10 +126,14 @@ public class PRRobot {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        /*
+
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+         */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -195,6 +199,13 @@ public class PRRobot {
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+
+    public void speedChange(double increase, int sign){
+        baseSpeed += increase * sign;
+        strafeSpeed += increase * sign;
+    }
+
+
 
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /

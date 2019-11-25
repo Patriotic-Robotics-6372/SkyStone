@@ -44,7 +44,7 @@ public class TeleOpv5 extends OpMode {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        strafeSpeed = 0.8;
+        strafeSpeed = 1;
         pivotSpeed = 0.0;
         open = 0.4;
         close = -0.4;
@@ -310,6 +310,10 @@ public class TeleOpv5 extends OpMode {
         telemetry.addData("strafeSpeed: ", strafeSpeed);
         telemetry.addData("leftPinch: ", leftPinch.getPower());
         telemetry.addData("rightPinch: ", rightPinch.getPower());
+        telemetry.addData("frontRight: ", rightPinch.getPower());
+        telemetry.addData("frontLeft: ", rightPinch.getPower());
+        telemetry.addData("backRight: ", rightPinch.getPower());
+        telemetry.addData("backLeft: ", rightPinch.getPower());
         updateTelemetry(telemetry);
         telemetry.update();
     }

@@ -69,6 +69,44 @@ public class PRRobot {
         this.close = close;
     }
 
+    public PRRobot(String mode) {
+        switch (mode) {
+            case "stable":
+                this.baseSpeed = 1;
+                this.pivotIntakeSpeed = .8;
+                this.strafeSpeed = 1;
+                this.liftSpeed = .8;
+                this.open = 1;
+                this.close = -1;
+                break;
+            case "fast":
+                this.baseSpeed = 1;
+                this.pivotIntakeSpeed = .8;
+                this.strafeSpeed = 1;
+                this.liftSpeed = 1;
+                this.open = 1;
+                this.close = -1;
+                break;
+            case "slow":
+                this.baseSpeed = .5;
+                this.pivotIntakeSpeed = .8;
+                this.strafeSpeed = .5;
+                this.liftSpeed = .5;
+                this.open = .5;
+                this.close = .5;
+                break;
+        }
+    }
+
+    public PRRobot() {
+        this.baseSpeed = 1;
+        this.pivotIntakeSpeed = .8;
+        this.strafeSpeed = 1;
+        this.liftSpeed = .8;
+        this.open = 1;
+        this.close = -1;
+    }
+
     public void init(HardwareMap hwMap){
 
         // init hardwaremap variables to phone

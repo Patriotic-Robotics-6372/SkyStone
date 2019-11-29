@@ -20,6 +20,11 @@ public class redSquare2 extends LinearOpMode {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         waitForStart();
 
         driveDistance(6, .5,.5);
@@ -31,22 +36,45 @@ public class redSquare2 extends LinearOpMode {
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftTickGoal = frontLeft.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
+        leftTickGoal *= -1;
         rightTickGoal = frontRight.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
 
-        frontLeft.setTargetPosition(leftTickGoal);
+        //frontLeft.setTargetPosition(leftTickGoal);
         frontRight.setTargetPosition(rightTickGoal);
 
-        while (Math.abs(frontLeft.getCurrentPosition()) < leftTickGoal ||
-                Math.abs(frontRight.getCurrentPosition()) < rightTickGoal) {
+        while (/*frontLeft.getCurrentPosition() > leftTickGoal ||*/
+                frontRight.getCurrentPosition() < rightTickGoal) {
 
-            frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             frontLeft.setPower(leftPower);
             frontRight.setPower(rightPower);
             backLeft.setPower(frontLeft.getPower());
             backRight.setPower(frontRight.getPower());
+
+            telemetry.addData("frontLeftPos: ", frontLeft.getCurrentPosition());
+            telemetry.addData("frontRightPos: ", frontRight.getCurrentPosition());
+            telemetry.addData("leftTickGoal: ", leftTickGoal);
+            telemetry.addData("rightTickGoal: ", rightTickGoal);
+
+            telemetry.addData("frontLeft: ", frontLeft.getPower());
+            telemetry.addData("frontRight: ", frontRight.getPower());
+            telemetry.addData("backLeft: ", backLeft.getPower());
+            telemetry.addData("backRight: ", backRight.getPower());
+            updateTelemetry(telemetry);
+            telemetry.update();
         }
+
+        telemetry.addData("frontLeftPos: ", frontLeft.getCurrentPosition());
+        telemetry.addData("frontRightPos: ", frontRight.getCurrentPosition());
+        telemetry.addData("leftTickGoal: ", leftTickGoal);
+        telemetry.addData("rightTickGoal: ", rightTickGoal);
+
+        telemetry.addData("frontLeft: ", frontLeft.getPower());
+        telemetry.addData("frontRight: ", frontRight.getPower());
+        telemetry.addData("backLeft: ", backLeft.getPower());
+        telemetry.addData("backRight: ", backRight.getPower());
 
         telemetry.addData("Left Enc ", frontLeft.getCurrentPosition());
         telemetry.addData("Right Enc ", frontRight.getCurrentPosition());

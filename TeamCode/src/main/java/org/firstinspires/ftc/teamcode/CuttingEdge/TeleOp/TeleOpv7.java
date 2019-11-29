@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
 public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters
     PRRobot prBot =
-            new PRRobot();
+            new PRRobot("stable");
     //hwMap = new HardwareMap();
     @Override
     public void init() {
         prBot.init(hardwareMap);
-        prBot.noBrake();
+        //prBot.noBrake();
         prBot.start();
     }
     @Override

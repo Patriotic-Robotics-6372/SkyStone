@@ -186,6 +186,8 @@ public class PRRobot {
         backRight.setPower(rightPower);
     }
 
+    /*
+
     public void noBrake(){
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -200,9 +202,23 @@ public class PRRobot {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+
+     */
+
     public void speedChange(double increase, int sign){
         baseSpeed += increase * sign;
         strafeSpeed += increase * sign;
+    }
+
+    public void driveDistance(double inches, double leftPower, double rightPower) {
+
+    }
+
+    public void stop() {
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
     }
 
 

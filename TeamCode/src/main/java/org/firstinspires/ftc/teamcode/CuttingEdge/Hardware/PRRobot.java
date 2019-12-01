@@ -26,14 +26,6 @@ public class PRRobot {
 
     public CRServo leftPinch, rightPinch;
 
-    // status variables; tells state of component
-
-    public int leftSideStatus, rightSideStatus,
-            liftStatus,
-            intakeStatus,
-            pivotStatus,
-            strafeStatus;
-
     // speed modifiers
 
     public double baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed,
@@ -50,7 +42,21 @@ public class PRRobot {
     public boolean controller1, dpadLeft1, dpadRight1, dpadUp1, dpadDown1,
             controller2, dpadUp2, dpadDown2, rightBumper2, leftBumper2, a2, b2, x2, y2;
 
-    // time
+    // enums
+
+    public enum Status {
+        NEUTRAL, BACKWARDS, FORWARDS, DOWN, UP, OPEN, CLOSE, LEFT, RIGHT;
+    }
+
+    // Status objects
+
+    public Status leftSideStatus, rightSideStatus,
+            liftStatus,
+            intakeStatus,
+            pivotStatus,
+            strafeStatus;
+
+    // objects
 
     public ElapsedTime runtime = new ElapsedTime();
 
@@ -246,66 +252,66 @@ public class PRRobot {
         lPv = leftPivot.getPower();
 
         switch (leftSideStatus) {
-            case -1:
+            case FORWARDS:
                 telemetry.addData("leftSide: ", "Forwards: " + fL);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("leftSide: ", "Neutral" + "0");
                 break;
-            case 1:
+            case BACKWARDS:
                 telemetry.addData("leftSide: ", "Backwards: " + fL);
                 break;
         }
         switch (rightSideStatus) {
-            case -1:
+            case BACKWARDS:
                 telemetry.addData("rightSide: ", "Backwards: " + fR);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("rightSide: ", "Neutral");
                 break;
-            case 1:
+            case FORWARDS:
                 telemetry.addData("rightSide: ", "Forwards: " + fR);
                 break;
         }
         switch (liftStatus) {
-            case -1:
+            case DOWN:
                 telemetry.addData("lift: ", "Down: " + L);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("lift: ", "Neutral");
                 break;
-            case 1:
+            case UP:
                 telemetry.addData("lift: ", "Up: " + L);
         }
         switch (intakeStatus) {
-            case -1:
+            case OPEN:
                 telemetry.addData("intake: ", "Open: " + lP);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("intake: ", "Neutral");
                 break;
-            case 1:
+            case CLOSE:
                 telemetry.addData("intake: ", "Close: " + lP);
                 break;
         }
         switch (pivotStatus) {
-            case -1:
+            case DOWN:
                 telemetry.addData("pivot: ", "Lowered: " + lPv);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("pivot: ", "Neutral");
                 break;
-            case 1:
+            case UP:
                 telemetry.addData("pivot: ", "Raised: " + lPv);
         }
         switch (strafeStatus) {
-            case -1:
+            case LEFT:
                 telemetry.addData("strafe: ", "Left: " + bL);
                 break;
-            case 0:
+            case NEUTRAL:
                 telemetry.addData("strafe: ",  "Neutral");
                 break;
-            case 1:
+            case RIGHT:
                 telemetry.addData("strafe: ", "Right: " + bR);
         }
         telemetry.addData("baseSpeed: ", baseSpeed);

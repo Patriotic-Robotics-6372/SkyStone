@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class redSquare2 extends LinearOpMode {
     DcMotor frontRight, frontLeft, backRight, backLeft;
     private double TICKS_PER_IN = 1120/(4*Math.PI);
-    int leftTickGoal, rightTickGoal;
+    int leftTickGoal, rightTickGoal, rightCurrentPos, leftCurrentPos;
     @Override
     public void runOpMode() throws InterruptedException {
         frontRight = hardwareMap.dcMotor.get("frontRight");
@@ -28,6 +28,7 @@ public class redSquare2 extends LinearOpMode {
         waitForStart();
 
         driveDistance(6, .5,.5);
+        sleep(10000);
     }
 
     public void driveDistance(double inches, double leftPower, double rightPower) {
@@ -36,17 +37,24 @@ public class redSquare2 extends LinearOpMode {
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftTickGoal = frontLeft.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
-        leftTickGoal *= -1;
-        rightTickGoal = frontRight.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
+        //leftTickGoal *= -1;
+        //rightTickGoal = frontRight.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
 
-        //frontLeft.setTargetPosition(leftTickGoal);
-        frontRight.setTargetPosition(rightTickGoal);
+        frontLeft.setTargetPosition(leftTickGoal);
+        //frontRight.setTargetPosition(rightTickGoal);
 
-        while (/*frontLeft.getCurrentPosition() > leftTickGoal ||*/
-                frontRight.getCurrentPosition() < rightTickGoal) {
+        /*frontLeft.getCurrentPosition() > leftTickGoal ||*/
+
+        leftCurrentPos = frontLeft.getCurrentPosition();
+
+        rightCurrentPos = frontRight.getCurrentPosition();
+
+        while (Math.abs(leftCurrentPos) < rightTickGoal) {
 
             //frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            rightCurrentPos = frontRight.getCurrentPosition();
 
             frontLeft.setPower(leftPower);
             frontRight.setPower(rightPower);
@@ -55,6 +63,7 @@ public class redSquare2 extends LinearOpMode {
 
             telemetry.addData("frontLeftPos: ", frontLeft.getCurrentPosition());
             telemetry.addData("frontRightPos: ", frontRight.getCurrentPosition());
+            telemetry.addData("rightCurrentPos", rightCurrentPos);
             telemetry.addData("leftTickGoal: ", leftTickGoal);
             telemetry.addData("rightTickGoal: ", rightTickGoal);
 
@@ -62,12 +71,14 @@ public class redSquare2 extends LinearOpMode {
             telemetry.addData("frontRight: ", frontRight.getPower());
             telemetry.addData("backLeft: ", backLeft.getPower());
             telemetry.addData("backRight: ", backRight.getPower());
+            telemetry.addData("stop: ", "false");
             updateTelemetry(telemetry);
             telemetry.update();
         }
 
         telemetry.addData("frontLeftPos: ", frontLeft.getCurrentPosition());
         telemetry.addData("frontRightPos: ", frontRight.getCurrentPosition());
+        telemetry.addData("rightCurrentPos", rightCurrentPos);
         telemetry.addData("leftTickGoal: ", leftTickGoal);
         telemetry.addData("rightTickGoal: ", rightTickGoal);
 
@@ -78,6 +89,7 @@ public class redSquare2 extends LinearOpMode {
 
         telemetry.addData("Left Enc ", frontLeft.getCurrentPosition());
         telemetry.addData("Right Enc ", frontRight.getCurrentPosition());
+        telemetry.addData("stop: ", "true");
         updateTelemetry(telemetry);
         telemetry.update();
 

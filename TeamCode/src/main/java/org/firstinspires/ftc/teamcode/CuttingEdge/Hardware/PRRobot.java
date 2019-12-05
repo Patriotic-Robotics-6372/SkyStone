@@ -154,18 +154,26 @@ public class PRRobot {
 
     // autonomous functions
 
-    public void goForward(double leftPower, double rightPower){
-        frontRight.setPower(rightPower);
-        frontLeft.setPower(leftPower);
-        backRight.setPower(rightPower);
-        backLeft.setPower(leftPower);
-    }
-
-    public void goBackward(double leftPower, double rightPower){
-        frontRight.setPower(rightPower);
-        frontLeft.setPower(leftPower);
-        backRight.setPower(rightPower);
-        backLeft.setPower(leftPower);
+    public void move(double leftPower, double rightPower, Status status) {
+        switch(status) {
+            case FORWARDS:
+                frontLeft.setPower(leftPower);
+                frontRight.setPower(rightPower);
+                backLeft.setPower(leftPower);
+                backRight.setPower(rightPower);
+                break;
+            case BACKWARDS:
+                frontLeft.setPower(-leftPower);
+                frontRight.setPower(-rightPower);
+                backLeft.setPower(-leftPower);
+                backRight.setPower(-rightPower);
+                break;
+            case NEUTRAL:
+                frontLeft.setPower(0);
+                frontRight.setPower(0);
+                backLeft.setPower(0);
+                backRight.setPower(0);
+        }
     }
 
     public void pivotRightTurn(double leftPower, double rightPower){
@@ -190,6 +198,38 @@ public class PRRobot {
     public void pointLeftTurn(double rightPower){
         frontRight.setPower(rightPower);
         backRight.setPower(rightPower);
+    }
+
+    public void pinch(Status status){
+        switch(status) {
+            case OPEN:
+                leftPinch.setPower(0.4);
+                rightPinch.setPower(-0.4);
+                break;
+            case CLOSE:
+                leftPinch.setPower(-0.4);
+                rightPinch.setPower(0.4);
+                break;
+            case NEUTRAL:
+
+        }
+    }
+
+
+    public void pivotIntake(Status status) {
+        switch (status) {
+            case DOWN:
+                leftPivot.setPower(.8);
+                rightPivot.setPower(-.8);
+                break;
+            case UP:
+                leftPivot.setPower(-.2);
+                rightPivot.setPower(.2);
+            case NEUTRAL:
+                leftPivot.setPower(0);
+                rightPivot.setPower(0);
+
+        }
     }
 
     /*
@@ -220,12 +260,6 @@ public class PRRobot {
 
     }
 
-    public void stop() {
-        frontRight.setPower(0);
-        frontLeft.setPower(0);
-        backRight.setPower(0);
-        backLeft.setPower(0);
-    }
 
 
 

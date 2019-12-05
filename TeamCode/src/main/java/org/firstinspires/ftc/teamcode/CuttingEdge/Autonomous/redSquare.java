@@ -52,7 +52,6 @@ public class redSquare extends LinearOpMode {
         updateTelemetry(telemetry);
         telemetry.update();
 
-        prBot.stop();
     }
 
 

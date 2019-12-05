@@ -39,7 +39,7 @@ public class redSquare3 extends LinearOpMode {
         backRight.setPower(0.6);
         backLeft.setPower(0.6);
 
-        sleep(1000);
+        sleep(1200);
 
         frontRight.setPower(0);
         frontLeft.setPower(0);
@@ -65,32 +65,57 @@ public class redSquare3 extends LinearOpMode {
 
         sleep(1000);
 
-        frontRight.setPower(0.3);
-        frontLeft.setPower(-0.3);
-        backRight.setPower(0.3);
-        backLeft.setPower(-0.3);
+        frontRight.setPower(0.6);
+        frontLeft.setPower(-0.6);
+        backRight.setPower(0.6);
+        backLeft.setPower(-0.6);
 
-        sleep(500);
+        sleep(1100);
 
-        leftPivot.setPower(-.2);
-        rightPivot.setPower(.2);
+        leftPivot.setPower(-.4);
+        rightPivot.setPower(.4);
 
         frontRight.setPower(0.6);
         frontLeft.setPower(0.6);
         backRight.setPower(0.6);
         backLeft.setPower(0.6);
 
-        sleep(2600);
+        sleep(3000);
 
         frontRight.setPower(0);
         frontLeft.setPower(0);
         backRight.setPower(0);
         backLeft.setPower(0);
 
-        sleep(2000);
+        sleep(300);
 
+        frontRight.setPower(-0.3);
+        frontLeft.setPower(0.3);
+        backRight.setPower(-0.3);
+        backLeft.setPower(0.3);
 
+        sleep(1100);
 
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
+
+        leftPivot.setPower(.8);
+        rightPivot.setPower(-.8);
+
+        lift.setPower(.8);
+
+        sleep(3000);
+
+        lift.setPower(0);
+
+        frontRight.setPower(0.3);
+        frontLeft.setPower(0.3);
+        backRight.setPower(0.3);
+        backLeft.setPower(0.3);
+
+        sleep(800);
 
 
 

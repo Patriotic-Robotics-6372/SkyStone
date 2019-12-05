@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode.CuttingEdge.Hardware;
+package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
 
 @Autonomous (name = "Auto redSquare4")
 public class redSquare4 extends LinearOpMode {

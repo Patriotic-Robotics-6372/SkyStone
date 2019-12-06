@@ -26,6 +26,10 @@ public class PRRobot {
 
     public CRServo leftPinch, rightPinch;
 
+    // encoders
+
+    public int leftTickGoal, rightTickGoal;
+
     // speed modifiers
 
     public double baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed,
@@ -35,9 +39,13 @@ public class PRRobot {
     // easier naming conventions / double values
 
             fL, fR, bL, bR, L, lP, lPv,
-            leftStick1, rightStick1;
+            leftStick1, rightStick1,
 
-    // easier naming conventions / truth values
+    // conversion factor between encoder rotations in the motors : 1 inch
+
+            TICKS_PER_IN;
+
+    // truth variables
 
     public boolean controller1, dpadLeft1, dpadRight1, dpadUp1, dpadDown1,
             controller2, dpadUp2, dpadDown2, rightBumper2, leftBumper2, a2, b2, x2, y2;
@@ -176,29 +184,34 @@ public class PRRobot {
         }
     }
 
-    public void pivotRightTurn(double leftPower, double rightPower){
-        frontRight.setPower(-rightPower);
-        frontLeft.setPower (leftPower);
-        backRight.setPower(-rightPower);
-        backLeft.setPower(rightPower);
+    public void pivotTurn(double leftPower, double rightPower, Status status){
+        switch (status) {
+            case LEFT:
+                frontRight.setPower(-rightPower);
+                frontLeft.setPower (leftPower);
+                backRight.setPower(-rightPower);
+                backLeft.setPower(rightPower);
+                break;
+            case RIGHT:
+                frontRight.setPower(rightPower);
+                frontLeft.setPower (-leftPower);
+                backRight.setPower(rightPower);
+                backLeft.setPower(-rightPower);
+        }
     }
 
-    public void pivotLeftTurn(double leftPower, double rightPower){
-        frontRight.setPower(rightPower);
-        frontLeft.setPower(-leftPower);
-        backRight.setPower(rightPower);
-        backLeft.setPower(-leftPower);
+    public void pointTurn(double power, Status status){
+        switch (status) {
+            case RIGHT:
+                frontRight.setPower(power);
+                backRight.setPower(power);
+                break;
+            case LEFT:
+                frontLeft.setPower(power);
+                backLeft.setPower(power);
+        }
     }
 
-    public void pointRightTurn(double leftPower){
-        frontLeft.setPower(leftPower);
-        backLeft.setPower(leftPower);
-    }
-
-    public void pointLeftTurn(double rightPower){
-        frontRight.setPower(rightPower);
-        backRight.setPower(rightPower);
-    }
 
     public void pinch(Status status){
         switch(status) {
@@ -228,28 +241,8 @@ public class PRRobot {
             case NEUTRAL:
                 leftPivot.setPower(0);
                 rightPivot.setPower(0);
-
         }
     }
-
-    /*
-
-    public void noBrake(){
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-    }
-
-    public void brake(){
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
-
-
-     */
 
     public void speedChange(double increase, int sign){
         baseSpeed += increase * sign;
@@ -258,11 +251,29 @@ public class PRRobot {
 
     public void driveDistance(double inches, double leftPower, double rightPower) {
 
+        TICKS_PER_IN = 1120/(4*Math.PI);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // tell the motors to use encoders
+
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // the encoders may not be set to zero. this line ensures that the encoder values start at 0
+
+        leftTickGoal = (int) (TICKS_PER_IN * inches * -1); // -1 because encoders "count backwards" on left side motors
+        rightTickGoal = (int) (TICKS_PER_IN * inches); // using ratio of TICKS_PER_IN, multiplying it by how many inches we want. casting to int because encoders are only whole numbers
+
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        telemetry.addData("frontRight getMode: ", frontRight.getMode());
+        telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
+
+        robotStatus(telemetry);
+
+        while (frontRight.getCurrentPosition() < rightTickGoal || frontLeft.getCurrentPosition() < leftTickGoal) {
+
+        }
+
     }
-
-
-
-
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /
         leftSide: backwards, neutral, forwards

@@ -31,8 +31,7 @@ public class redSquare4 extends LinearOpMode {
         prBot.move(.6, .6, PRRobot.Status.BACKWARDS);
         sleep(1200);
 
-        prBot.pivotLeftTurn(.3, .3);
+        prBot.pivotTurn(.3, .3, PRRobot.Status.LEFT);
         sleep(500);
-
     }
 }

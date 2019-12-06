@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Deprecated.Practice;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
      date: 10/1/19
      summary: I setup the encoder drive distance
      */
-
+@Disabled
 @Autonomous (name="Autonomous Program")
 public class AutonomousPR extends LinearOpMode {
     DcMotor backLeft;

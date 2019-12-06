@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Stable.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
     date: 10/23/19
     desc: autonomous. robot should be faced to the bridge. parks under bridge.
  */
-
+@Disabled
 @Autonomous (name = "bridgeParkLong")
 public class bridgeParkLong extends LinearOpMode {
     public DcMotor frontRight;
@@ -31,7 +32,7 @@ public class bridgeParkLong extends LinearOpMode {
 
         waitForStart();
 
-        goForward(1,1,800);
+        goForward(1,1,2800);
     }
 
     public void goForward (double leftPower, double rightPower,int milliseconds){

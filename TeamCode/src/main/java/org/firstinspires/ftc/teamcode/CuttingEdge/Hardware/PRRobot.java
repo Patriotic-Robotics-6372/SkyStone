@@ -43,7 +43,7 @@ public class PRRobot {
 
     // conversion factor between encoder rotations in the motors : 1 inch
 
-            TICKS_PER_IN;
+            TICKS_PER_IN, STRAFE_MOD;
 
     // truth variables
 
@@ -141,19 +141,16 @@ public class PRRobot {
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
 
         /*
-
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
          */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
-
     }
 
     public void start() {
@@ -212,7 +209,6 @@ public class PRRobot {
         }
     }
 
-
     public void pinch(Status status){
         switch(status) {
             case OPEN:
@@ -224,10 +220,10 @@ public class PRRobot {
                 rightPinch.setPower(0.4);
                 break;
             case NEUTRAL:
-
+                leftPinch.setPower(0);
+                rightPinch.setPower(0);
         }
     }
-
 
     public void pivotIntake(Status status) {
         switch (status) {
@@ -249,17 +245,44 @@ public class PRRobot {
         strafeSpeed += increase * sign;
     }
 
-    public void driveDistance(double inches, double leftPower, double rightPower) {
+    public void turnPerpendicular(Status status) {
+        switch (status) {
+            case LEFT:
+                driveDistance(3, .3, 1, Status.FORWARDS);
+                break;
+            case RIGHT:
+                driveDistance(3, 1, .3, Status.FORWARDS);
+        }
+    }
+
+    public void driveDistance(double inches, double leftPower, double rightPower, Status status) {
 
         TICKS_PER_IN = 1120/(4*Math.PI);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // tell the motors to use encoders
+        STRAFE_MOD = 1.2;
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // the encoders may not be set to zero. this line ensures that the encoder values start at 0
 
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // tell the motors to use encoders
+
         leftTickGoal = (int) (TICKS_PER_IN * inches * -1); // -1 because encoders "count backwards" on left side motors
         rightTickGoal = (int) (TICKS_PER_IN * inches); // using ratio of TICKS_PER_IN, multiplying it by how many inches we want. casting to int because encoders are only whole numbers
+
+        switch (status) {
+            case FORWARDS:
+                break;
+            case BACKWARDS:
+                break;
+            case LEFT:
+                leftTickGoal *= STRAFE_MOD;
+                rightTickGoal *= STRAFE_MOD;
+                break;
+            case RIGHT:
+                leftTickGoal *= STRAFE_MOD;
+                rightTickGoal *= STRAFE_MOD;
+                break;
+        }
 
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -270,10 +293,51 @@ public class PRRobot {
         robotStatus(telemetry);
 
         while (frontRight.getCurrentPosition() < rightTickGoal || frontLeft.getCurrentPosition() < leftTickGoal) {
+            frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+            switch (status) {
+                case FORWARDS:
+                    frontRight.setPower(rightPower);
+                    frontLeft.setPower(leftPower);
+                    backRight.setPower(frontRight.getPower());
+                    backLeft.setPower(frontLeft.getPower());
+                    break;
+                case BACKWARDS:
+                    frontRight.setPower(-rightPower);
+                    frontLeft.setPower(-leftPower);
+                    backRight.setPower(frontRight.getPower());
+                    backLeft.setPower(frontLeft.getPower());
+                    break;
+                case LEFT:
+                    frontRight.setPower(rightPower);
+                    frontLeft.setPower(-leftPower);
+                    backRight.setPower(-rightPower);
+                    backLeft.setPower(leftPower);
+                    break;
+                case RIGHT:
+                    frontRight.setPower(-rightPower);
+                    frontLeft.setPower(leftPower);
+                    backRight.setPower(rightPower);
+                    backLeft.setPower(-leftPower);
+                    break;
+            }
+
+            telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
+            telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
+
+            robotStatus(telemetry);
         }
 
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
+
+        robotStatus(telemetry);
+
     }
+
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /
         leftSide: backwards, neutral, forwards

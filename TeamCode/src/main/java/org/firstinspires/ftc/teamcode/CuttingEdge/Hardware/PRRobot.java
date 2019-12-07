@@ -450,7 +450,6 @@ public class PRRobot {
         telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
         telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
         telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
-
          */
         telemetry.update();
 

@@ -14,7 +14,7 @@ public class redSquare5 extends LinearOpMode {
 
         waitForStart();
 
-        prBot.driveDistance(3, 1, 1, PRRobot.Status.FORWARDS);
+        prBot.driveDistance(12, .3, .3, PRRobot.Status.FORWARDS);
         prBot.robotStatus(telemetry);
 
     }

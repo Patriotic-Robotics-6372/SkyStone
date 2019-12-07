@@ -139,13 +139,13 @@ public class PRRobot {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        /*
+/*
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-         */
+
+ */
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -266,7 +266,7 @@ public class PRRobot {
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // tell the motors to use encoders
 
-        leftTickGoal = (int) (TICKS_PER_IN * inches * -1); // -1 because encoders "count backwards" on left side motors
+        leftTickGoal = (int) (TICKS_PER_IN * inches); // -1 because encoders "count backwards" on left side motors
         rightTickGoal = (int) (TICKS_PER_IN * inches); // using ratio of TICKS_PER_IN, multiplying it by how many inches we want. casting to int because encoders are only whole numbers
 
         switch (status) {
@@ -284,24 +284,29 @@ public class PRRobot {
                 break;
         }
 
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        frontRight.setTargetPosition(rightTickGoal);
+        frontLeft.setTargetPosition(leftTickGoal);
+        /*
         telemetry.addData("frontRight getMode: ", frontRight.getMode());
         telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
 
-        robotStatus(telemetry);
 
-        while (frontRight.getCurrentPosition() < rightTickGoal || frontLeft.getCurrentPosition() < leftTickGoal) {
-            frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+         */
+        //telemetry.update();
+
+        //robotStatus(telemetry);
+
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (Math.abs(frontRight.getCurrentPosition()) < rightTickGoal || Math.abs(frontLeft.getCurrentPosition()) < leftTickGoal) {
 
             switch (status) {
                 case FORWARDS:
                     frontRight.setPower(rightPower);
                     frontLeft.setPower(leftPower);
-                    backRight.setPower(frontRight.getPower());
-                    backLeft.setPower(frontLeft.getPower());
+                    backRight.setPower(rightPower);
+                    backLeft.setPower(leftPower);
                     break;
                 case BACKWARDS:
                     frontRight.setPower(-rightPower);
@@ -323,10 +328,16 @@ public class PRRobot {
                     break;
             }
 
+            /*
+
             telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
             telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
 
-            robotStatus(telemetry);
+             */
+
+            //telemetry.update();
+
+            //robotStatusU();
         }
 
         frontRight.setPower(0);
@@ -334,7 +345,9 @@ public class PRRobot {
         backRight.setPower(0);
         backLeft.setPower(0);
 
-        robotStatus(telemetry);
+        //telemetry.update();
+
+        //robotStatus(telemetry);
 
     }
 
@@ -432,6 +445,105 @@ public class PRRobot {
         telemetry.addData("controller1: ", controller1);
         telemetry.addData("controller2: ", controller2);
         telemetry.addData("TimeElapsed: ", runtime);
+        /*
+        telemetry.addData("frontRight getMode: ", frontRight.getMode());
+        telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
+        telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
+        telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
+
+         */
+        telemetry.update();
+
+    }
+
+    public void robotStatusU() {
+
+        // used to check how the robot is doing
+
+        fL = frontLeft.getPower();
+        fR = frontRight.getPower();
+        bL = backLeft.getPower();
+        bR = backRight.getPower();
+        L = lift.getPower();
+        lP = leftPinch.getPower();
+        lPv = leftPivot.getPower();
+
+        switch (leftSideStatus) {
+            case FORWARDS:
+                telemetry.addData("leftSide: ", "Forwards: " + fL);
+                break;
+            case NEUTRAL:
+                telemetry.addData("leftSide: ", "Neutral" + "0");
+                break;
+            case BACKWARDS:
+                telemetry.addData("leftSide: ", "Backwards: " + fL);
+                break;
+        }
+        switch (rightSideStatus) {
+            case BACKWARDS:
+                telemetry.addData("rightSide: ", "Backwards: " + fR);
+                break;
+            case NEUTRAL:
+                telemetry.addData("rightSide: ", "Neutral");
+                break;
+            case FORWARDS:
+                telemetry.addData("rightSide: ", "Forwards: " + fR);
+                break;
+        }
+        switch (liftStatus) {
+            case DOWN:
+                telemetry.addData("lift: ", "Down: " + L);
+                break;
+            case NEUTRAL:
+                telemetry.addData("lift: ", "Neutral");
+                break;
+            case UP:
+                telemetry.addData("lift: ", "Up: " + L);
+        }
+        switch (intakeStatus) {
+            case OPEN:
+                telemetry.addData("intake: ", "Open: " + lP);
+                break;
+            case NEUTRAL:
+                telemetry.addData("intake: ", "Neutral");
+                break;
+            case CLOSE:
+                telemetry.addData("intake: ", "Close: " + lP);
+                break;
+        }
+        switch (pivotStatus) {
+            case DOWN:
+                telemetry.addData("pivot: ", "Lowered: " + lPv);
+                break;
+            case NEUTRAL:
+                telemetry.addData("pivot: ", "Neutral");
+                break;
+            case UP:
+                telemetry.addData("pivot: ", "Raised: " + lPv);
+        }
+        switch (strafeStatus) {
+            case LEFT:
+                telemetry.addData("strafe: ", "Left: " + bL);
+                break;
+            case NEUTRAL:
+                telemetry.addData("strafe: ",  "Neutral");
+                break;
+            case RIGHT:
+                telemetry.addData("strafe: ", "Right: " + bR);
+        }
+        telemetry.addData("baseSpeed: ", baseSpeed);
+        telemetry.addData("pivotSpeed: ", pivotIntakeSpeed);
+        telemetry.addData("strafeSpeed: ", strafeSpeed);
+        telemetry.addData("liftSpeed: ", liftSpeed);
+        telemetry.addData("leftSideSpeed: ", leftSideSpeed);
+        telemetry.addData("rightSideSpeed: ", rightSideSpeed);
+        telemetry.addData("controller1: ", controller1);
+        telemetry.addData("controller2: ", controller2);
+        telemetry.addData("TimeElapsed: ", runtime);
+        telemetry.addData("frontRight getMode: ", frontRight.getMode());
+        telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
+        telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
+        telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
         telemetry.update();
 
     }

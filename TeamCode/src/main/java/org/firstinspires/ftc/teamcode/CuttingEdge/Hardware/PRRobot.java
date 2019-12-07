@@ -248,13 +248,13 @@ public class PRRobot {
     public void turnPerpendicular(Status status) {
         switch (status) {
             case LEFT:
-                driveDistance(3, .3, 1, Status.FORWARDS);
+                //driveDistance(3, .3, 1, Status.FORWARDS);
                 break;
             case RIGHT:
-                driveDistance(3, 1, .3, Status.FORWARDS);
+                //driveDistance(3, 1, .3, Status.FORWARDS);
         }
     }
-
+/*
     public void driveDistance(double inches, double leftPower, double rightPower, Status status) {
 
         TICKS_PER_IN = 1120/(4*Math.PI);
@@ -286,12 +286,12 @@ public class PRRobot {
 
         frontRight.setTargetPosition(rightTickGoal);
         frontLeft.setTargetPosition(leftTickGoal);
-        /*
+
         telemetry.addData("frontRight getMode: ", frontRight.getMode());
         telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
 
 
-         */
+
         //telemetry.update();
 
         //robotStatus(telemetry);
@@ -333,12 +333,13 @@ public class PRRobot {
             telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
             telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
 
-             */
+
 
             //telemetry.update();
 
             //robotStatusU();
         }
+
 
         frontRight.setPower(0);
         frontLeft.setPower(0);
@@ -350,6 +351,7 @@ public class PRRobot {
         //robotStatus(telemetry);
 
     }
+     */
 
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /

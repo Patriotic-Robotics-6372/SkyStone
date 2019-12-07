@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Stable.Autonomous;
+package org.firstinspires.ftc.teamcode.Deprecated.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -12,12 +12,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
     desc: autonomous. robot should be faced to the bridge. parks under bridge.
  */
 @Disabled
-@Autonomous (name = "bridgeParkLong")
-public class bridgeParkLong extends LinearOpMode {
+@Autonomous (name= "bridgeParkShort")
+public class bridgeParkShort extends LinearOpMode {
     public DcMotor frontRight;
     public DcMotor frontLeft;
     public DcMotor backRight;
-    //public DcMotor backLeft;
+    public DcMotor backLeft;
 
 
     @Override
@@ -25,35 +25,35 @@ public class bridgeParkLong extends LinearOpMode {
         frontRight = hardwareMap.dcMotor.get("frontRight");
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
-        //backLeft = hardwareMap.dcMotor.get("backLeft");
+        backLeft = hardwareMap.dcMotor.get("backLeft");
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        //backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
-        goForward(1,1,2800);
+        goForward(1,1,800);
     }
 
     public void goForward (double leftPower, double rightPower,int milliseconds){
         frontRight.setPower(rightPower);
         frontLeft.setPower(leftPower);
         backRight.setPower(rightPower);
-        //backLeft.setPower(leftPower);
+        backLeft.setPower(leftPower);
     }
 
     public void goBackward (double leftPower, double rightPower,int millisecond){
         frontRight.setPower(rightPower);
         frontLeft.setPower(leftPower);
         backRight.setPower(rightPower);
-        //backLeft.setPower(leftPower);
+        backLeft.setPower(leftPower);
     }
 
     public void pivotRightTurn (double leftPower,double rightPower,int milliseconds){
         frontRight.setPower(-rightPower);
         frontLeft.setPower (leftPower);
         backRight.setPower(-rightPower);
-        //backLeft.setPower(rightPower);
+        backLeft.setPower(rightPower);
         sleep(milliseconds);
     }
 
@@ -61,13 +61,13 @@ public class bridgeParkLong extends LinearOpMode {
         frontRight.setPower(rightPower);
         frontLeft.setPower (-leftPower);
         backRight.setPower (rightPower);
-        //backLeft.setPower (-leftPower);
+        backLeft.setPower (-leftPower);
         sleep(milliseconds);
     }
 
     public void pointRightTurn (double leftPower,int milliseconds){
         frontLeft.setPower(leftPower);
-        //backLeft.setPower(leftPower);
+        backLeft.setPower(leftPower);
         sleep(milliseconds);
     }
 

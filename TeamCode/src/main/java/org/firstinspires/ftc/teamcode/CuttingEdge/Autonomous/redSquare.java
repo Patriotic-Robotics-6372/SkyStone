@@ -33,20 +33,28 @@ public class redSquare extends LinearOpMode {
 
         prBot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         prBot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        prBot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftTickGoal = prBot.frontLeft.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
         rightTickGoal = prBot.frontRight.getCurrentPosition() + (int) (TICKS_PER_IN * inches);
 
-        while (Math.abs(prBot.frontLeft.getCurrentPosition()) < leftTickGoal ||
-                Math.abs(prBot.frontRight.getCurrentPosition()) < rightTickGoal) {
+        prBot.frontRight.setTargetPosition(rightTickGoal);
+        prBot.frontLeft.setTargetPosition(leftTickGoal);
+        prBot.backRight.setTargetPosition(rightTickGoal);
+        prBot.backLeft.setTargetPosition(leftTickGoal);
+
+        while ((Math.abs(prBot.frontLeft.getCurrentPosition()) < leftTickGoal) || (Math.abs(prBot.frontRight.getCurrentPosition()) < rightTickGoal) || (Math.abs(prBot.backLeft.getCurrentPosition()) < leftTickGoal) || (Math.abs(prBot.backRight.getCurrentPosition()) < rightTickGoal)){
 
             prBot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             prBot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            prBot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            prBot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             prBot.frontLeft.setPower(leftPower);
             prBot.frontRight.setPower(rightPower);
-            prBot.backLeft.setPower(prBot.frontLeft.getPower());
-            prBot.backRight.setPower(prBot.frontRight.getPower());
+            prBot.backLeft.setPower(leftPower);
+            prBot.backRight.setPower(rightPower);
         }
 
         telemetry.addData("Left Enc ", prBot.frontLeft.getCurrentPosition());

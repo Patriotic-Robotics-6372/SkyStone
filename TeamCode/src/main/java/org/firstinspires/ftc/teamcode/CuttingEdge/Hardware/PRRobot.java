@@ -157,6 +157,13 @@ public class PRRobot {
         runtime.reset();
     }
 
+    public void brake(){
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
     // autonomous functions
 
     public void move(double leftPower, double rightPower, Status status) {

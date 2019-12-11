@@ -13,7 +13,7 @@ public class redSquare7 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
-        prBot.brake();
+        prBot.useBrake(true);
 
         wait = 2000;
 

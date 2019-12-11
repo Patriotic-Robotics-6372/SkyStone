@@ -28,7 +28,7 @@ public class PRRobot {
 
     // encoders
 
-    public int leftTickGoal, rightTickGoal;
+    public int STOP, leftTickGoal, rightTickGoal;
 
     // speed modifiers
 
@@ -146,7 +146,7 @@ public class PRRobot {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
  */
-
+        STOP = 0;
         frontLeft.setPower(0);
         frontRight.setPower(0);
         backLeft.setPower(0);
@@ -157,11 +157,32 @@ public class PRRobot {
         runtime.reset();
     }
 
-    public void brake(){
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    public void useBrake(boolean use){
+        if (use) {
+            frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        } else {
+            frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        }
+    }
+
+    public void useEnc(boolean use){
+        if (use) {
+            frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        } else {
+            frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
     }
 
     // autonomous functions
@@ -553,6 +574,5 @@ public class PRRobot {
         telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
         telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
         telemetry.update();
-
     }
 }

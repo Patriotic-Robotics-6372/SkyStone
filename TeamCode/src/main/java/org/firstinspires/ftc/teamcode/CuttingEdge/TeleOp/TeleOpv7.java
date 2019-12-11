@@ -20,11 +20,11 @@ public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters
     PRRobot prBot =
             new PRRobot("stable");
-    //hwMap = new HardwareMap();
     @Override
     public void init() {
         prBot.init(hardwareMap);
-        //prBot.noBrake();
+        prBot.useBrake(false);
+        prBot.useEnc(false);
         prBot.start();
     }
     @Override
@@ -114,10 +114,7 @@ public class TeleOpv7 extends OpMode {
             prBot.strafeStatus = PRRobot.Status.LEFT;
             prBot.robotStatus(telemetry);
         } else {
-            prBot.frontLeft.setPower(prBot.STOP);
-            prBot.frontRight.setPower(prBot.STOP);
-            prBot.backLeft.setPower(prBot.STOP);
-            prBot.backRight.setPower(prBot.STOP);
+            prBot.stop();
             prBot.strafeStatus = PRRobot.Status.NEUTRAL;
         }
         // strafing right
@@ -129,19 +126,17 @@ public class TeleOpv7 extends OpMode {
             prBot.strafeStatus = PRRobot.Status.RIGHT;
             prBot.robotStatus(telemetry);
         } else {
-            prBot.frontLeft.setPower(prBot.STOP);
-            prBot.frontRight.setPower(prBot.STOP);
-            prBot.backLeft.setPower(prBot.STOP);
-            prBot.backRight.setPower(prBot.STOP);
+            prBot.stop();
             prBot.strafeStatus = PRRobot.Status.NEUTRAL;
         }
-
+        /*
         if (prBot.dpadUp1) {
             prBot.speedChange(.1, 1);
         }
         if (prBot.dpadDown1) {
             prBot.speedChange(.1, -1);
         }
+        */
 
         if (prBot.b2) {
             prBot.lift.setPower(prBot.liftSpeed);
@@ -161,6 +156,7 @@ public class TeleOpv7 extends OpMode {
             prBot.liftStatus = PRRobot.Status.NEUTRAL;
         }
 
+        /*
         if (prBot.x2) {
             prBot.liftSpeed -= .1;
         }
@@ -168,6 +164,7 @@ public class TeleOpv7 extends OpMode {
         if (prBot.y2) {
             prBot.liftSpeed += .1;
         }
+        */
 
         if (prBot.rightBumper2) {
             prBot.leftPinch.setPower(prBot.close);
@@ -180,7 +177,7 @@ public class TeleOpv7 extends OpMode {
         if (prBot.leftBumper2) {
             prBot.leftPinch.setPower(prBot.open);
             prBot.rightPinch.setPower(prBot.close);
-            prBot.intakeStatus = PRRobot.Status.OPEN;;
+            prBot.intakeStatus = PRRobot.Status.OPEN;
             prBot.robotStatus(telemetry);
         } else {
             prBot.intakeStatus = PRRobot.Status.NEUTRAL;

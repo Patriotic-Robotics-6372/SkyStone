@@ -120,6 +120,8 @@ public class redSquare6 extends LinearOpMode {
             //prBot.robotStatus(telemetry);
         }
 
+        sleep(5000);
+
         prBot.frontRight.setPower(0);
         prBot.frontLeft.setPower(0);
         prBot.backRight.setPower(0);

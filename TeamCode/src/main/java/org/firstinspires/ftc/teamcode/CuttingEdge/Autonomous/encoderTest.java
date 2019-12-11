@@ -16,7 +16,7 @@ public class encoderTest extends LinearOpMode {
         prBot.init(hardwareMap);
         prBot.useBrake(true);
         prBot.useEnc(true);
-        wait = 2000;
+        wait = 5000;
         waitForStart();
         driveDistance(6, .5, .5, "fR");
         driveDistance(6, .5, .5, "bL");
@@ -28,7 +28,7 @@ public class encoderTest extends LinearOpMode {
             case "fR":
                 prBot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 //telemetry.addData("fR getMode: ", prBot.frontRight.getMode());
-                //prBot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                prBot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.frontRight.setTargetPosition(tickGoal);
@@ -39,7 +39,7 @@ public class encoderTest extends LinearOpMode {
             case "fL":
                 prBot.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 //telemetry.addData("fL getMode: ", prBot.frontLeft.getMode());
-                //prBot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                prBot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.frontLeft.setTargetPosition(tickGoal);
@@ -50,7 +50,7 @@ public class encoderTest extends LinearOpMode {
             case "bR":
                 prBot.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 //telemetry.addData("bR getMode: ", prBot.backRight.getMode());
-                //prBot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                prBot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.backRight.setTargetPosition(tickGoal);
@@ -61,7 +61,7 @@ public class encoderTest extends LinearOpMode {
             case "bL":
                 prBot.backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 //telemetry.addData("bL getMode: ", prBot.backLeft.getMode());
-                //prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.backLeft.setTargetPosition(tickGoal);
@@ -83,6 +83,8 @@ public class encoderTest extends LinearOpMode {
         prBot.frontLeft.setPower(prBot.STOP);
         prBot.backRight.setPower(prBot.STOP);
         prBot.backLeft.setPower(prBot.STOP);
+        encoderTelemetry(motor, true);
+        sleep(wait);
         encoderTelemetry(motor, true);
         sleep(wait);
     }

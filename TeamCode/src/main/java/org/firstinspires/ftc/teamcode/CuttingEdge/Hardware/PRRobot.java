@@ -144,7 +144,7 @@ public class PRRobot {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftPinch.setDirection(Servo.Direction.REVERSE);
+        //leftPinch.setDirection(Servo.Direction.REVERSE);
 
         STOP = 0;
         stop();

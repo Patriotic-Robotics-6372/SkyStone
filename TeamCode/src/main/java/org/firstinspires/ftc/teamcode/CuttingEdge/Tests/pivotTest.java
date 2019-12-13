@@ -19,10 +19,10 @@ public class pivotTest extends OpMode {
     public void loop() {
         if (gamepad1.x) {
             prBot.leftPivot.setPower(prBot.pivotIntakeSpeed);
-            prBot.rightPivot.setPower(prBot.pivotIntakeSpeed);
+            prBot.rightPivot.setPower(-prBot.pivotIntakeSpeed);
         } else if (gamepad1.y) {
             prBot.leftPivot.setPower(-prBot.pivotIntakeSpeed);
-            prBot.rightPivot.setPower(-prBot.pivotIntakeSpeed);
+            prBot.rightPivot.setPower(prBot.pivotIntakeSpeed);
         } else {
             prBot.leftPivot.setPower(prBot.STOP);
             prBot.rightPivot.setPower(prBot.STOP);

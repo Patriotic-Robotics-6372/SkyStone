@@ -28,7 +28,7 @@ public class PRRobotv2 {
 
     // encoders
 
-    public int STOP, leftTickGoal, rightTickGoal;
+    public int STOP, leftTickGoal, rightTickGoal, tickGoal;
 
     // speed modifiers
 
@@ -283,104 +283,123 @@ public class PRRobotv2 {
                 //driveDistance(3, 1, .3, Status.FORWARDS);
         }
     }
-/*
-    public void driveDistance(double inches, double leftPower, double rightPower, Status status) {
 
-        TICKS_PER_IN = 1120/(4*Math.PI);
-        STRAFE_MOD = 1.2;
-
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // the encoders may not be set to zero. this line ensures that the encoder values start at 0
-
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // tell the motors to use encoders
-
-        leftTickGoal = (int) (TICKS_PER_IN * inches); // -1 because encoders "count backwards" on left side motors
-        rightTickGoal = (int) (TICKS_PER_IN * inches); // using ratio of TICKS_PER_IN, multiplying it by how many inches we want. casting to int because encoders are only whole numbers
-
-        switch (status) {
-            case FORWARDS:
+    public void encoder(double inches, double rightPower, double leftPower, String motor) {
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        switch (motor) {
+            case "fR":
+                frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                frontRight.setTargetPosition(tickGoal);
+                frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
                 break;
-            case BACKWARDS:
+            case "fL":
+                frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                frontLeft.setTargetPosition(tickGoal);
+                frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
                 break;
-            case LEFT:
-                leftTickGoal *= STRAFE_MOD;
-                rightTickGoal *= STRAFE_MOD;
+            case "bR":
+                backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                backRight.setTargetPosition(tickGoal);
+                backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
                 break;
-            case RIGHT:
-                leftTickGoal *= STRAFE_MOD;
-                rightTickGoal *= STRAFE_MOD;
+            case "bL":
+                backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                backLeft.setTargetPosition(tickGoal);
+                backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
                 break;
+            case "all":
+                frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                frontRight.setTargetPosition(tickGoal);
+                frontLeft.setTargetPosition(tickGoal);
+                backRight.setTargetPosition(tickGoal);
+                backLeft.setTargetPosition(tickGoal);
+                frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                break;
+            case "pivot":
+                leftPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rightPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                leftPivot.setTargetPosition(tickGoal);
+                rightPivot.setTargetPosition(tickGoal);
+                leftPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                rightPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
         }
-
-        frontRight.setTargetPosition(rightTickGoal);
-        frontLeft.setTargetPosition(leftTickGoal);
-
-        telemetry.addData("frontRight getMode: ", frontRight.getMode());
-        telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
-
-
-
-        //telemetry.update();
-
-        //robotStatus(telemetry);
-
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        while (Math.abs(frontRight.getCurrentPosition()) < rightTickGoal || Math.abs(frontLeft.getCurrentPosition()) < leftTickGoal) {
-
-            switch (status) {
-                case FORWARDS:
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
+        while (anyBusy()) {
+            switch (motor) {
+                case "pivot":
+                    leftPivot.setPower(leftPower);
+                    rightPivot.setPower(rightPower);
+                    telemetry.addData("pivots", "yes");
+                    break;
+                default:
                     frontRight.setPower(rightPower);
                     frontLeft.setPower(leftPower);
                     backRight.setPower(rightPower);
                     backLeft.setPower(leftPower);
-                    break;
-                case BACKWARDS:
-                    frontRight.setPower(-rightPower);
-                    frontLeft.setPower(-leftPower);
-                    backRight.setPower(frontRight.getPower());
-                    backLeft.setPower(frontLeft.getPower());
-                    break;
-                case LEFT:
-                    frontRight.setPower(rightPower);
-                    frontLeft.setPower(-leftPower);
-                    backRight.setPower(-rightPower);
-                    backLeft.setPower(leftPower);
-                    break;
-                case RIGHT:
-                    frontRight.setPower(-rightPower);
-                    frontLeft.setPower(leftPower);
-                    backRight.setPower(rightPower);
-                    backLeft.setPower(-leftPower);
-                    break;
             }
-
-            /*
-
-            telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
-            telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
-
-
-
-            //telemetry.update();
-
-            //robotStatusU();
+            //encoderTelemetry(motor, true);
         }
-
-
-        frontRight.setPower(0);
-        frontLeft.setPower(0);
-        backRight.setPower(0);
-        backLeft.setPower(0);
-
-        //telemetry.update();
-
-        //robotStatus(telemetry);
-
+        stop();
+        leftPivot.setPower(0);
+        rightPivot.setPower(0);
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
     }
-     */
+
+    public boolean anyBusy(){
+        if (frontRight.isBusy() || frontLeft.isBusy() || backRight.isBusy() || backLeft.isBusy() || leftPivot.isBusy() || rightPivot.isBusy()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
         /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /
@@ -476,13 +495,74 @@ public class PRRobotv2 {
         telemetry.addData("controller1: ", controller1);
         telemetry.addData("controller2: ", controller2);
         telemetry.addData("TimeElapsed: ", runtime);
-        /*
-        telemetry.addData("frontRight getMode: ", frontRight.getMode());
-        telemetry.addData("frontLeft getMode: ", frontLeft.getMode()); // it should say something about encoders
-        telemetry.addData("frontRight enc: ", frontRight.getCurrentPosition());
-        telemetry.addData("frontLeft enc: ", frontLeft.getCurrentPosition());
-         */
         telemetry.update();
+    }
 
+    public void encoderTelemetry(Telemetry telemetry, String motor, boolean toggle) {
+        if (toggle) {
+            switch (motor) {
+                case "fR":
+                    telemetry.addData("fR getCurPos: ", frontRight.getCurrentPosition());
+                    telemetry.addData("fR getTarPos: ", frontRight.getTargetPosition());
+                    telemetry.addData("fR isBusy: ", frontRight.isBusy());
+                case "fL":
+                    telemetry.addData("fL getCurPos: ", frontLeft.getCurrentPosition());
+                    telemetry.addData("fL getTarPos: ", frontLeft.getTargetPosition());
+                    telemetry.addData("fL isBusy: ", frontLeft.isBusy());
+                case "bR":
+                    telemetry.addData("bR getCurPos: ", backRight.getCurrentPosition());
+                    telemetry.addData("bR getTarPos: ", backRight.getTargetPosition());
+                    telemetry.addData("bR isBusy: ", backRight.isBusy());
+                case "bL":
+                    telemetry.addData("bL getCurPos: ", backLeft.getCurrentPosition());
+                    telemetry.addData("bL getTarPos: ", backLeft.getTargetPosition());
+                    telemetry.addData("bL isBusy: ", backLeft.isBusy());
+                case "all":
+                    telemetry.addData("fR getCurPos: ", frontRight.getCurrentPosition());
+                    telemetry.addData("fL getCurPos: ", frontLeft.getCurrentPosition());
+                    telemetry.addData("bR getCurPos: ", backRight.getCurrentPosition());
+                    telemetry.addData("bL getCurPos: ", backLeft.getCurrentPosition());
+                    telemetry.addData("fR getTarPos: ", frontRight.getTargetPosition());
+                    telemetry.addData("fL getTarPos: ", frontLeft.getTargetPosition());
+                    telemetry.addData("bR getTarPos: ", backRight.getTargetPosition());
+                    telemetry.addData("bL getTarPos: ", backLeft.getTargetPosition());
+                    telemetry.addData("fR isBusy: ", frontRight.isBusy());
+                    telemetry.addData("fL isBusy: ", frontLeft.isBusy());
+                    telemetry.addData("bR isBusy: ", backRight.isBusy());
+                    telemetry.addData("bL isBusy: ", backLeft.isBusy());
+                case "pivot":
+                    telemetry.addData("lP getCurPos: ", leftPivot.getCurrentPosition());
+                    telemetry.addData("rP getCurPos: ", rightPivot.getCurrentPosition());
+                    telemetry.addData("lP getTarPos: ", leftPivot.getTargetPosition());
+                    telemetry.addData("rP getTarPos: ", rightPivot.getTargetPosition());
+                    telemetry.addData("lP isBusy: ", leftPivot.isBusy());
+                    telemetry.addData("rP isBusy: ", rightPivot.isBusy());
+            }
+        }
+        /*
+        telemetry.addData("fR isBusy: ", prBot.frontRight.isBusy());
+        telemetry.addData("fL isBusy: ", prBot.frontLeft.isBusy());
+        telemetry.addData("bR isBusy: ", prBot.backRight.isBusy());
+        telemetry.addData("bL isBusy: ", prBot.backLeft.isBusy());
+         */
+        /*
+        telemetry.addData("fR getCurPos: ", prBot.frontRight.getCurrentPosition());
+        telemetry.addData("fL getCurPos: ", prBot.frontLeft.getCurrentPosition());
+        telemetry.addData("bR getCurPos: ", prBot.backRight.getCurrentPosition());
+        telemetry.addData("bL getCurPos: ", prBot.backLeft.getCurrentPosition());
+         */
+        telemetry.addData("fR getPow: ", frontRight.getPower());
+        telemetry.addData("fL getPow: ", frontLeft.getPower());
+        telemetry.addData("bR getPow: ", backRight.getPower());
+        telemetry.addData("bL getPow: ", backLeft.getPower());
+        telemetry.addData("lP getPow: ", leftPivot.getPower());
+        telemetry.addData("rP getPow: ", rightPivot.getPower());
+        telemetry.addData("fR getMode: ", frontRight.getMode());
+        telemetry.addData("fL getMode: ", frontLeft.getMode());
+        telemetry.addData("bR getMode: ", backRight.getMode());
+        telemetry.addData("bL getMode: ", backLeft.getMode());
+        telemetry.addData("lP getMode: ", leftPivot.getMode());
+        telemetry.addData("rP getMode: ", rightPivot.getMode());
+        telemetry.update();
     }
 }

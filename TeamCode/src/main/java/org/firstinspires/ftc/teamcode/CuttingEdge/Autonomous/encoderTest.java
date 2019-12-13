@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
-import android.text.style.LineHeightSpan;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
+import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
 @Autonomous (name = "encoderTest")
 public class encoderTest extends LinearOpMode {
@@ -16,29 +14,29 @@ public class encoderTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
-        prBot.useBrake(true);
+        prBot.useBrake(false);
         prBot.useEnc(true);
-        prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        prBot.leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //prBot.leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        wait = 1000;
+        wait = 500;
         waitForStart();
         //prBot.leftPivot.setPower(.5);
         //prBot.rightPivot.setPower(.5);
         encoderTelemetry("pivot", false);
         sleep(wait);
-        encoder(2, .5, .5, "pivot");
+        //encoder(2, .5, .5, "pivot");
+        //encoder(6,.5,.5,"all");
         encoder(6,.5,.5,"all");
-        //driveDistance(6,.5,.5,"all");
-        //driveDistance(6,.5,.5,"all");
-        //driveDistance(6,.5,.5,"all");
+        encoder(18,.5,.5,"all");
+        encoder(18,1,1,"all");
         encoder(6, .5, .5, "fR");
         encoder(6, .5, .5, "fL");
         encoder(6, .5, .5, "bR");
         encoder(6, .5, .5, "bL");
         //driveDistance(6,.5,.5,"all");
-        encoder(2, .5, .5, "pivot");
+        //encoder(2, .5, .5, "pivot");
     }
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {
@@ -125,6 +123,7 @@ public class encoderTest extends LinearOpMode {
                 prBot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, true);
                 sleep(wait);
+                break;
             case "pivot":
                 prBot.leftPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 prBot.rightPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

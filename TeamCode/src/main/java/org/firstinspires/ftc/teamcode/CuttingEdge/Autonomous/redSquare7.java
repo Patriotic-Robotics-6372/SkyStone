@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
+import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
 @Autonomous (name = "auto redSquare7")
 public class redSquare7 extends LinearOpMode {

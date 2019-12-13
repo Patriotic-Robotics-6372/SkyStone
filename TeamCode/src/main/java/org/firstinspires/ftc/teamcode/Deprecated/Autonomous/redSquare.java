@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
+package org.firstinspires.ftc.teamcode.Deprecated.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
+import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
 @Disabled
 @Autonomous(name = "Auto redSquare")

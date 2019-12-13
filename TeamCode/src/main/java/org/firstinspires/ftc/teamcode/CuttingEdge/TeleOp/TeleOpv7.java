@@ -3,10 +3,8 @@ package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.Hardware;
 
-import org.firstinspires.ftc.teamcode.CuttingEdge.Hardware.PRRobot;
+import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
 /*
     author: Jacob Marinas

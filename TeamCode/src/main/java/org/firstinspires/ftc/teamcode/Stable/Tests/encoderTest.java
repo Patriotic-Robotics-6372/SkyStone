@@ -1,10 +1,15 @@
-package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
+package org.firstinspires.ftc.teamcode.Stable.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
+/*
+    author: Jacob Marinas
+    date: 12/11/19
+    desc: To test encoders; can test base, individual, and pivots
+ */
 
 @Autonomous (name = "encoderTest")
 public class encoderTest extends LinearOpMode {
@@ -44,13 +49,7 @@ public class encoderTest extends LinearOpMode {
         switch (motor) {
             case "fR":
                 prBot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //telemetry.addData("fR getMode: ", prBot.frontRight.getMode());
                 prBot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                /*prBot.frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                prBot.backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                prBot.backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-                 */
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.frontRight.setTargetPosition(tickGoal);
@@ -60,11 +59,7 @@ public class encoderTest extends LinearOpMode {
                 break;
             case "fL":
                 prBot.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //telemetry.addData("fL getMode: ", prBot.frontLeft.getMode());
-                //prBot.frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 prBot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                //prBot.backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                //prBot.backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.frontLeft.setTargetPosition(tickGoal);
@@ -74,11 +69,7 @@ public class encoderTest extends LinearOpMode {
                 break;
             case "bR":
                 prBot.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //telemetry.addData("bR getMode: ", prBot.backRight.getMode());
-                //prBot.frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                //prBot.frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 prBot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                //prBot.backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 prBot.backRight.setTargetPosition(tickGoal);
@@ -88,10 +79,6 @@ public class encoderTest extends LinearOpMode {
                 break;
             case "bL":
                 prBot.backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                //telemetry.addData("bL getMode: ", prBot.backLeft.getMode());
-                //prBot.frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                //prBot.frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                //prBot.backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
@@ -222,18 +209,6 @@ public class encoderTest extends LinearOpMode {
                     telemetry.addData("rP isBusy: ", prBot.rightPivot.isBusy());
             }
         }
-        /*
-        telemetry.addData("fR isBusy: ", prBot.frontRight.isBusy());
-        telemetry.addData("fL isBusy: ", prBot.frontLeft.isBusy());
-        telemetry.addData("bR isBusy: ", prBot.backRight.isBusy());
-        telemetry.addData("bL isBusy: ", prBot.backLeft.isBusy());
-         */
-        /*
-        telemetry.addData("fR getCurPos: ", prBot.frontRight.getCurrentPosition());
-        telemetry.addData("fL getCurPos: ", prBot.frontLeft.getCurrentPosition());
-        telemetry.addData("bR getCurPos: ", prBot.backRight.getCurrentPosition());
-        telemetry.addData("bL getCurPos: ", prBot.backLeft.getCurrentPosition());
-         */
         telemetry.addData("fR getPow: ", prBot.frontRight.getPower());
         telemetry.addData("fL getPow: ", prBot.frontLeft.getPower());
         telemetry.addData("bR getPow: ", prBot.backRight.getPower());

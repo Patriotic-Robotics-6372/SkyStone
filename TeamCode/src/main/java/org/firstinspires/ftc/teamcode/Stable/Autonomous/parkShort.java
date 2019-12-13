@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
-@Autonomous (name = "parkShort")
+@Autonomous (name = "parkShort", group = "Stable")
 public class parkShort extends LinearOpMode {
     PRRobot prBot = new PRRobot("stable");
     @Override

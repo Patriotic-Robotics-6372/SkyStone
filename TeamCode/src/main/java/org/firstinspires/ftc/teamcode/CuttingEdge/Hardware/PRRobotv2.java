@@ -10,10 +10,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /*
     author: Jacob Marinas
-    date: 11/18/19 (last updated: 12/11/19)
-    desc: defines robot for use in autonomous and teleop; included is robotStatus() made by me
-          needs parameters for baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed where double is between 0 and 1 (max speed)
-          open and close, where int is between 180 and 0
+    date: 12/13/19
+    desc: defines robot for use in autonomous and teleop; contains encoders
+    parameters: baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed, pinchSpeed, open, close
+    methods: useBrake(), useEnc(), move(), stop(), pivotTurn, pointTurn(), pivotIntake(), speedChange(), encoder(), anyBusy(), robotStatus(), encoderTelemetry().
  */
 
 public class PRRobotv2 {
@@ -54,7 +54,7 @@ public class PRRobotv2 {
     // enums
 
     public enum Status {
-        NEUTRAL, BACKWARDS, FORWARDS, DOWN, UP, OPEN, CLOSE, LEFT, RIGHT;
+        NEUTRAL, BACKWARDS, FORWARDS, DOWN, UP, OPEN, CLOSE, LEFT, RIGHT, ALL, FR, FL, BR, BL, PIVOT, INTAKE, BASE;
     }
 
     // Status objects
@@ -147,7 +147,7 @@ public class PRRobotv2 {
         //leftPinch.setDirection(Servo.Direction.REVERSE);
 
         STOP = 0;
-        stop();
+        stop(Status.BASE);
     }
 
     public void start() {
@@ -199,15 +199,42 @@ public class PRRobotv2 {
                 backRight.setPower(-rightPower);
                 break;
             case NEUTRAL:
-                stop();
+                stop(Status.BASE);
         }
     }
 
-    public void stop(){
-        frontLeft.setPower(STOP);
-        frontRight.setPower(STOP);
-        backLeft.setPower(STOP);
-        backRight.setPower(STOP);
+    public void stop(Status status){
+        switch (status) {
+            case BASE:
+                frontLeft.setPower(STOP);
+                frontRight.setPower(STOP);
+                backLeft.setPower(STOP);
+                backRight.setPower(STOP);
+                break;
+            case PIVOT:
+                leftPivot.setPower(STOP);
+                rightPivot.setPower(STOP);
+                break;
+            case INTAKE:
+                leftPinch.setPower(STOP);
+                rightPinch.setPower(STOP);
+                break;
+            case ALL:
+                frontLeft.setPower(STOP);
+                frontRight.setPower(STOP);
+                backLeft.setPower(STOP);
+                backRight.setPower(STOP);
+                leftPivot.setPower(STOP);
+                rightPivot.setPower(STOP);
+                leftPinch.setPower(STOP);
+                rightPinch.setPower(STOP);
+                break;
+            default:
+                frontRight.setPower(STOP);
+                frontLeft.setPower(STOP);
+                backRight.setPower(STOP);
+                backLeft.setPower(STOP);
+        }
     }
 
     public void pivotTurn(double leftPower, double rightPower, Status status){
@@ -286,6 +313,12 @@ public class PRRobotv2 {
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {
         tickGoal = (int) (TICKS_PER_IN * inches);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftPivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightPivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         switch (motor) {
             case "fR":
                 frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -384,14 +417,130 @@ public class PRRobotv2 {
             }
             //encoderTelemetry(motor, true);
         }
-        stop();
-        leftPivot.setPower(0);
-        rightPivot.setPower(0);
+        stop(Status.BASE);
+        leftPivot.setPower(STOP);
+        rightPivot.setPower(STOP);
         //encoderTelemetry(motor, true);
         //sleep(wait);
         //encoderTelemetry(motor, true);
         //sleep(wait);
     }
+/*
+    public void encoder(double inches, double rightPower, double leftPower, Status status) {
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftPivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightPivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        switch (status) {
+            case FR:
+                frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                frontRight.setTargetPosition(tickGoal);
+                frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                break;
+            case FL:
+                frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                frontLeft.setTargetPosition(tickGoal);
+                frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                break;
+            case BR:
+                backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                backRight.setTargetPosition(tickGoal);
+                backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                break;
+            case BL:
+                backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                backLeft.setTargetPosition(tickGoal);
+                backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, false);
+                //sleep(wait);
+                break;
+            case ALL:
+                frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                frontRight.setTargetPosition(tickGoal);
+                frontLeft.setTargetPosition(tickGoal);
+                backRight.setTargetPosition(tickGoal);
+                backLeft.setTargetPosition(tickGoal);
+                frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                break;
+            case PIVOT:
+                leftPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rightPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+                leftPivot.setTargetPosition(tickGoal);
+                rightPivot.setTargetPosition(tickGoal);
+                leftPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                rightPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //encoderTelemetry(motor, true);
+                //sleep(wait);
+        }
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
+        while (anyBusy()) {
+            switch (status) {
+                case PIVOT:
+                    leftPivot.setPower(leftPower);
+                    rightPivot.setPower(rightPower);
+                    telemetry.addData("pivots", "yes");
+                    break;
+                default:
+                    frontRight.setPower(rightPower);
+                    frontLeft.setPower(leftPower);
+                    backRight.setPower(rightPower);
+                    backLeft.setPower(leftPower);
+            }
+            //encoderTelemetry(motor, true);
+        }
+        stop();
+        leftPivot.setPower(STOP);
+        rightPivot.setPower(STOP);
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
+        //encoderTelemetry(motor, true);
+        //sleep(wait);
+    }
+ */
 
     public boolean anyBusy(){
         if (frontRight.isBusy() || frontLeft.isBusy() || backRight.isBusy() || backLeft.isBusy() || leftPivot.isBusy() || rightPivot.isBusy()) {
@@ -565,4 +714,73 @@ public class PRRobotv2 {
         telemetry.addData("rP getMode: ", rightPivot.getMode());
         telemetry.update();
     }
+/*
+    public void encoderTelemetry(Telemetry telemetry, Status status, boolean toggle) {
+        if (toggle) {
+            switch (status) {
+                case FR:
+                    telemetry.addData("fR getCurPos: ", frontRight.getCurrentPosition());
+                    telemetry.addData("fR getTarPos: ", frontRight.getTargetPosition());
+                    telemetry.addData("fR isBusy: ", frontRight.isBusy());
+                case FL:
+                    telemetry.addData("fL getCurPos: ", frontLeft.getCurrentPosition());
+                    telemetry.addData("fL getTarPos: ", frontLeft.getTargetPosition());
+                    telemetry.addData("fL isBusy: ", frontLeft.isBusy());
+                case BR:
+                    telemetry.addData("bR getCurPos: ", backRight.getCurrentPosition());
+                    telemetry.addData("bR getTarPos: ", backRight.getTargetPosition());
+                    telemetry.addData("bR isBusy: ", backRight.isBusy());
+                case BL:
+                    telemetry.addData("bL getCurPos: ", backLeft.getCurrentPosition());
+                    telemetry.addData("bL getTarPos: ", backLeft.getTargetPosition());
+                    telemetry.addData("bL isBusy: ", backLeft.isBusy());
+                case ALL:
+                    telemetry.addData("fR getCurPos: ", frontRight.getCurrentPosition());
+                    telemetry.addData("fL getCurPos: ", frontLeft.getCurrentPosition());
+                    telemetry.addData("bR getCurPos: ", backRight.getCurrentPosition());
+                    telemetry.addData("bL getCurPos: ", backLeft.getCurrentPosition());
+                    telemetry.addData("fR getTarPos: ", frontRight.getTargetPosition());
+                    telemetry.addData("fL getTarPos: ", frontLeft.getTargetPosition());
+                    telemetry.addData("bR getTarPos: ", backRight.getTargetPosition());
+                    telemetry.addData("bL getTarPos: ", backLeft.getTargetPosition());
+                    telemetry.addData("fR isBusy: ", frontRight.isBusy());
+                    telemetry.addData("fL isBusy: ", frontLeft.isBusy());
+                    telemetry.addData("bR isBusy: ", backRight.isBusy());
+                    telemetry.addData("bL isBusy: ", backLeft.isBusy());
+                case PIVOT:
+                    telemetry.addData("lP getCurPos: ", leftPivot.getCurrentPosition());
+                    telemetry.addData("rP getCurPos: ", rightPivot.getCurrentPosition());
+                    telemetry.addData("lP getTarPos: ", leftPivot.getTargetPosition());
+                    telemetry.addData("rP getTarPos: ", rightPivot.getTargetPosition());
+                    telemetry.addData("lP isBusy: ", leftPivot.isBusy());
+                    telemetry.addData("rP isBusy: ", rightPivot.isBusy());
+            }
+        }
+        /*
+        telemetry.addData("fR isBusy: ", prBot.frontRight.isBusy());
+        telemetry.addData("fL isBusy: ", prBot.frontLeft.isBusy());
+        telemetry.addData("bR isBusy: ", prBot.backRight.isBusy());
+        telemetry.addData("bL isBusy: ", prBot.backLeft.isBusy());
+
+        /*
+        telemetry.addData("fR getCurPos: ", prBot.frontRight.getCurrentPosition());
+        telemetry.addData("fL getCurPos: ", prBot.frontLeft.getCurrentPosition());
+        telemetry.addData("bR getCurPos: ", prBot.backRight.getCurrentPosition());
+        telemetry.addData("bL getCurPos: ", prBot.backLeft.getCurrentPosition());
+
+        telemetry.addData("fR getPow: ", frontRight.getPower());
+        telemetry.addData("fL getPow: ", frontLeft.getPower());
+        telemetry.addData("bR getPow: ", backRight.getPower());
+        telemetry.addData("bL getPow: ", backLeft.getPower());
+        telemetry.addData("lP getPow: ", leftPivot.getPower());
+        telemetry.addData("rP getPow: ", rightPivot.getPower());
+        telemetry.addData("fR getMode: ", frontRight.getMode());
+        telemetry.addData("fL getMode: ", frontLeft.getMode());
+        telemetry.addData("bR getMode: ", backRight.getMode());
+        telemetry.addData("bL getMode: ", backLeft.getMode());
+        telemetry.addData("lP getMode: ", leftPivot.getMode());
+        telemetry.addData("rP getMode: ", rightPivot.getMode());
+        telemetry.update();
+    }
+    */
 }

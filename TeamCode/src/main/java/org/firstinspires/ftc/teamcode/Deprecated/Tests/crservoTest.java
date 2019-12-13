@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.robotcontroller;
+package org.firstinspires.ftc.teamcode.Deprecated.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;

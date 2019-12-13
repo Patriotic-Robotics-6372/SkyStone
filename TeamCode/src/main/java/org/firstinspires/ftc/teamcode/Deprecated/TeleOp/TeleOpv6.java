@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
+package org.firstinspires.ftc.teamcode.Deprecated.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;

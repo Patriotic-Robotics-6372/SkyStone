@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/5/19
     desc: simple park that goes under the bridge from back
  */
-@Autonomous (name = "parkLong")
+@Autonomous (name = "parkLong", group = "Stable")
 public class parkLong extends LinearOpMode {
     PRRobot prBot = new PRRobot("stable");
     @Override

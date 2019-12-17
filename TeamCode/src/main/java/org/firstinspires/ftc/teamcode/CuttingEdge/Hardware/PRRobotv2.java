@@ -415,7 +415,7 @@ public class PRRobotv2 {
                     backRight.setPower(rightPower);
                     backLeft.setPower(leftPower);
             }
-            //encoderTelemetry(motor, true);
+            encoderTelemetry(telemetry, motor, true);
         }
         stop(Status.BASE);
         leftPivot.setPower(STOP);
@@ -714,7 +714,7 @@ public class PRRobotv2 {
         telemetry.addData("rP getMode: ", rightPivot.getMode());
         telemetry.update();
     }
-/*
+
     public void encoderTelemetry(Telemetry telemetry, Status status, boolean toggle) {
         if (toggle) {
             switch (status) {
@@ -762,11 +762,12 @@ public class PRRobotv2 {
         telemetry.addData("bR isBusy: ", prBot.backRight.isBusy());
         telemetry.addData("bL isBusy: ", prBot.backLeft.isBusy());
 
-        /*
+
         telemetry.addData("fR getCurPos: ", prBot.frontRight.getCurrentPosition());
         telemetry.addData("fL getCurPos: ", prBot.frontLeft.getCurrentPosition());
         telemetry.addData("bR getCurPos: ", prBot.backRight.getCurrentPosition());
         telemetry.addData("bL getCurPos: ", prBot.backLeft.getCurrentPosition());
+         */
 
         telemetry.addData("fR getPow: ", frontRight.getPower());
         telemetry.addData("fL getPow: ", frontLeft.getPower());
@@ -782,5 +783,5 @@ public class PRRobotv2 {
         telemetry.addData("rP getMode: ", rightPivot.getMode());
         telemetry.update();
     }
-    */
+
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Stable.Tests;
+package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     desc: To test encoders; can test base, individual, and pivots
  */
 
-@Autonomous (name = "encoderTest")
-public class encoderTest extends LinearOpMode {
+@Autonomous (name = "redSquare9")
+public class redSquare9 extends LinearOpMode {
     PRRobot prBot = new PRRobot();
     double TICKS_PER_IN = 1120/4*Math.PI;
     int tickGoal, wait;
@@ -21,27 +21,16 @@ public class encoderTest extends LinearOpMode {
         prBot.init(hardwareMap);
         prBot.useBrake(false);
         prBot.useEnc(true);
-        //prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //prBot.leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        wait = 500;
         waitForStart();
-        //prBot.leftPivot.setPower(.5);
-        //prBot.rightPivot.setPower(.5);
-        encoderTelemetry("pivot", false);
-        sleep(wait);
-        //encoder(2, .5, .5, "pivot");
-        //encoder(6,.5,.5,"all");
-        encoder(6,.5,.5,"base");
-        encoder(18,.5,.5,"base");
-        encoder(18,1,1,"base");
-        encoder(6, .5, .5, "fR");
-        encoder(6, .5, .5, "fL");
-        encoder(6, .5, .5, "bR");
-        encoder(6, .5, .5, "bL");
-        //driveDistance(6,.5,.5,"all");
-        //encoder(2, .5, .5, "pivot");
+        encoder(10, .5, .5, "base");
+        prBot.pivotIntake(prBot.Status.UP);
+        prBot.robotStatus(telemetry);
+        sleep(500);
+        prBot.pivotIntake(prBot.Status.NEUTRAL);
+        prBot.robotStatus(telemetry);
+        sleep(3000);
     }
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {

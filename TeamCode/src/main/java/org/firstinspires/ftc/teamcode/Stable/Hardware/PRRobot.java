@@ -28,7 +28,7 @@ public class PRRobot {
 
     // encoders
 
-    public int STOP, leftTickGoal, rightTickGoal;
+    public int STOP, tickGoal, leftTickGoal, rightTickGoal;
 
     // speed modifiers
 
@@ -53,7 +53,7 @@ public class PRRobot {
 
     // enums
 
-    public enum Status {
+    public static enum Status {
         NEUTRAL, BACKWARDS, FORWARDS, DOWN, UP, OPEN, CLOSE, LEFT, RIGHT;
     }
 
@@ -145,6 +145,8 @@ public class PRRobot {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftPinch.setDirection(Servo.Direction.REVERSE);
+
+        double TICKS_PER_IN = 1120/4*Math.PI;
 
         STOP = 0;
         stop();

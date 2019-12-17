@@ -1,58 +1,39 @@
-package org.firstinspires.ftc.teamcode.Stable.Tests;
+package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
-/*
-    author: Jacob Marinas
-    date: 12/11/19
-    desc: To test encoders; can test base, individual, and pivots
- */
 
-@Autonomous (name = "encoderTest")
-public class encoderTest extends LinearOpMode {
-    PRRobot prBot = new PRRobot();
-    double TICKS_PER_IN = 1120/4*Math.PI;
-    int tickGoal, wait;
+@Autonomous (name = "Auto redSquare8")
+public class redSquare8 extends LinearOpMode {
+    PRRobot prBot = new PRRobot("stable");
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
-        prBot.useBrake(false);
+        prBot.useBrake(true);
         prBot.useEnc(true);
-        //prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //prBot.leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        wait = 500;
+
         waitForStart();
-        //prBot.leftPivot.setPower(.5);
-        //prBot.rightPivot.setPower(.5);
-        encoderTelemetry("pivot", false);
-        sleep(wait);
-        //encoder(2, .5, .5, "pivot");
-        //encoder(6,.5,.5,"all");
-        encoder(6,.5,.5,"base");
-        encoder(18,.5,.5,"base");
-        encoder(18,1,1,"base");
-        encoder(6, .5, .5, "fR");
-        encoder(6, .5, .5, "fL");
-        encoder(6, .5, .5, "bR");
-        encoder(6, .5, .5, "bL");
-        //driveDistance(6,.5,.5,"all");
-        //encoder(2, .5, .5, "pivot");
+
+        encoder(6, .5, .5, "all");
+        encoder(18, .5, .5, "all");
+        encoder(18, 1, 1, "all");
+        sleep(3000);
+
     }
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {
-        tickGoal = (int) (TICKS_PER_IN * inches);
+        int wait = 250;
+        prBot.tickGoal = (int) (prBot.TICKS_PER_IN * inches);
         switch (motor) {
             case "fR":
                 prBot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 prBot.frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
-                prBot.frontRight.setTargetPosition(tickGoal);
+                prBot.frontRight.setTargetPosition(prBot.tickGoal);
                 prBot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, false);
                 sleep(wait);
@@ -62,7 +43,7 @@ public class encoderTest extends LinearOpMode {
                 prBot.frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
-                prBot.frontLeft.setTargetPosition(tickGoal);
+                prBot.frontLeft.setTargetPosition(prBot.tickGoal);
                 prBot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, false);
                 sleep(wait);
@@ -72,7 +53,7 @@ public class encoderTest extends LinearOpMode {
                 prBot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
-                prBot.backRight.setTargetPosition(tickGoal);
+                prBot.backRight.setTargetPosition(prBot.tickGoal);
                 prBot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, false);
                 sleep(wait);
@@ -82,12 +63,12 @@ public class encoderTest extends LinearOpMode {
                 prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, false);
                 sleep(wait);
-                prBot.backLeft.setTargetPosition(tickGoal);
+                prBot.backLeft.setTargetPosition(prBot.tickGoal);
                 prBot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, false);
                 sleep(wait);
                 break;
-            case "base":
+            case "all":
                 prBot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 prBot.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 prBot.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -100,10 +81,10 @@ public class encoderTest extends LinearOpMode {
                 prBot.backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, true);
                 sleep(wait);
-                prBot.frontRight.setTargetPosition(tickGoal);
-                prBot.frontLeft.setTargetPosition(tickGoal);
-                prBot.backRight.setTargetPosition(tickGoal);
-                prBot.backLeft.setTargetPosition(tickGoal);
+                prBot.frontRight.setTargetPosition(prBot.tickGoal);
+                prBot.frontLeft.setTargetPosition(prBot.tickGoal);
+                prBot.backRight.setTargetPosition(prBot.tickGoal);
+                prBot.backLeft.setTargetPosition(prBot.tickGoal);
                 prBot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 prBot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 prBot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -120,8 +101,8 @@ public class encoderTest extends LinearOpMode {
                 prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 encoderTelemetry(motor, true);
                 sleep(wait);
-                prBot.leftPivot.setTargetPosition(tickGoal);
-                prBot.rightPivot.setTargetPosition(tickGoal);
+                prBot.leftPivot.setTargetPosition(prBot.tickGoal);
+                prBot.rightPivot.setTargetPosition(prBot.tickGoal);
                 prBot.leftPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 prBot.rightPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 encoderTelemetry(motor, true);

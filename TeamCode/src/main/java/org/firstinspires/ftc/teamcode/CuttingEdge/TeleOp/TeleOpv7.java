@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
@@ -12,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     desc: teleop w/ PRRobot. left side / right side goes forwards / backwards, strafe, pivot, lift, intake.
  */
 
-@Disabled
+//@Disabled
 @TeleOp(name = "Driver Control w/ PRRobot")
 public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters
@@ -58,11 +59,7 @@ public class TeleOpv7 extends OpMode {
             // speed modifier to find actual speed
             prBot.rightSideSpeed = prBot.rightStick1 * prBot.baseSpeed;
             // limiting speed to valid values
-            if (prBot.rightSideSpeed > 1) {
-                prBot.rightSideSpeed = 1;
-            } else if (prBot.rightSideSpeed < -1) {
-                prBot.rightSideSpeed = -1;
-            }
+            prBot.rightSideSpeed = Range.clip(prBot.rightSideSpeed, -1, 1);
             // set powers of right side
             prBot.frontRight.setPower(prBot.rightSideSpeed);
             prBot.backRight.setPower(prBot.rightSideSpeed);
@@ -82,11 +79,8 @@ public class TeleOpv7 extends OpMode {
         }
         // tank drive left
         if (Math.abs(prBot.leftStick1) > .1) {
-            if (prBot.leftSideSpeed > 1) {
-                prBot.leftSideSpeed = 1;
-            } else if (prBot.leftSideSpeed < -1) {
-                prBot.leftSideSpeed = -1;
-            }
+            prBot.rightSideSpeed = prBot.rightStick1 * prBot.baseSpeed;
+            prBot.rightSideSpeed = Range.clip(prBot.rightSideSpeed, -1, 1);
             prBot.frontLeft.setPower(prBot.leftSideSpeed);
             prBot.backLeft.setPower(prBot.leftSideSpeed);
             if (prBot.leftStick1 >= .1) {

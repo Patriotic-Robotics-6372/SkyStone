@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/11/19
     desc: To test encoders; can test base, individual, and pivots
  */
-
+@Disabled
 @Autonomous (name = "redSquare9")
 public class redSquare9 extends LinearOpMode {
     PRRobot prBot = new PRRobot();
@@ -25,10 +26,10 @@ public class redSquare9 extends LinearOpMode {
         prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart();
         encoder(10, .5, .5, "base");
-        prBot.pivotIntake(prBot.Status.UP);
+        prBot.pivotIntake(PRRobot.Status.UP);
         prBot.robotStatus(telemetry);
         sleep(500);
-        prBot.pivotIntake(prBot.Status.NEUTRAL);
+        prBot.pivotIntake(PRRobot.Status.NEUTRAL);
         prBot.robotStatus(telemetry);
         sleep(3000);
     }

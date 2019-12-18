@@ -1,16 +1,14 @@
-package org.firstinspires.ftc.robotcontroller;
+package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-//@Disabled
-@TeleOp (name = "Base Test")
-public class baseTest extends OpMode {
+@TeleOp(name="Driver Control Stable")
+public class TeleOpv5p1 extends OpMode {
 
     DcMotor backLeft, backRight, frontLeft, frontRight,
             lift,
@@ -24,7 +22,11 @@ public class baseTest extends OpMode {
             pivotStatus,
             strafeStatus;
 
-    double strafeSpeed;
+    double baseSpeed, pivotSpeed, strafeSpeed, liftSpeed,
+            open, close,
+            fL, fR;
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void init() {
@@ -32,7 +34,6 @@ public class baseTest extends OpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
-        /*
         lift = hardwareMap.dcMotor.get("leftLift");
         leftPivotIntake = hardwareMap.dcMotor.get("leftPivot");
         rightPivotIntake = hardwareMap.dcMotor.get("rightPivot");
@@ -40,30 +41,40 @@ public class baseTest extends OpMode {
         leftPinch = hardwareMap.get(CRServo.class, "leftPinch");
         rightPinch = hardwareMap.get(CRServo.class, "rightPinch");
 
-         */
-
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         strafeSpeed = 1;
+        pivotSpeed = 0.0;
+        open = 0.4;
+        close = -0.4;
+
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+
+        leftPinch.setPower(open);
+        rightPinch.setPower(close);
+
+        telemetry.addData("Driver Control", "Robot is Ready");
+        updateTelemetry(telemetry);
+        telemetry.update();
+
     }
 
     @Override
     public void loop() {
 
-        double strafeSpeed = 1;
+        //change variables to actual numbers (we need to test it first)
 
+        robotStatus();
+
+        // tank drive right
         if (Math.abs(gamepad1.right_stick_y) > .1) {
             frontRight.setPower(-gamepad1.right_stick_y);
             backRight.setPower(-gamepad1.right_stick_y);
 
-            if (gamepad1.right_stick_y >= .1) {
-                rightSideStatus = 1;
-            } else if (gamepad1.right_stick_y <= -.1) {
-                rightSideStatus = -1;
-            } else {
-                rightSideStatus = 0;
-            }
             robotStatus();
         } else {
             frontRight.setPower(0);
@@ -90,7 +101,36 @@ public class baseTest extends OpMode {
 
             leftSideStatus = 0;
         }
-/*
+
+        if (gamepad1.x) {
+            strafeSpeed = 1;
+        }
+
+        if (gamepad1.y) {
+            strafeSpeed = .4;
+        }
+
+        if (gamepad2.b) {
+            lift.setPower(.5);
+
+            liftStatus = 1;
+            robotStatus();
+        } else {
+            lift.setPower(0);
+
+            liftStatus = 0;
+        }
+        //down lift
+        if (gamepad2.a) {
+            lift.setPower(-.5);
+
+            liftStatus = -1;
+            robotStatus();
+        } else {
+            lift.setPower(0);
+
+            liftStatus = 0;
+        }
         // strafing left
         if (gamepad1.dpad_left) {
             frontLeft.setPower(-strafeSpeed);
@@ -127,38 +167,92 @@ public class baseTest extends OpMode {
             strafeStatus = 0;
         }
 
- */
+        if (gamepad2.right_bumper) {
+            leftPinch.setPower(close);
+            rightPinch.setPower(open);
 
+            intakeStatus = -1;
+            robotStatus();
+        } else {
+
+            intakeStatus = 0;
+        }
+        if (gamepad2.left_bumper) {
+            leftPinch.setPower(open);
+            rightPinch.setPower(close);
+
+            intakeStatus = 1;
+            robotStatus();
+        } else {
+
+            intakeStatus = 0;
+        }
+        //up lift
+
+        //pivot intake up
+        if (gamepad2.dpad_up) {
+            leftPivotIntake.setPower(.8);
+            rightPivotIntake.setPower(-.8);
+
+            pivotStatus = 1;
+            robotStatus();
+
+        } else if (gamepad2.dpad_down) {
+            leftPivotIntake.setPower(-.3);
+            rightPivotIntake.setPower(.3);
+
+            pivotStatus = -1;
+            robotStatus();
+        } else {
+            leftPivotIntake.setPower(0);
+            rightPivotIntake.setPower(0);
+
+            pivotStatus = 0;
+        }
     }
+
+
+    /* variales for state of robot:
+        / / / / -1 / / / / 0 / / / / 1 / / / /
+        leftSide: backwards, neutral, forwards
+        rightSide: backwards, neutral, forwards
+        lift: down, neutral, up
+        intake: open, neutral, closed
+        pivot: down, neutral, up
+        strafe: left, neutral, right
+    */
+
     public void robotStatus() {
+
+        telemetry.addData("TimeElapsed: ", runtime);
+
+        fL = frontLeft.getPower();
+        fR = frontRight.getPower();
+
+
         switch (leftSideStatus) {
             case -1:
-                telemetry.addData("leftSide: ", "Forwards: " + frontLeft.getPower());
+                telemetry.addData("leftSide: ", "Forwards: " + fL);
                 break;
             case 0:
                 telemetry.addData("leftSide: ", "Neutral" + "0");
                 break;
             case 1:
-                telemetry.addData("leftSide: ", "Backwards: " + frontLeft.getPower());
-                break;
-            default:
+                telemetry.addData("leftSide: ", "Backwards: " + fL);
                 break;
         }
 
         switch (rightSideStatus) {
             case -1:
-                telemetry.addData("rightSide: ", "Forwards: " + frontRight.getPower());
+                telemetry.addData("rightSide: ", "Forwards: " + fR);
                 break;
             case 0:
                 telemetry.addData("rightSide: ", "Neutral");
                 break;
             case 1:
-                telemetry.addData("rightSide: ", "Backwards: " + frontRight.getPower());
-                break;
-            default:
+                telemetry.addData("rightSide: ", "Backwards: " + fR);
                 break;
         }
-        /*
 
         switch (liftStatus) {
             case -1:
@@ -169,8 +263,6 @@ public class baseTest extends OpMode {
                 break;
             case 1:
                 telemetry.addData("lift: ", "Up: " + lift.getPower());
-            default:
-                break;
         }
 
         switch (intakeStatus) {
@@ -183,8 +275,6 @@ public class baseTest extends OpMode {
             case 1:
                 telemetry.addData("intake: ", "Close: " + leftPinch.getPower());
                 break;
-            default:
-                break;
         }
 
         switch (pivotStatus) {
@@ -196,36 +286,27 @@ public class baseTest extends OpMode {
                 break;
             case 1:
                 telemetry.addData("pivot: ", "Raised: " + leftPivotIntake.getPower());
-            default:
-                break;
-
         }
-
-         */
 
         switch (strafeStatus) {
             case -1:
                 telemetry.addData("strafe: ", "Left: " + backLeft.getPower());
                 break;
             case 0:
-                telemetry.addData("strafe: ", "Neutral");
+                telemetry.addData("strafe: ",  "Neutral");
                 break;
             case 1:
                 telemetry.addData("strafe: ", "Right: " + backRight.getPower());
-            default:
-                break;
         }
 
-        //telemetry.addData("leftSide: ", leftSideStatus);
-        //telemetry.addData("rightSide: ", rightSideStatus);
-        //telemetry.addData("lift: ", liftStatus);
-        //telemetry.addData("intake: ", intakeStatus);
-        //telemetry.addData("pivot: ", pivotStatus);
-        //telemetry.addData("strafe: ", strafeStatus);
-        /*telemetry.addData("pivotSpeed: ", pivotSpeed);
+        telemetry.addData("pivotSpeed: ", pivotSpeed);
         telemetry.addData("strafeSpeed: ", strafeSpeed);
-        telemetry.addData("strafeToggle: ", strafeToggle);
-        telemetry.addData("strafeToggle2: ", strafeToggle2);*/
+        telemetry.addData("leftPinch: ", leftPinch.getPower());
+        telemetry.addData("rightPinch: ", rightPinch.getPower());
+        telemetry.addData("frontRight: ", rightPinch.getPower());
+        telemetry.addData("frontLeft: ", rightPinch.getPower());
+        telemetry.addData("backRight: ", rightPinch.getPower());
+        telemetry.addData("backLeft: ", rightPinch.getPower());
         updateTelemetry(telemetry);
         telemetry.update();
     }

@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
+@Disabled
 @Autonomous (name = "auto redSquare7")
 public class redSquare7 extends LinearOpMode {
     PRRobot prBot = new PRRobot();

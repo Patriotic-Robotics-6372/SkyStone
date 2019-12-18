@@ -1,47 +1,26 @@
-package org.firstinspires.ftc.teamcode.Stable.Tests;
+package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
-/*
-    author: Jacob Marinas
-    date: 12/11/19
-    desc: To test encoders; can test base, individual, and pivots
- */
-
-@Autonomous (name = "encoderTest")
-public class encoderTest extends LinearOpMode {
-    PRRobot prBot = new PRRobot();
-    double TICKS_PER_IN = 1120/4*Math.PI;
+//@Disabled
+@Autonomous (name = "auto redSquare10")
+public class redSquare10 extends LinearOpMode {
+    PRRobot prBot = new PRRobot("stable");
     int tickGoal, wait;
+    double TICKS_PER_IN = 1120/4*Math.PI;
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
-        prBot.useBrake(false);
+        prBot.useBrake(true);
         prBot.useEnc(true);
-        //prBot.rightPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //prBot.leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        wait = 500;
         waitForStart();
-        //prBot.leftPivot.setPower(.5);
-        //prBot.rightPivot.setPower(.5);
-        encoderTelemetry("pivot", false);
-        sleep(wait);
-        //encoder(2, .5, .5, "pivot");
-        //encoder(6,.5,.5,"all");
-        encoder(6,.5,.5,"base");
-        encoder(18,.5,.5,"base");
-        encoder(18,1,1,"base");
-        encoder(6, .5, .5, "fR");
-        encoder(6, .5, .5, "fL");
-        encoder(6, .5, .5, "bR");
-        encoder(6, .5, .5, "bL");
-        //driveDistance(6,.5,.5,"all");
-        //encoder(2, .5, .5, "pivot");
+        encoder(6, .3, 1, "base");
+        encoder(12, 1, .3, "base");
+        sleep(3000);
     }
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/12/19
     desc: testing encoders from class PRRobotv2
  */
+@Disabled
 @Autonomous (name = "encoderTestv2")
 public class encoderTestv2 extends LinearOpMode {
     PRRobotv2 prBot = new PRRobotv2();

@@ -13,6 +13,7 @@ public class parkLong extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
+        prBot.setTelemetry(telemetry);
         waitForStart();
         prBot.move(.6, .6, PRRobot.Status.FORWARDS);
         sleep(2800);

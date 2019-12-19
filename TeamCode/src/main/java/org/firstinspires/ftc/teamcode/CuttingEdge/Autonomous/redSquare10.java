@@ -21,6 +21,7 @@ public class redSquare10 extends LinearOpMode {
         encoder(6, .3, 1, "base");
         encoder(12, 1, .3, "base");
         sleep(3000);
+        Thread.sleep(1000);
     }
 
     public void encoder(double inches, double rightPower, double leftPower, String motor) {

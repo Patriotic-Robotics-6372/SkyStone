@@ -153,12 +153,6 @@ public class encoderTest extends LinearOpMode {
         sleep(wait);
     }
 
-    public void pivot(String status) {
-        switch (status) {
-            case "up":
-
-        }
-    }
 
     public boolean anyBusy(){
         if (prBot.frontRight.isBusy() || prBot.frontLeft.isBusy() || prBot.backRight.isBusy() || prBot.backLeft.isBusy() || prBot.leftPivot.isBusy() || prBot.rightPivot.isBusy()) {

@@ -26,7 +26,6 @@ public class servoTest extends OpMode {
         if (gamepad2.x) {
             rightPinch.setPosition(open);
             leftPinch.setPosition(close);
-
             telemetry.addData("servo", "open");
             updateTelemetry(telemetry);
             telemetry.update();
@@ -34,11 +33,9 @@ public class servoTest extends OpMode {
         if (gamepad2.y) {
             rightPinch.setPosition(close);
             leftPinch.setPosition(open);
-
             telemetry.addData("servo", "close");
             updateTelemetry(telemetry);
             telemetry.update();
         }
-
     }
 }

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.CuttingEdge.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
+//import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 /*
@@ -11,29 +11,56 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/11/19
     desc: To test encoders; can test base, individual, and pivots
  */
-@Disabled
+//@Disabled
 @Autonomous (name = "redSquare9")
 public class redSquare9 extends LinearOpMode {
-    PRRobot prBot = new PRRobot();
-    double TICKS_PER_IN = 1120/4*Math.PI;
+    ///*
+
+    PRRobot prBot = new PRRobot("stable");
+    double TICKS_PER_IN = 1120 / 4 * Math.PI;
     int tickGoal, wait;
+
     @Override
     public void runOpMode() throws InterruptedException {
         prBot.init(hardwareMap);
-        prBot.useBrake(false);
-        prBot.useEnc(true);
-        prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        prBot.useBrake(true);
+        prBot.useEnc(false);
+        prBot.setTelemetry(telemetry);
+        //prBot.rightPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //prBot.leftPivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart();
-        encoder(10, .5, .5, "base");
         prBot.pivotIntake(PRRobot.Status.UP);
         prBot.robotStatus(telemetry);
         sleep(500);
         prBot.pivotIntake(PRRobot.Status.NEUTRAL);
-        prBot.robotStatus(telemetry);
+        //prBot.robotStatus(telemetry);
         sleep(3000);
     }
+}
 
+/*
+
+
+    PRRobot prBot = new PRRobot("stable");
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        prBot.init(hardwareMap);
+        prBot.useEnc(false);
+        prBot.useBrake(true);
+        prBot.setTelemetry(telemetry);
+        waitForStart();
+        telemetry.update();
+        prBot.move(.6, .6, PRRobot.Status.FORWARDS);
+        telemetry.update();
+        sleep(3000);
+        prBot.pivotIntake(PRRobot.Status.NEUTRAL);
+        telemetry.update();
+        sleep(3000);
+        telemetry.update();
+    }
+}*/
+/*
     public void encoder(double inches, double rightPower, double leftPower, String motor) {
         tickGoal = (int) (TICKS_PER_IN * inches);
         switch (motor) {
@@ -216,3 +243,4 @@ public class redSquare9 extends LinearOpMode {
         telemetry.update();
     }
 }
+ */

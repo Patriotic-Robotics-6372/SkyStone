@@ -9,9 +9,11 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 @Disabled
 @Autonomous (name = "Auto redSquare4")
 public class redSquare4 extends LinearOpMode {
+
     PRRobot prBot = new PRRobot();
     @Override
     public void runOpMode() throws InterruptedException {
+        /*
         prBot.init(hardwareMap);
 
         waitForStart();
@@ -33,5 +35,9 @@ public class redSquare4 extends LinearOpMode {
 
         prBot.pivotTurn(.3, .3, PRRobot.Status.LEFT);
         sleep(500);
+
+         */
     }
+
+
 }

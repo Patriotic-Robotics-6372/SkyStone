@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="Driver Control Stable")
+@TeleOp(name="Driver Control Stable v2")
 public class TeleOpv5p1 extends OpMode {
 
     DcMotor backLeft, backRight, frontLeft, frontRight,
@@ -48,6 +48,7 @@ public class TeleOpv5p1 extends OpMode {
         pivotSpeed = 0.0;
         open = 0.4;
         close = -0.4;
+        liftSpeed = 1;
 
         frontLeft.setPower(0);
         frontRight.setPower(0);
@@ -74,19 +75,16 @@ public class TeleOpv5p1 extends OpMode {
         if (Math.abs(gamepad1.right_stick_y) > .1) {
             frontRight.setPower(-gamepad1.right_stick_y);
             backRight.setPower(-gamepad1.right_stick_y);
-
             robotStatus();
         } else {
             frontRight.setPower(0);
             backRight.setPower(0);
-
             rightSideStatus = 0;
         }
         // tank drive left
         if (Math.abs(gamepad1.left_stick_y) > .1) {
             frontLeft.setPower(-gamepad1.left_stick_y);
             backLeft.setPower(-gamepad1.left_stick_y);
-
             if (gamepad1.left_stick_y >= .1) {
                 leftSideStatus = 1;
             } else if (gamepad1.left_stick_y <= -.1) {
@@ -98,37 +96,24 @@ public class TeleOpv5p1 extends OpMode {
         } else {
             frontLeft.setPower(0);
             backLeft.setPower(0);
-
             leftSideStatus = 0;
         }
 
-        if (gamepad1.x) {
-            strafeSpeed = 1;
-        }
-
-        if (gamepad1.y) {
-            strafeSpeed = .4;
-        }
-
         if (gamepad2.b) {
-            lift.setPower(.5);
-
+            lift.setPower(liftSpeed);
             liftStatus = 1;
             robotStatus();
         } else {
             lift.setPower(0);
-
             liftStatus = 0;
         }
         //down lift
         if (gamepad2.a) {
-            lift.setPower(-.5);
-
+            lift.setPower(-liftSpeed);
             liftStatus = -1;
             robotStatus();
         } else {
             lift.setPower(0);
-
             liftStatus = 0;
         }
         // strafing left
@@ -137,16 +122,13 @@ public class TeleOpv5p1 extends OpMode {
             frontRight.setPower(strafeSpeed);
             backLeft.setPower(strafeSpeed);
             backRight.setPower(-strafeSpeed);
-
             strafeStatus = -1;
             robotStatus();
-
         } else {
             frontLeft.setPower(0);
             frontRight.setPower(0);
             backLeft.setPower(0);
             backRight.setPower(0);
-
             strafeStatus = 0;
         }
         // strafing right
@@ -155,7 +137,6 @@ public class TeleOpv5p1 extends OpMode {
             frontRight.setPower(-strafeSpeed);
             backLeft.setPower(-strafeSpeed);
             backRight.setPower(strafeSpeed);
-
             strafeStatus = 1;
             robotStatus();
         } else {
@@ -163,56 +144,44 @@ public class TeleOpv5p1 extends OpMode {
             frontRight.setPower(0);
             backLeft.setPower(0);
             backRight.setPower(0);
-
             strafeStatus = 0;
         }
 
         if (gamepad2.right_bumper) {
             leftPinch.setPower(close);
             rightPinch.setPower(open);
-
-            intakeStatus = -1;
-            robotStatus();
-        } else {
-
-            intakeStatus = 0;
-        }
-        if (gamepad2.left_bumper) {
+            intakeStatus = 1;
+        } else if (gamepad2.left_bumper) {
             leftPinch.setPower(open);
             rightPinch.setPower(close);
-
-            intakeStatus = 1;
-            robotStatus();
+            intakeStatus = -1;
         } else {
-
+            leftPinch.setPower(0);
+            rightPinch.setPower(0);
             intakeStatus = 0;
         }
         //up lift
 
         //pivot intake up
         if (gamepad2.dpad_up) {
-            leftPivotIntake.setPower(.8);
-            rightPivotIntake.setPower(-.8);
-
+            leftPivotIntake.setPower(pivotSpeed);
+            rightPivotIntake.setPower(-pivotSpeed);
             pivotStatus = 1;
             robotStatus();
-
         } else if (gamepad2.dpad_down) {
-            leftPivotIntake.setPower(-.3);
-            rightPivotIntake.setPower(.3);
-
+            leftPivotIntake.setPower(-pivotSpeed/2);
+            rightPivotIntake.setPower(pivotSpeed/2);
             pivotStatus = -1;
             robotStatus();
         } else {
             leftPivotIntake.setPower(0);
             rightPivotIntake.setPower(0);
-
             pivotStatus = 0;
         }
     }
 
 
-    /* variales for state of robot:
+    /* variables for state of robot:
         / / / / -1 / / / / 0 / / / / 1 / / / /
         leftSide: backwards, neutral, forwards
         rightSide: backwards, neutral, forwards

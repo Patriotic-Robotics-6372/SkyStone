@@ -65,17 +65,17 @@ public class TeleOpv7 extends OpMode {
             prBot.backRight.setPower(prBot.rightSideSpeed);
             // set status of right side
             if (prBot.rightStick1 >= .1) {
-                prBot.rightSideStatus = PRRobot.Status.FORWARDS;
+                //prBot.rightSideStatus = PRRobot.Status.FORWARDS;
             } else if (prBot.rightStick1 <= -.1) {
-                prBot.rightSideStatus = PRRobot.Status.BACKWARDS;
+                //prBot.rightSideStatus = PRRobot.Status.BACKWARDS;
             } else {
-                prBot.rightSideStatus = PRRobot.Status.NEUTRAL;
+                //prBot.rightSideStatus = PRRobot.Status.NEUTRAL;
             }
             prBot.robotStatus(telemetry);
         } else {
             prBot.frontRight.setPower(prBot.STOP);
             prBot.backRight.setPower(prBot.STOP);
-            prBot.rightSideStatus = PRRobot.Status.NEUTRAL;
+            //prBot.rightSideStatus = PRRobot.Status.NEUTRAL;
         }
         // tank drive left
         if (Math.abs(prBot.leftStick1) > .1) {
@@ -84,17 +84,17 @@ public class TeleOpv7 extends OpMode {
             prBot.frontLeft.setPower(prBot.leftSideSpeed);
             prBot.backLeft.setPower(prBot.leftSideSpeed);
             if (prBot.leftStick1 >= .1) {
-                prBot.leftSideStatus = PRRobot.Status.FORWARDS;
+               // prBot.leftSideStatus = PRRobot.Status.FORWARDS;
             } else if (prBot.leftStick1 <= -.1) {
-                prBot.leftSideStatus = PRRobot.Status.BACKWARDS;
+                //prBot.leftSideStatus = PRRobot.Status.BACKWARDS;
             } else {
-                prBot.leftSideStatus = PRRobot.Status.NEUTRAL;
+                //prBot.leftSideStatus = PRRobot.Status.NEUTRAL;
             }
             prBot.robotStatus(telemetry);
         } else {
             prBot.frontLeft.setPower(prBot.STOP);
             prBot.backLeft.setPower(prBot.STOP);
-            prBot.leftSideStatus = PRRobot.Status.NEUTRAL;
+           // prBot.leftSideStatus = PRRobot.Status.NEUTRAL;
         }
 
         // strafing left
@@ -103,11 +103,11 @@ public class TeleOpv7 extends OpMode {
             prBot.frontRight.setPower(prBot.strafeSpeed);
             prBot.backLeft.setPower(prBot.strafeSpeed);
             prBot.backRight.setPower(-prBot.strafeSpeed);
-            prBot.strafeStatus = PRRobot.Status.LEFT;
+            //prBot.strafeStatus = PRRobot.Status.LEFT;
             prBot.robotStatus(telemetry);
         } else {
             prBot.stop();
-            prBot.strafeStatus = PRRobot.Status.NEUTRAL;
+            //prBot.strafeStatus = PRRobot.Status.NEUTRAL;
         }
         // strafing right
         if (prBot.dpadRight1) {
@@ -115,11 +115,11 @@ public class TeleOpv7 extends OpMode {
             prBot.frontRight.setPower(-prBot.strafeSpeed);
             prBot.backLeft.setPower(-prBot.strafeSpeed);
             prBot.backRight.setPower(prBot.strafeSpeed);
-            prBot.strafeStatus = PRRobot.Status.RIGHT;
+            //prBot.strafeStatus = PRRobot.Status.RIGHT;
             prBot.robotStatus(telemetry);
         } else {
             prBot.stop();
-            prBot.strafeStatus = PRRobot.Status.NEUTRAL;
+            //prBot.strafeStatus = PRRobot.Status.NEUTRAL;
         }
         /*
         if (prBot.dpadUp1) {
@@ -132,20 +132,20 @@ public class TeleOpv7 extends OpMode {
 
         if (prBot.b2) {
             prBot.lift.setPower(prBot.liftSpeed);
-            prBot.liftStatus = PRRobot.Status.UP;
+            //prBot.liftStatus = PRRobot.Status.UP;
             prBot.robotStatus(telemetry);
         } else {
             prBot.lift.setPower(prBot.STOP);
-            prBot.liftStatus = PRRobot.Status.NEUTRAL;
+            //prBot.liftStatus = PRRobot.Status.NEUTRAL;
         }
         //down lift
         if (prBot.a2) {
             prBot.lift.setPower(-prBot.liftSpeed);
-            prBot.liftStatus = PRRobot.Status.DOWN;
+           // prBot.liftStatus = PRRobot.Status.DOWN;
             prBot.robotStatus(telemetry);
         } else {
             prBot.lift.setPower(prBot.STOP);
-            prBot.liftStatus = PRRobot.Status.NEUTRAL;
+            //prBot.liftStatus = PRRobot.Status.NEUTRAL;
         }
 
         /*
@@ -161,35 +161,35 @@ public class TeleOpv7 extends OpMode {
         if (prBot.rightBumper2) {
             prBot.leftPinch.setPower(prBot.close);
             prBot.rightPinch.setPower(prBot.open);
-            prBot.intakeStatus = PRRobot.Status.CLOSE;
+            //prBot.intakeStatus = PRRobot.Status.CLOSE;
             prBot.robotStatus(telemetry);
         } else {
-            prBot.intakeStatus = PRRobot.Status.NEUTRAL;
+            //prBot.intakeStatus = PRRobot.Status.NEUTRAL;
         }
         if (prBot.leftBumper2) {
             prBot.leftPinch.setPower(prBot.open);
             prBot.rightPinch.setPower(prBot.close);
-            prBot.intakeStatus = PRRobot.Status.OPEN;
+            //prBot.intakeStatus = PRRobot.Status.OPEN;
             prBot.robotStatus(telemetry);
         } else {
-            prBot.intakeStatus = PRRobot.Status.NEUTRAL;
+            //prBot.intakeStatus = PRRobot.Status.NEUTRAL;
         }
 
         //pivot intake up
         if (prBot.dpadUp2) {
             prBot.leftPivot.setPower(prBot.pivotIntakeSpeed);
             prBot.rightPivot.setPower(prBot.pivotIntakeSpeed);
-            prBot.pivotStatus = PRRobot.Status.UP;
+            //prBot.pivotStatus = PRRobot.Status.UP;
             prBot.robotStatus(telemetry);
         } else if (prBot.dpadDown2) {
             prBot.leftPivot.setPower(-prBot.pivotIntakeSpeed);
             prBot.rightPivot.setPower(-prBot.pivotIntakeSpeed);
-            prBot.pivotStatus = PRRobot.Status.DOWN;
+            //prBot.pivotStatus = PRRobot.Status.DOWN;
             prBot.robotStatus(telemetry);
         } else {
             prBot.leftPivot.setPower(prBot.STOP);
             prBot.rightPivot.setPower(prBot.STOP);
-            prBot.pivotStatus = PRRobot.Status.NEUTRAL;
+            //prBot.pivotStatus = PRRobot.Status.NEUTRAL;
         }
     }
 }

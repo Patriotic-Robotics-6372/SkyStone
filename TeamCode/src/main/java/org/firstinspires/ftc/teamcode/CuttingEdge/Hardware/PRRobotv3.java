@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Stable.Hardware;
+package org.firstinspires.ftc.teamcode.CuttingEdge.Hardware;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
           open and close, where int is between 180 and 0
  */
 
-public class PRRobot {
+public class PRRobotv3 {
 
     // defining motors and servos
 
@@ -34,7 +34,7 @@ public class PRRobot {
 
     public double baseSpeed, pivotIntakeSpeed, strafeSpeed, liftSpeed,
             leftSideSpeed, rightSideSpeed,
-            pinchSpeed, 
+            pinchSpeed,
             open, close,
 
     // easier naming conventions / double values
@@ -78,7 +78,7 @@ public class PRRobot {
 
     // constructor
 
-    public PRRobot(double baseSpeed, double pivotIntakeSpeed, double strafeSpeed, double liftSpeed, double open, double close) {
+    public PRRobotv3(double baseSpeed, double pivotIntakeSpeed, double strafeSpeed, double liftSpeed, double open, double close) {
         this.baseSpeed = baseSpeed;
         this.pivotIntakeSpeed = pivotIntakeSpeed;
         this.strafeSpeed = strafeSpeed;
@@ -87,7 +87,7 @@ public class PRRobot {
         this.close = close;
     }
 
-    public PRRobot(String mode) {
+    public PRRobotv3(String mode) {
         switch (mode) {
             case "stable":
                 this.baseSpeed = 1;
@@ -119,7 +119,7 @@ public class PRRobot {
         }
     }
 
-    public PRRobot() {
+    public PRRobotv3() {
         this.baseSpeed = 1;
         this.pivotIntakeSpeed = .8;
         this.strafeSpeed = 1;
@@ -239,6 +239,7 @@ public class PRRobot {
             case RIGHT:
                 frontRight.setPower(power);
                 backRight.setPower(power);
+                telem.addData("pointTurn: ", "OPEN");
                 break;
             case LEFT:
                 frontLeft.setPower(power);
@@ -251,14 +252,17 @@ public class PRRobot {
             case OPEN:
                 leftPinch.setPower(pinchSpeed);
                 rightPinch.setPower(pinchSpeed);
+                telem.addData("pinch: ", "OPEN");
                 break;
             case CLOSE:
                 leftPinch.setPower(pinchSpeed);
                 rightPinch.setPower(pinchSpeed);
+                telem.addData("pinch: ", "CLOSE");
                 break;
             case NEUTRAL:
                 leftPinch.setPower(STOP);
                 rightPinch.setPower(STOP);
+                telem.addData("pinch: ", "NEUTRAL");
         }
     }
 
@@ -291,7 +295,7 @@ public class PRRobot {
         this.telem = telemetry;
     }
 
-    public void robotStatus(Telemetry telemetry) {
+    public void robotStatus() {
 
         // used to check how the robot is doing
 
@@ -305,77 +309,77 @@ public class PRRobot {
 
         switch (leftSideStatus) {
             case FORWARDS:
-                telemetry.addData("leftSide: ", "Forwards: " + fL);
+                telem.addData("leftSide: ", "Forwards: " + fL);
                 break;
             case NEUTRAL:
-                telemetry.addData("leftSide: ", "Neutral" + "0");
+                telem.addData("leftSide: ", "Neutral" + "0");
                 break;
             case BACKWARDS:
-                telemetry.addData("leftSide: ", "Backwards: " + fL);
+                telem.addData("leftSide: ", "Backwards: " + fL);
                 break;
         }
         switch (rightSideStatus) {
             case BACKWARDS:
-                telemetry.addData("rightSide: ", "Backwards: " + fR);
+                telem.addData("rightSide: ", "Backwards: " + fR);
                 break;
             case NEUTRAL:
-                telemetry.addData("rightSide: ", "Neutral");
+                telem.addData("rightSide: ", "Neutral");
                 break;
             case FORWARDS:
-                telemetry.addData("rightSide: ", "Forwards: " + fR);
+                telem.addData("rightSide: ", "Forwards: " + fR);
                 break;
         }
         switch (liftStatus) {
             case DOWN:
-                telemetry.addData("lift: ", "Down: " + L);
+                telem.addData("lift: ", "Down: " + L);
                 break;
             case NEUTRAL:
-                telemetry.addData("lift: ", "Neutral");
+                telem.addData("lift: ", "Neutral");
                 break;
             case UP:
-                telemetry.addData("lift: ", "Up: " + L);
+                telem.addData("lift: ", "Up: " + L);
         }
         switch (intakeStatus) {
             case OPEN:
-                telemetry.addData("intake: ", "Open: " + lP);
+                telem.addData("intake: ", "Open: " + lP);
                 break;
             case NEUTRAL:
-                telemetry.addData("intake: ", "Neutral");
+                telem.addData("intake: ", "Neutral");
                 break;
             case CLOSE:
-                telemetry.addData("intake: ", "Close: " + lP);
+                telem.addData("intake: ", "Close: " + lP);
                 break;
         }
         switch (pivotStatus) {
             case DOWN:
-                telemetry.addData("pivot: ", "Lowered: " + lPv);
+                telem.addData("pivot: ", "Lowered: " + lPv);
                 break;
             case NEUTRAL:
-                telemetry.addData("pivot: ", "Neutral");
+                telem.addData("pivot: ", "Neutral");
                 break;
             case UP:
-                telemetry.addData("pivot: ", "Raised: " + lPv);
+                telem.addData("pivot: ", "Raised: " + lPv);
         }
         switch (strafeStatus) {
             case LEFT:
-                telemetry.addData("strafe: ", "Left: " + bL);
+                telem.addData("strafe: ", "Left: " + bL);
                 break;
             case NEUTRAL:
-                telemetry.addData("strafe: ",  "Neutral");
+                telem.addData("strafe: ",  "Neutral");
                 break;
             case RIGHT:
-                telemetry.addData("strafe: ", "Right: " + bR);
+                telem.addData("strafe: ", "Right: " + bR);
         }
-        telemetry.addData("baseSpeed: ", baseSpeed);
-        telemetry.addData("pivotSpeed: ", pivotIntakeSpeed);
-        telemetry.addData("strafeSpeed: ", strafeSpeed);
-        telemetry.addData("liftSpeed: ", liftSpeed);
-        telemetry.addData("leftSideSpeed: ", leftSideSpeed);
-        telemetry.addData("rightSideSpeed: ", rightSideSpeed);
-        telemetry.addData("controller1: ", controller1);
-        telemetry.addData("controller2: ", controller2);
-        telemetry.addData("TimeElapsed: ", runtime);
-        telemetry.update();
+        telem.addData("baseSpeed: ", baseSpeed);
+        telem.addData("pivotSpeed: ", pivotIntakeSpeed);
+        telem.addData("strafeSpeed: ", strafeSpeed);
+        telem.addData("liftSpeed: ", liftSpeed);
+        telem.addData("leftSideSpeed: ", leftSideSpeed);
+        telem.addData("rightSideSpeed: ", rightSideSpeed);
+        telem.addData("controller1: ", controller1);
+        telem.addData("controller2: ", controller2);
+        telem.addData("TimeElapsed: ", runtime);
+        telem.update();
 
     }
 }

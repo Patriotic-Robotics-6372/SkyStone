@@ -187,6 +187,14 @@ public class PRRobotv3 {
         }
     }
 
+    public boolean getController1(){
+        return (leftStick1 != 0) || (rightStick1 != 0) || dpadLeft1 || dpadRight1 || dpadUp1 || dpadDown1;
+    }
+
+    public boolean getController2(){
+        return dpadUp2 || dpadDown2 || a2 || b2 || rightBumper2 || leftBumper2 || x2 || y2;
+    }
+
     // autonomous functions
 
     public void move(double leftPower, double rightPower, Status status) {
@@ -196,18 +204,18 @@ public class PRRobotv3 {
                 frontRight.setPower(rightPower);
                 backLeft.setPower(leftPower);
                 backRight.setPower(rightPower);
-                telem.addData("FORWARD: ", "yes");
+                telem.addData("move()", "FORWARDS");
                 break;
             case BACKWARDS:
                 frontLeft.setPower(-leftPower);
                 frontRight.setPower(-rightPower);
                 backLeft.setPower(-leftPower);
                 backRight.setPower(-rightPower);
-                telem.addData("BACKWARD: ", "yes");
+                telem.addData("move()", "BACKWARDS");
                 break;
             case NEUTRAL:
                 stop();
-                telem.addData("NEUTRAL: ", "yes");
+                telem.addData("move()", "NEUTRAL");
         }
     }
 
@@ -216,6 +224,7 @@ public class PRRobotv3 {
         frontRight.setPower(STOP);
         backLeft.setPower(STOP);
         backRight.setPower(STOP);
+        telem.addData("stop()", "true");
     }
 
     public void pivotTurn(double leftPower, double rightPower, Status status){
@@ -225,12 +234,14 @@ public class PRRobotv3 {
                 frontLeft.setPower (leftPower);
                 backRight.setPower(-rightPower);
                 backLeft.setPower(rightPower);
+                telem.addData("pivotTurn()", "LEFT");
                 break;
             case RIGHT:
                 frontRight.setPower(rightPower);
                 frontLeft.setPower (-leftPower);
                 backRight.setPower(rightPower);
                 backLeft.setPower(-rightPower);
+                telem.addData("pivotTurn()", "RIGHT");
         }
     }
 
@@ -239,11 +250,12 @@ public class PRRobotv3 {
             case RIGHT:
                 frontRight.setPower(power);
                 backRight.setPower(power);
-                telem.addData("pointTurn: ", "OPEN");
+                telem.addData("pointTurn()", "RIGHT");
                 break;
             case LEFT:
                 frontLeft.setPower(power);
                 backLeft.setPower(power);
+                telem.addData("pointTurn()", "LEFT");
         }
     }
 
@@ -252,17 +264,17 @@ public class PRRobotv3 {
             case OPEN:
                 leftPinch.setPower(pinchSpeed);
                 rightPinch.setPower(pinchSpeed);
-                telem.addData("pinch: ", "OPEN");
+                telem.addData("pinch()", "OPEN");
                 break;
             case CLOSE:
                 leftPinch.setPower(pinchSpeed);
                 rightPinch.setPower(pinchSpeed);
-                telem.addData("pinch: ", "CLOSE");
+                telem.addData("pinch()", "CLOSE");
                 break;
             case NEUTRAL:
                 leftPinch.setPower(STOP);
                 rightPinch.setPower(STOP);
-                telem.addData("pinch: ", "NEUTRAL");
+                telem.addData("pinch()", "NEUTRAL");
         }
     }
 
@@ -271,17 +283,17 @@ public class PRRobotv3 {
             case DOWN:
                 leftPivot.setPower(.8);
                 rightPivot.setPower(-.8);
-                telem.addData("pivotIntake: ", "DOWN");
+                telem.addData("pivotIntake()", "DOWN");
                 break;
             case UP:
                 leftPivot.setPower(-.2);
                 rightPivot.setPower(.2);
-                telem.addData("pivotIntake: ", "UP");
+                telem.addData("pivotIntake()", "UP");
                 break;
             case NEUTRAL:
                 leftPivot.setPower(STOP);
                 rightPivot.setPower(STOP);
-                telem.addData("pivotIntake: ", "NEUTRAL");
+                telem.addData("pivotIntake()", "NEUTRAL");
                 break;
         }
     }
@@ -309,76 +321,76 @@ public class PRRobotv3 {
 
         switch (leftSideStatus) {
             case FORWARDS:
-                telem.addData("leftSide: ", "Forwards: " + fL);
+                telem.addData("leftSide", "Forwards: " + fL);
                 break;
             case NEUTRAL:
-                telem.addData("leftSide: ", "Neutral" + "0");
+                telem.addData("leftSide", "Neutral" + "0");
                 break;
             case BACKWARDS:
-                telem.addData("leftSide: ", "Backwards: " + fL);
+                telem.addData("leftSide", "Backwards: " + fL);
                 break;
         }
         switch (rightSideStatus) {
             case BACKWARDS:
-                telem.addData("rightSide: ", "Backwards: " + fR);
+                telem.addData("rightSide", "Backwards: " + fR);
                 break;
             case NEUTRAL:
-                telem.addData("rightSide: ", "Neutral");
+                telem.addData("rightSide", "Neutral");
                 break;
             case FORWARDS:
-                telem.addData("rightSide: ", "Forwards: " + fR);
+                telem.addData("rightSide", "Forwards: " + fR);
                 break;
         }
         switch (liftStatus) {
             case DOWN:
-                telem.addData("lift: ", "Down: " + L);
+                telem.addData("lift", "Down: " + L);
                 break;
             case NEUTRAL:
-                telem.addData("lift: ", "Neutral");
+                telem.addData("lift", "Neutral");
                 break;
             case UP:
-                telem.addData("lift: ", "Up: " + L);
+                telem.addData("lift", "Up: " + L);
         }
         switch (intakeStatus) {
             case OPEN:
-                telem.addData("intake: ", "Open: " + lP);
+                telem.addData("intake", "Open: " + lP);
                 break;
             case NEUTRAL:
-                telem.addData("intake: ", "Neutral");
+                telem.addData("intake", "Neutral");
                 break;
             case CLOSE:
-                telem.addData("intake: ", "Close: " + lP);
+                telem.addData("intake", "Close: " + lP);
                 break;
         }
         switch (pivotStatus) {
             case DOWN:
-                telem.addData("pivot: ", "Lowered: " + lPv);
+                telem.addData("pivot", "Lowered: " + lPv);
                 break;
             case NEUTRAL:
-                telem.addData("pivot: ", "Neutral");
+                telem.addData("pivot", "Neutral");
                 break;
             case UP:
-                telem.addData("pivot: ", "Raised: " + lPv);
+                telem.addData("pivot", "Raised: " + lPv);
         }
         switch (strafeStatus) {
             case LEFT:
-                telem.addData("strafe: ", "Left: " + bL);
+                telem.addData("strafe", "Left: " + bL);
                 break;
             case NEUTRAL:
-                telem.addData("strafe: ",  "Neutral");
+                telem.addData("strafe",  "Neutral");
                 break;
             case RIGHT:
-                telem.addData("strafe: ", "Right: " + bR);
+                telem.addData("strafe", "Right: " + bR);
         }
-        telem.addData("baseSpeed: ", baseSpeed);
-        telem.addData("pivotSpeed: ", pivotIntakeSpeed);
-        telem.addData("strafeSpeed: ", strafeSpeed);
-        telem.addData("liftSpeed: ", liftSpeed);
-        telem.addData("leftSideSpeed: ", leftSideSpeed);
-        telem.addData("rightSideSpeed: ", rightSideSpeed);
-        telem.addData("controller1: ", controller1);
-        telem.addData("controller2: ", controller2);
-        telem.addData("TimeElapsed: ", runtime);
+        telem.addData("baseSpeed", baseSpeed);
+        telem.addData("pivotSpeed", pivotIntakeSpeed);
+        telem.addData("strafeSpeed", strafeSpeed);
+        telem.addData("liftSpeed", liftSpeed);
+        telem.addData("leftSideSpeed", leftSideSpeed);
+        telem.addData("rightSideSpeed", rightSideSpeed);
+        telem.addData("controller1", controller1);
+        telem.addData("controller2", controller2);
+        telem.addData("TimeElapsed", runtime);
         telem.update();
 
     }

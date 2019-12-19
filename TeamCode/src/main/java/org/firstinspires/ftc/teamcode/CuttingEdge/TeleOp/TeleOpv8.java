@@ -48,10 +48,7 @@ public class TeleOpv8 extends OpMode {
 
         // to check if controller is being used; true if any of the buttons are pressed, false else
 
-        prBot.controller1 = (prBot.leftStick1 != 0) || (prBot.rightStick1 != 0) || prBot.dpadLeft1 || prBot.dpadRight1 || prBot.dpadUp1 || prBot.dpadDown1;
-        prBot.controller2 = prBot.dpadUp2 || prBot.dpadDown2 || prBot.a2 || prBot.b2 || prBot.rightBumper2 || prBot.leftBumper2 || prBot.x2 || prBot.y2;
-
-        if (!prBot.controller1 && !prBot.controller2) {
+        if (!prBot.getController1() && !prBot.getController2()) {
             prBot.robotStatus();
         }
 
@@ -85,9 +82,9 @@ public class TeleOpv8 extends OpMode {
             prBot.frontLeft.setPower(prBot.leftSideSpeed);
             prBot.backLeft.setPower(prBot.leftSideSpeed);
             if (prBot.leftStick1 >= .1) {
-                prBot.leftSideStatus = PRRobotv3.Status.FORWARDS;
-            } else if (prBot.leftStick1 <= -.1) {
                 prBot.leftSideStatus = PRRobotv3.Status.BACKWARDS;
+            } else if (prBot.leftStick1 <= -.1) {
+                prBot.leftSideStatus = PRRobotv3.Status.FORWARDS;
             } else {
                 prBot.leftSideStatus = PRRobotv3.Status.NEUTRAL;
             }
@@ -148,16 +145,6 @@ public class TeleOpv8 extends OpMode {
             prBot.lift.setPower(prBot.STOP);
             prBot.liftStatus = PRRobotv3.Status.NEUTRAL;
         }
-
-        /*
-        if (prBot.x2) {
-            prBot.liftSpeed -= .1;
-        }
-
-        if (prBot.y2) {
-            prBot.liftSpeed += .1;
-        }
-        */
 
         if (prBot.rightBumper2) {
             prBot.leftPinch.setPower(prBot.close);

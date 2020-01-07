@@ -174,25 +174,16 @@ public class TeleOpv5 extends OpMode {
             strafeStatus = 0;
         }
 
-        if (gamepad2.right_bumper) {
-            leftPinch.setPower(close);
-            rightPinch.setPower(open);
-
-            intakeStatus = -1;
-            robotStatus();
+        if (gamepad2.right_bumper){
+            leftPinch.setPower(1);
+            rightPinch.setPower(-1);
+        } else if (gamepad2.left_bumper){
+            leftPinch.setPower(0);
+            rightPinch.setPower(0);
         } else {
+            leftPinch.setPower(-1);
+            rightPinch.setPower(1);
 
-            intakeStatus = 0;
-        }
-        if (gamepad2.left_bumper) {
-            leftPinch.setPower(open);
-            rightPinch.setPower(close);
-
-            intakeStatus = 1;
-            robotStatus();
-        } else {
-
-            intakeStatus = 0;
         }
         //up lift
 

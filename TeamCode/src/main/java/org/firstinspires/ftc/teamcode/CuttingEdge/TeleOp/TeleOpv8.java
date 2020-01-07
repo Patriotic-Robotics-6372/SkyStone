@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
 /*
     author: Jacob Marinas
-    date: 12/18/19
+    date: 1/7/20
     desc: teleop w/ PRRobotv3. left side / right side goes forwards / backwards, strafe, pivot, lift, intake.
  */
 
@@ -119,14 +119,6 @@ public class TeleOpv8 extends OpMode {
             prBot.stop();
             prBot.strafeStatus = PRRobotv3.Status.NEUTRAL;
         }
-        /*
-        if (prBot.dpadUp1) {
-            prBot.speedChange(.1, 1);
-        }
-        if (prBot.dpadDown1) {
-            prBot.speedChange(.1, -1);
-        }
-        */
 
         if (prBot.b2) {
             prBot.lift.setPower(prBot.liftSpeed);
@@ -146,6 +138,7 @@ public class TeleOpv8 extends OpMode {
             prBot.liftStatus = PRRobotv3.Status.NEUTRAL;
         }
 
+        //intake
         if (prBot.rightBumper2) {
             prBot.leftPinch.setPower(prBot.close);
             prBot.rightPinch.setPower(prBot.open);

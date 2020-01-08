@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -26,11 +26,11 @@ public class Intake {
         stop();
     }
 
-    public void setPower(double power){
+    public void setMaxPower(double power){
         this.power = power;
     }
 
-    public double getPower(){
+    public double getMaxPower(){
         return power;
     }
 
@@ -54,5 +54,9 @@ public class Intake {
 
     public Status getStatus(){
         return intakeStatus;
+    }
+
+    public double[] getSpeeds(){
+        return new double[]{leftPinch.getPower(), rightPinch.getPower()};
     }
 }

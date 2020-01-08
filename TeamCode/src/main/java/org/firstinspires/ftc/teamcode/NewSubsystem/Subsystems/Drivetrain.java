@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -6,7 +6,6 @@ public class Drivetrain {
 
     private DcMotor frontRight, frontLeft, backRight, backLeft;
     private double power;
-    private boolean hasEnc, hasBrake;
     private enum Status {
         FORWARDS, BACKWARDS, LEFT, RIGHT, NEUTRAL
     }
@@ -26,10 +25,11 @@ public class Drivetrain {
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
+
+        stop();
     }
     
     public void setEnc(boolean has){
-        hasEnc = has;
         if (has){
             frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -43,12 +43,11 @@ public class Drivetrain {
         }
     }
 
-    public boolean hasEnc(){
-        return hasEnc;
+    public Enum[] getModes(){
+        return new Enum[]{frontRight.getMode(), frontLeft.getMode(), backRight.getMode(), backLeft.getMode()};
     }
 
     public void setBrake(boolean has){
-        hasBrake = has;
         if (has) {
             frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -62,15 +61,15 @@ public class Drivetrain {
         }
     }
 
-    public boolean hasBrake(){
-        return hasBrake;
+    public Enum[] getZPB(){
+        return new Enum[]{frontRight.getZeroPowerBehavior(), frontLeft.getZeroPowerBehavior(), backRight.getZeroPowerBehavior(), backLeft.getZeroPowerBehavior()};
     }
 
-    public void setPower(double power){
+    public void setMaxPower(double power){
         this.power = power;
     }
 
-    public double getPower(){
+    public double getMaxPower(){
         return power;
     }
 
@@ -88,6 +87,16 @@ public class Drivetrain {
         backRight.setPower(power);
         backLeft.setPower(power);
         baseStatus = Status.BACKWARDS;
+    }
+
+    public void moveLeftSide(double pow){
+        frontLeft.setPower(pow);
+        backLeft.setPower(pow);
+    }
+
+    public void moveRightSide(double pow){
+        frontRight.setPower(pow);
+        backRight.setPower(pow);
     }
 
     public void strafeLeft(){
@@ -114,7 +123,21 @@ public class Drivetrain {
         baseStatus = Status.NEUTRAL;
     }
 
+    public void stopLeftSide(){
+        frontLeft.setPower(0);
+        backLeft.setPower(0);
+    }
+
+    public void stopRightSide(){
+        frontRight.setPower(0);
+        backRight.setPower(0);
+    }
+
     public Status getStatus(){
         return baseStatus;
+    }
+
+    public double[] getSpeeds(){
+        return new double[]{frontLeft.getPower(), frontRight.getPower(), backLeft.getPower(), backRight.getPower()};
     }
 }

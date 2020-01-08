@@ -1,6 +1,11 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+/**
+ * Lift subsystem
+ */
 
 public class Lift {
 
@@ -18,16 +23,16 @@ public class Lift {
     }
 
     public void init(){
-        lift.setPower(power);
+        lift.setDirection(DcMotorSimple.Direction.FORWARD);
 
         stop();
     }
 
-    public void setPower(double power){
+    public void setMaxPower(double power){
         this.power = power;
     }
 
-    public double getPower(){
+    public double getMaxPower(){
         return power;
     }
 
@@ -48,5 +53,9 @@ public class Lift {
 
     public Status getStatus(){
         return liftStatus;
+    }
+
+    public double getSpeed(){
+        return lift.getPower();
     }
 }

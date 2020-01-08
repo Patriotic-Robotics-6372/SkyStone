@@ -1,7 +1,11 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+/**
+ * Pivot subsystem;
+ */
 
 public class Pivot {
 
@@ -26,13 +30,14 @@ public class Pivot {
         stop();
     }
 
-    public void setPower(double power){
+    public void setMaxPower(double power){
         this.power = power;
     }
 
-    public double getPower(){
+    public double getMaxPower(){
         return power;
     }
+
     public void up(){
         leftPivot.setPower(power);
         rightPivot.setPower(power);
@@ -40,8 +45,8 @@ public class Pivot {
     }
 
     public void down(){
-        leftPivot.setPower(power);
-        rightPivot.setPower(power);
+        leftPivot.setPower(-power);
+        rightPivot.setPower(-power);
         pivotStatus = Status.DOWN;
     }
 
@@ -53,5 +58,9 @@ public class Pivot {
 
     public Status getStatus(){
         return pivotStatus;
+    }
+
+    public double[] getSpeeds(){
+        return new double[]{leftPivot.getPower(), rightPivot.getPower()};
     }
 }

@@ -37,13 +37,13 @@ public class Intake implements Constants{
 
     public void open(){
         leftPinch.setPower(power);
-        rightPinch.setPower(-power);
+        rightPinch.setPower(power);
         intakeStatus = Status.OPEN;
     }
 
     public void close(){
         leftPinch.setPower(-power);
-        rightPinch.setPower(power);
+        rightPinch.setPower(-power);
         intakeStatus = Status.CLOSE;
     }
 

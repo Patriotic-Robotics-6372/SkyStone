@@ -13,7 +13,8 @@ public class prAuton extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         prbot.init(hardwareMap);
-        prbot.drive.setEnc(true);
+        prbot.telem.setTelemetry(telemetry);
+        prbot.drive.setEnc(false);
         prbot.drive.setBrake(true);
         prbot.drive.setMaxPower(1);
         prbot.lift.setMaxPower(.8);
@@ -22,10 +23,10 @@ public class prAuton extends LinearOpMode {
 
         waitForStart();
 
-        prbot.drive.forward();                  // go forward for 1 second
+        prbot.drive.forward();                  // go forward for 3 second
         prbot.telem.addBase();
         prbot.telem.update();
-        sleep(1000);
+        sleep(3000);
         prbot.drive.stop();
         prbot.drive.backwards();                // go backward for 1 second
         prbot.telem.addBase();
@@ -36,12 +37,12 @@ public class prAuton extends LinearOpMode {
         prbot.telem.addBase();
         prbot.telem.update();
         sleep(1000);
-        prbot.drive.stop();                     // move right side for 1 second
+        prbot.drive.stopLeftSide();                     // move right side for 1 second
         prbot.drive.moveRightSide(1);
         prbot.telem.addBase();
         prbot.telem.update();
         sleep(1000);
-        prbot.drive.stop();                     // stop base for 1 second
+        prbot.drive.stopRightSide();                     // stop base for 1 second
         prbot.telem.addBase();
         prbot.telem.update();
         sleep(1000);

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     desc: teleop w/ PRRobot. left side / right side goes forwards / backwards, strafe, pivot, lift, intake.
  */
 
-//@Disabled
+@Disabled
 @TeleOp(name = "Driver Control w/ PRRobot")
 public class TeleOpv7 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters

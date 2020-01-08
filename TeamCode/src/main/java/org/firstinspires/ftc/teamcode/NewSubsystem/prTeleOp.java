@@ -9,13 +9,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * desc: Teleop using subsystems.
  */
 
-@TeleOp(name = "TeleOp")
+@TeleOp(name = "Subsystem TeleOp")
 public class prTeleOp extends OpMode {
     private Robot prbot = new Robot();
 
     @Override
     public void init() {
         prbot.init(hardwareMap);
+        prbot.telem.setTelemetry(telemetry);
         prbot.drive.setEnc(false);
         prbot.drive.setBrake(false);
         prbot.drive.setMaxPower(1);

@@ -4,6 +4,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
  * Telemetry subsystem
+ *  MAKE SURE TO USE SETTELEMETRY
  */
 
 public class Telem {

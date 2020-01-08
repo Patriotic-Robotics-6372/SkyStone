@@ -12,11 +12,11 @@ public class Drivetrain implements Constants {
     private double power = STOP;
     private Status baseStatus = Status.NEUTRAL;
 
-    public Drivetrain(DcMotor fR, DcMotor fL, DcMotor bR, DcMotor bL){
-        frontRight = fR;
+    public Drivetrain(DcMotor fL, DcMotor fR, DcMotor bL, DcMotor bR){
         frontLeft = fL;
-        backRight = bR;
+        frontRight = fR;
         backLeft = bL;
+        backRight = bR;
         
         init();
     }

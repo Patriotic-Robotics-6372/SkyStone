@@ -2,6 +2,10 @@ package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+/**
+ * Telemetry subsystem
+ */
+
 public class Telem {
 
     private Telemetry telemetry;

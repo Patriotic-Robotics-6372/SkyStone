@@ -4,16 +4,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 /**
- * Pivot subsystem;
+ * Pivot subsystem
  */
 
-public class Pivot {
+public class Pivot implements Constants{
 
     private DcMotor leftPivot, rightPivot;
-    private double power = 0;
-    private enum Status {
-        UP, DOWN, NEUTRAL
-    }
+    private double power = STOP;
     private Status pivotStatus = Status.NEUTRAL;
 
     public Pivot(DcMotor lP, DcMotor rP) {
@@ -51,8 +48,8 @@ public class Pivot {
     }
 
     public void stop(){
-        leftPivot.setPower(0);
-        rightPivot.setPower(0);
+        leftPivot.setPower(STOP);
+        rightPivot.setPower(STOP);
         pivotStatus = Status.NEUTRAL;
     }
 

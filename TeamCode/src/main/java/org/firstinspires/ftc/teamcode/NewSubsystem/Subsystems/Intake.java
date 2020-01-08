@@ -3,13 +3,14 @@ package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-public class Intake {
+/**
+ * Intake subsystem
+ */
+
+public class Intake implements Constants{
 
     private CRServo leftPinch, rightPinch;
-    private double power;
-    private enum Status{
-        OPEN, CLOSE, NEUTRAL
-    }
+    private double power = STOP;
     private Status intakeStatus = Status.NEUTRAL;
 
     public Intake(CRServo lP, CRServo rP){
@@ -47,8 +48,8 @@ public class Intake {
     }
 
     public void stop(){
-        leftPinch.setPower(0);
-        rightPinch.setPower(0);
+        leftPinch.setPower(STOP);
+        rightPinch.setPower(STOP);
         intakeStatus = Status.NEUTRAL;
     }
 

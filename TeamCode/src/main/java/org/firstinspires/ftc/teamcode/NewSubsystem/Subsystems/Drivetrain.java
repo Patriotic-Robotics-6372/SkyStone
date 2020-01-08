@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class Drivetrain {
+/**
+ * Drivetrain subsystem
+ */
+
+public class Drivetrain implements Constants {
 
     private DcMotor frontRight, frontLeft, backRight, backLeft;
-    private double power;
-    private enum Status {
-        FORWARDS, BACKWARDS, LEFT, RIGHT, NEUTRAL
-    }
+    private double power = STOP;
     private Status baseStatus = Status.NEUTRAL;
 
     public Drivetrain(DcMotor fR, DcMotor fL, DcMotor bR, DcMotor bL){
@@ -116,21 +117,21 @@ public class Drivetrain {
     }
 
     public void stop(){
-        frontRight.setPower(0);
-        frontLeft.setPower(0);
-        backRight.setPower(0);
-        backLeft.setPower(0);
+        frontRight.setPower(STOP);
+        frontLeft.setPower(STOP);
+        backRight.setPower(STOP);
+        backLeft.setPower(STOP);
         baseStatus = Status.NEUTRAL;
     }
 
     public void stopLeftSide(){
-        frontLeft.setPower(0);
-        backLeft.setPower(0);
+        frontLeft.setPower(STOP);
+        backLeft.setPower(STOP);
     }
 
     public void stopRightSide(){
-        frontRight.setPower(0);
-        backRight.setPower(0);
+        frontRight.setPower(STOP);
+        backRight.setPower(STOP);
     }
 
     public Status getStatus(){

@@ -7,13 +7,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Lift subsystem
  */
 
-public class Lift {
+public class Lift implements Constants{
 
     private DcMotor lift;
-    private double power = 0;
-    private enum Status {
-        UP, DOWN, NEUTRAL
-    }
+    private double power = STOP;
     private Status liftStatus = Status.NEUTRAL;
 
     public Lift(DcMotor l){
@@ -47,7 +44,7 @@ public class Lift {
     }
 
     public void stop(){
-        lift.setPower(0);
+        lift.setPower(STOP);
         liftStatus = Status.NEUTRAL;
     }
 

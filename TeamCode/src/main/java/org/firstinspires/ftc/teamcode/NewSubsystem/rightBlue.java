@@ -30,7 +30,7 @@ public class rightBlue extends LinearOpMode {
             bot.drive.stop();
 
             bot.intake.close();
-            sleep(500); // grabs block
+            sleep(1000); // grabs block
 
             bot.drive.backwards();
             sleep(1000); //moves backwards

@@ -23,6 +23,8 @@ public class rightBlue extends LinearOpMode {
             sleep(500);
             bot.lift.stop(); //pivots up
 
+            bot.drive.setMaxPower(.5);
+
             bot.drive.forward();
             bot.intake.open();
             sleep(1500); // moves forward and opens intake
@@ -33,19 +35,19 @@ public class rightBlue extends LinearOpMode {
             sleep(1000); // grabs block
 
             bot.drive.backwards();
-            sleep(1000); //moves backwards
+            sleep(750); //moves backwards
             bot.drive.stop();
 
             bot.pivot.down();
-            sleep(300); //pivot down
+            sleep(1000); //pivot down
             bot.pivot.stop();
 
             bot.drive.rotateLeft();
-            sleep(500); //rotates left
+            sleep(1000); //rotates left
             bot.drive.stop();
 
             bot.drive.forward();
-            sleep(500);
+            sleep(1000);
             bot.drive.stop();
 
             break;

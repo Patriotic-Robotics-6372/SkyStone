@@ -100,18 +100,18 @@ public class Drivetrain implements Constants {
         backRight.setPower(pow);
     }
     public void rotateLeft(){
-        frontRight.setPower(power);
-        frontLeft.setPower(-power);
-        backRight.setPower(power);
-        backLeft.setPower(-power);
-        baseStatus = Status.LEFT;
-    }
-
-    public void rotateRight(){
         frontRight.setPower(-power);
         frontLeft.setPower(power);
         backRight.setPower(-power);
         backLeft.setPower(power);
+        baseStatus = Status.LEFT;
+    }
+
+    public void rotateRight(){
+        frontRight.setPower(power);
+        frontLeft.setPower(-power);
+        backRight.setPower(power);
+        backLeft.setPower(-power);
         baseStatus = Status.RIGHT;
     }
 

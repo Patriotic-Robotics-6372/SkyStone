@@ -34,24 +34,25 @@ public class leftRed extends LinearOpMode {
 
             // move forward
 
+            prbot.drive.setMaxPower(.5);
             prbot.drive.forward();
             sleep(1500);
 
             // grab block
             prbot.drive.stop();
             prbot.intake.close();
-            sleep(2000);
+            sleep(1000);
 
             // move backwards
             prbot.drive.backwards();
-            sleep(1500);
+            sleep(1000);
 
             // turn right
             prbot.drive.stop();
             sleep(200);
             prbot.drive.rotateRight();
             prbot.pivot.down();
-            sleep(400);
+            sleep(1000);
 
             // move forwards
             prbot.drive.stop();

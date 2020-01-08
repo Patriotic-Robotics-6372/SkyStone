@@ -75,10 +75,10 @@ public class Drivetrain implements Constants {
     }
 
     public void forward(){
-        frontRight.setPower(power);
-        frontLeft.setPower(power);
-        backRight.setPower(power);
-        backLeft.setPower(power);
+        frontRight.setPower(-power);
+        frontLeft.setPower(-power);
+        backRight.setPower(-power);
+        backLeft.setPower(-power);
         baseStatus = Status.FORWARDS;
     }
     
@@ -112,7 +112,7 @@ public class Drivetrain implements Constants {
         frontLeft.setPower(power);
         backRight.setPower(-power);
         backLeft.setPower(power);
-        baseStatus = Status.LEFT;
+        baseStatus = Status.RIGHT;
     }
 
     public void strafeLeft(){

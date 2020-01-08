@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class Lift {
 
     private DcMotor lift;
-    private double power;
+    private double power = 0;
     private enum Status {
         UP, DOWN, NEUTRAL
     }
@@ -13,6 +13,14 @@ public class Lift {
 
     public Lift(DcMotor l){
         lift = l;
+
+        init();
+    }
+
+    public void init(){
+        lift.setPower(power);
+
+        stop();
     }
 
     public void setPower(double power){
@@ -29,12 +37,16 @@ public class Lift {
     }
 
     public void down(){
-        lift.setPower(power);
+        lift.setPower(-power);
         liftStatus = Status.DOWN;
     }
 
     public void stop(){
         lift.setPower(0);
         liftStatus = Status.NEUTRAL;
+    }
+
+    public Status getStatus(){
+        return liftStatus;
     }
 }

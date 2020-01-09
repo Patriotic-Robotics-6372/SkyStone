@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/11/19
     desc: To test encoders; can test base, individual, and pivots
  */
-//@Disabled
+@Disabled
 @Autonomous (name = "redSquare9")
 public class redSquare9 extends LinearOpMode {
     ///*

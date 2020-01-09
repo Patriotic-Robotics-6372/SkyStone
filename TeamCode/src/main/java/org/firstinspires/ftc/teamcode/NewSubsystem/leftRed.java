@@ -24,35 +24,36 @@ public class leftRed extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // setup: lift up, intake open
+            // setup: pivot up, intake open
 
             prbot.pivot.up();
             prbot.intake.open();
+            prbot.lift.down();
             sleep(500);
-
-            prbot.lift.stop();
+            prbot.pivot.stop();
 
             // move forward
 
             prbot.drive.setMaxPower(.5);
             prbot.drive.forward();
-            sleep(1500);
+            sleep(1600);
 
             // grab block
+            prbot.lift.stop();
             prbot.drive.stop();
             prbot.intake.close();
             sleep(1000);
 
             // move backwards
             prbot.drive.backwards();
-            sleep(1000);
+            sleep(500);
 
             // turn right
             prbot.drive.stop();
             sleep(200);
             prbot.drive.rotateRight();
             prbot.pivot.down();
-            sleep(1000);
+            sleep(1400);
 
             // move forwards
             prbot.drive.stop();
@@ -65,29 +66,53 @@ public class leftRed extends LinearOpMode {
             prbot.drive.stop();
             sleep(200);
             prbot.drive.rotateLeft();
-            sleep(400);
+            sleep(1200);
+
+            //move forwards
+            prbot.drive.forward();
+            sleep(500);
 
             // place block
             prbot.drive.stop();
-            sleep(200);
+            sleep(500);
+
             prbot.pivot.up();
-            sleep(300);
+            sleep(500);
             prbot.pivot.stop();
+
             prbot.lift.up();
-            sleep(1000);
+            sleep(1800);
             prbot.lift.stop();
+
             prbot.drive.forward();
             sleep(500);
             prbot.drive.stop();
+
             prbot.lift.down();
-            sleep(700);
+            sleep(1800);
             prbot.lift.stop();
+
             prbot.intake.open();
             sleep(1500);
             prbot.intake.stop();
+
+            prbot.lift.up();
+            sleep(1000);
+            prbot.lift.stop();
+
             prbot.drive.backwards();
-            sleep(500);
+            sleep(1500);
             prbot.drive.stop();
+
+            prbot.drive.rotateLeft();
+            sleep(1200);
+
+            prbot.drive.stop();
+            prbot.pivot.down();
+            sleep(500);
+
+            prbot.drive.forward();
+            sleep(1500);
 
             break;
 

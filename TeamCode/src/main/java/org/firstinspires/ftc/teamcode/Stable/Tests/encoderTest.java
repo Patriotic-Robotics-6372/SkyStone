@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Stable.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     desc: To test encoders; can test base, individual, and pivots
  */
 
+@Disabled
 @Autonomous (name = "encoderTest")
 public class encoderTest extends LinearOpMode {
     PRRobot prBot = new PRRobot();

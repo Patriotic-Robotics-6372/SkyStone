@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * desc: Teleop using subsystems.
  */
 
-@TeleOp(name = "TeleOp 2P")
-public class prTeleOp extends OpMode {
+@TeleOp(name = "TeleOp 1P")
+public class prTeleOpSolo extends OpMode {
     private Robot prbot = new Robot();
 
     @Override
@@ -56,9 +56,9 @@ public class prTeleOp extends OpMode {
 
         // Lift
 
-        if (gamepad2.a){
+        if (gamepad1.a){
             prbot.lift.up();
-        } else if (gamepad2.y){
+        } else if (gamepad1.y){
             prbot.lift.down();
         } else {
             prbot.lift.stop();
@@ -66,9 +66,9 @@ public class prTeleOp extends OpMode {
 
         // Intake
 
-        if (gamepad2.right_bumper){
+        if (gamepad1.right_bumper){
             prbot.intake.close();
-        } else if (gamepad2.left_bumper){
+        } else if (gamepad1.left_bumper){
             prbot.intake.open();
         } else {
             prbot.intake.stop();
@@ -76,9 +76,9 @@ public class prTeleOp extends OpMode {
 
         // Pivot
 
-        if (gamepad2.dpad_up){
+        if (gamepad1.dpad_up){
             prbot.pivot.up();
-        } else if (gamepad2.dpad_down){
+        } else if (gamepad1.dpad_down){
             prbot.pivot.down();
         } else {
             prbot.pivot.stop();

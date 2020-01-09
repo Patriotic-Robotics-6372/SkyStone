@@ -20,7 +20,7 @@ public class Lift implements Constants{
     }
 
     public void init(){
-        lift.setDirection(DcMotorSimple.Direction.FORWARD);
+        lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         stop();
     }

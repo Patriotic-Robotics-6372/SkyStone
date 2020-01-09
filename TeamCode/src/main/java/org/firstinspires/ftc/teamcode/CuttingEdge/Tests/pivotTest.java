@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.Tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     date: 12/12/19
     desc: test motors for pivot, without encoders
  */
+@Disabled
 @TeleOp (name = "pivotTest")
 public class pivotTest extends OpMode {
     PRRobot prBot = new PRRobot(1, .5, 1, .8, 1, 1);

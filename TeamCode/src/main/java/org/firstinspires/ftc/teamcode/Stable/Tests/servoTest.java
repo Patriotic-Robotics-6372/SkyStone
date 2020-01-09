@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.Stable.Tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
 
+@Disabled
 @TeleOp (name = "servoTest")
 public class servoTest extends OpMode {
     PRRobot prBot = new PRRobot(1, .8, 1, .8, 1, 1);

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.CuttingEdge.TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Stable.Hardware.PRRobot;
     desc: teleop w/ PRRobotv3. left side / right side goes forwards / backwards, strafe, pivot, lift, intake.
  */
 
-//@Disabled
+@Disabled
 @TeleOp(name = "Driver Control w/ PRRobotv3")
 public class TeleOpv8 extends OpMode {
     // use PRRobot that has defined things already; takes in speed parameters

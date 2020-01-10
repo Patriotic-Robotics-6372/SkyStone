@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Robot;
 
-@Autonomous (name = "leftRed")
-public class leftRed extends LinearOpMode {
+@Autonomous (name = "leftRed", group = "Subsystem")
+public class prAutonLeftRed extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -47,7 +47,7 @@ public class leftRed extends LinearOpMode {
             sleep(1000);
 
             // move backwards
-            prbot.drive.backwards();
+            prbot.drive.backward();
             sleep(500);
 
             // turn right
@@ -74,43 +74,51 @@ public class leftRed extends LinearOpMode {
             prbot.drive.forward();
             sleep(500);
 
-            // place block
             prbot.drive.stop();
             sleep(500);
 
+            // pivot up
             prbot.pivot.up();
             sleep(500);
             prbot.pivot.stop();
 
+            // lift up
             prbot.lift.up();
             sleep(1800);
             prbot.lift.stop();
 
+            // get close to foundation
             prbot.drive.forward();
             sleep(500);
             prbot.drive.stop();
 
+            // lower block onto foundation
             prbot.lift.down();
             sleep(1800);
             prbot.lift.stop();
 
+            // let go of block
             prbot.intake.open();
             sleep(1500);
             prbot.intake.stop();
 
+            // raise lift out of foundation
             prbot.lift.up();
             sleep(1000);
             prbot.lift.stop();
 
-            prbot.drive.backwards();
+            // move away from lift
+            prbot.drive.backward();
             sleep(1500);
             prbot.drive.stop();
 
-
+            // turn towards bridge
             prbot.drive.rotateLeft();
             sleep(1200);
 
             prbot.drive.stop();
+
+            // pivot down to fit under bridge
             prbot.pivot.down();
             sleep(500);
 
@@ -118,7 +126,7 @@ public class leftRed extends LinearOpMode {
             sleep(1500);
 
             //reverse
-            prbot.drive.backwards();
+            prbot.drive.backward();
             sleep(300);
 
             //turn left

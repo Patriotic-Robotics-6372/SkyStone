@@ -73,6 +73,12 @@ public class Telem {
         telemetry.addData("PivotMaxPower", pivot.getMaxPower());
     }
 
+    public void addEncoders(){
+        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("FrontLeftPos", drive.getFrontLeftEncoder());
+        telemetry.addData("FrontRightPos", drive.getFrontRightEncoder());
+    }
+
     public void addBaseMode(){
         telemetry.addData("BaseMode", drive.getModes());
     }

@@ -11,6 +11,7 @@ public class Drivetrain implements Constants {
     private DcMotor frontRight, frontLeft, backRight, backLeft;
     private double power = STOP;
     private Status baseStatus = Status.NEUTRAL;
+    private int tickGoal;
 
     public Drivetrain(DcMotor fL, DcMotor fR, DcMotor bL, DcMotor bR){
         frontLeft = fL;
@@ -82,7 +83,7 @@ public class Drivetrain implements Constants {
         baseStatus = Status.FORWARDS;
     }
     
-    public void backwards() {
+    public void backward() {
         frontRight.setPower(power);
         frontLeft.setPower(power);
         backRight.setPower(power);
@@ -149,11 +150,73 @@ public class Drivetrain implements Constants {
         backRight.setPower(STOP);
     }
 
+    public void forward(double inches){
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        resetEncoders();
+        runUsingEncoders();
+        setTargetPositions(tickGoal);
+        runToPositions();
+        while(anyBusy()){
+            frontRight.setPower(power);
+            frontLeft.setPower(power);
+        }
+        stop();
+    }
+
+    public void backward(double inches){
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        resetEncoders();
+        runUsingEncoders();
+        setTargetPositions(-tickGoal);
+        runToPositions();
+        while(anyBusy()){
+            frontRight.setPower(-power);
+            frontLeft.setPower(-power);
+        }
+        stop();
+    }
+
+    public void resetEncoders(){
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void runUsingEncoders(){
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void setTargetPositions(int pos){
+        frontRight.setTargetPosition(pos);
+        frontLeft.setTargetPosition(pos);
+    }
+
+    public void runToPositions(){
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public boolean anyBusy(){
+        return frontLeft.isBusy() || frontRight.isBusy();
+    }
+
     public Status getStatus(){
         return baseStatus;
     }
 
     public double[] getSpeeds(){
         return new double[]{frontLeft.getPower(), frontRight.getPower(), backLeft.getPower(), backRight.getPower()};
+    }
+
+    public int getFrontRightEncoder(){
+        return frontRight.getCurrentPosition();
+    }
+
+    public int getFrontLeftEncoder(){
+        return frontLeft.getCurrentPosition();
+    }
+
+    public int getTickGoal(){
+        return tickGoal;
     }
 }

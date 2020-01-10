@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.Range;
  * desc: Teleop using subsystems.
  */
 
-@TeleOp(name = "TeleOp Arcade")
+@TeleOp(name = "TeleOp Arcade", group = "Subsystem")
 public class prTeleOpArcade extends OpMode {
     private Robot prbot = new Robot();
 
@@ -34,8 +34,8 @@ public class prTeleOpArcade extends OpMode {
         // Base
 
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.left_stick_x) > .1) {
-            yValue = gamepad1.left_stick_y * -1;
-            xValue = gamepad1.left_stick_x * -1;
+            yValue = gamepad1.left_stick_y;
+            xValue = gamepad1.left_stick_x;
             leftPower = yValue - xValue;
             rightPower = yValue + xValue;
             prbot.drive.moveLeftSide(Range.clip(leftPower, -1.0, 1.0));
@@ -49,7 +49,7 @@ public class prTeleOpArcade extends OpMode {
         } else if (gamepad1.dpad_up){
             prbot.drive.forward();
         } else if (gamepad1.dpad_down){
-            prbot.drive.backwards();
+            prbot.drive.backward();
         } else {
             prbot.drive.stop();
         }

@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Robot;
 
-@Autonomous (name = "leftBlue")
-public class leftBlue extends LinearOpMode {
+@Autonomous (name = "leftBlue", group = "Subsystem")
+public class prAutonLeftBlue extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -44,7 +44,7 @@ public class leftBlue extends LinearOpMode {
             prbot.lift.down();
             sleep(1300);
 
-            prbot.drive.backwards();
+            prbot.drive.backward();
             sleep(2200);
 
             prbot.drive.stop();

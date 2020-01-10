@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Test auton to see if subsystems work
  */
 
-@Autonomous (name = "Subsystem test")
+@Autonomous (name = "Subsystem test", group = "Subsystem")
 public class prAutonTest extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
@@ -28,7 +28,7 @@ public class prAutonTest extends LinearOpMode {
         prbot.telem.update();
         sleep(3000);
         prbot.drive.stop();
-        prbot.drive.backwards();                // go backward for 1 second
+        prbot.drive.backward();                // go backward for 1 second
         prbot.telem.addBase();
         prbot.telem.update();
         sleep(1000);

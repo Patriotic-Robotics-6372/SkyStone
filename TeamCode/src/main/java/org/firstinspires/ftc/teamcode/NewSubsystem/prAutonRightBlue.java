@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.NewSubsystem;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-@Autonomous (name = "rightBlue")
-public class rightBlue extends LinearOpMode {
+@Autonomous (name = "rightBlue", group = "Subsystem")
+public class prAutonRightBlue extends LinearOpMode {
     Robot bot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -40,7 +40,7 @@ public class rightBlue extends LinearOpMode {
             bot.intake.close();
             sleep(1000); // grabs block
 
-            bot.drive.backwards();
+            bot.drive.backward();
             sleep(750); //moves backwards
             bot.drive.stop();
 

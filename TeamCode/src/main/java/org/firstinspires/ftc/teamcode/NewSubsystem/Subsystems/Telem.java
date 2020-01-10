@@ -27,10 +27,10 @@ public class Telem {
     }
 
     public void addSpeeds(){
-        telemetry.addData("Base", drive.getSpeeds());
-        telemetry.addData("Intake", intake.getSpeeds());
+        telemetry.addData("Base", drive.getSpeeds().toString());
+        telemetry.addData("Intake", intake.getSpeeds().toString());
         telemetry.addData("Lift", lift.getSpeed());
-        telemetry.addData("Pivot", pivot.getSpeeds());
+        telemetry.addData("Pivot", pivot.getSpeeds().toString());
     }
 
     public void addStatus(){
@@ -56,7 +56,7 @@ public class Telem {
     }
 
     public void addIntake(){
-        telemetry.addData("IntakeSpeed", intake.getSpeeds());
+        telemetry.addData("IntakeSpeed", intake.getSpeeds().toString());
         telemetry.addData("IntakeStatus", intake.getStatus());
         telemetry.addData("IntakeMaxPower", intake.getMaxPower());
     }
@@ -68,7 +68,7 @@ public class Telem {
     }
 
     public void addPivot(){
-        telemetry.addData("PivotSpeed", pivot.getSpeeds());
+        telemetry.addData("PivotSpeed", pivot.getSpeeds().toString());
         telemetry.addData("PivotStatus", pivot.getStatus());
         telemetry.addData("PivotMaxPower", pivot.getMaxPower());
     }

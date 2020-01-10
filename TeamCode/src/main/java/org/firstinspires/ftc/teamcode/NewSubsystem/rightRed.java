@@ -40,8 +40,7 @@ public class rightRed extends LinearOpMode {
             prbot.lift.stop();
 
             //rotate right
-            prbot.drive
-
+            prbot.drive.rotateRight();
 
             break;
 

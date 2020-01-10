@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
+@Disabled
 @Autonomous (name = "leftRed", group = "Subsystem")
 public class prAutonLeftRed extends LinearOpMode {
     Robot prbot = new Robot();

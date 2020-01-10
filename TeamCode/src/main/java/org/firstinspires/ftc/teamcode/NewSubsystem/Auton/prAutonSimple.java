@@ -21,7 +21,10 @@ public class prAutonSimple extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             prbot.drive.forward();
-            sleep(1000);
+            prbot.lift.down();
+            sleep(500);
+            prbot.lift.stop();
+            sleep(500);
             break;
         }
     }

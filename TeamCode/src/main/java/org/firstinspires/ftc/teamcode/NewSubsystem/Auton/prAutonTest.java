@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
 /**
  * Test auton to see if subsystems work

@@ -1,13 +1,12 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.NewSubsystem.Robot;
+import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
-@Autonomous (name = "leftRed", group = "Subsystem")
-public class prAutonLeftRed extends LinearOpMode {
+@Autonomous (name = "leftRed2", group = "Subsystem")
+public class prAutonLeftRed2 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -31,6 +30,7 @@ public class prAutonLeftRed extends LinearOpMode {
             prbot.lift.down();
             sleep(500);
             prbot.pivot.stop();
+            prbot.lift.stop();
 
             // move forward
 
@@ -41,7 +41,6 @@ public class prAutonLeftRed extends LinearOpMode {
 
 
             // grab block
-            prbot.lift.stop();
             prbot.drive.stop();
             prbot.intake.close();
             sleep(1000);
@@ -55,7 +54,7 @@ public class prAutonLeftRed extends LinearOpMode {
             sleep(200);
             prbot.drive.rotateRight();
             prbot.pivot.down();
-            sleep(1400);
+            sleep(1100);
 
             // move forwards
             prbot.drive.stop();
@@ -68,80 +67,35 @@ public class prAutonLeftRed extends LinearOpMode {
             prbot.drive.stop();
             sleep(200);
             prbot.drive.rotateLeft();
-            sleep(1200);
-
-            //move forwards
-            prbot.drive.forward();
-            sleep(500);
-
-            prbot.drive.stop();
-            sleep(500);
-
-            // pivot up
-            prbot.pivot.up();
-            sleep(500);
-            prbot.pivot.stop();
-
-            // lift up
-            prbot.lift.up();
-            sleep(1800);
-            prbot.lift.stop();
-
-            // get close to foundation
-            prbot.drive.forward();
-            sleep(500);
+            sleep(600);
             prbot.drive.stop();
 
-            // lower block onto foundation
-            prbot.lift.down();
-            sleep(1800);
-            prbot.lift.stop();
+            // go forward
+            prbot.drive.forward();
+            sleep(600);
+            prbot.drive.stop();
 
-            // let go of block
+            // drop block
             prbot.intake.open();
-            sleep(1500);
+            sleep(1000);
             prbot.intake.stop();
 
-            // raise lift out of foundation
-            prbot.lift.up();
-            sleep(1000);
-            prbot.lift.stop();
-
-            // move away from lift
+            // go backward
             prbot.drive.backward();
-            sleep(1500);
+            sleep(600);
             prbot.drive.stop();
 
-            // turn towards bridge
+            // turn left
             prbot.drive.rotateLeft();
-            sleep(1200);
-
-            prbot.drive.stop();
-
-            // pivot down to fit under bridge
-            prbot.pivot.down();
-            sleep(500);
-
-            prbot.drive.forward();
-            sleep(1500);
-
-            //reverse
-            prbot.drive.backward();
-            sleep(300);
-
-            //turn left
-            prbot.drive.rotateLeft();
-            sleep(400);
-            prbot.drive.stop();
-
-            //forward and park
-            prbot.pivot.down();
-            sleep(500);
-            prbot.pivot.stop();
-            prbot.drive.forward();
             sleep(1500);
             prbot.drive.stop();
 
+            // move forward
+            prbot.drive.forward();
+            sleep(1800);
+            prbot.drive.stop();
+
+            //
             break;
 
         }

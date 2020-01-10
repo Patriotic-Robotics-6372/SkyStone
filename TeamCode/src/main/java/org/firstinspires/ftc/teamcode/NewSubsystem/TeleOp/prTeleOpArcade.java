@@ -1,7 +1,10 @@
-package org.firstinspires.ftc.teamcode.NewSubsystem;
+package org.firstinspires.ftc.teamcode.NewSubsystem.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
 /**
  * author: Jacob Marinas
@@ -9,9 +12,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * desc: Teleop using subsystems.
  */
 
-@TeleOp(name = "TeleOp 2P", group = "Subsystem")
-public class prTeleOp extends OpMode {
+@TeleOp(name = "TeleOp Arcade", group = "Subsystem")
+public class prTeleOpArcade extends OpMode {
     private Robot prbot = new Robot();
+
+    double xValue, yValue, leftPower, rightPower;
 
     @Override
     public void init() {
@@ -30,16 +35,13 @@ public class prTeleOp extends OpMode {
 
         // Base
 
-        if (Math.abs(gamepad1.left_stick_y) > .1){
-            prbot.drive.moveLeftSide(gamepad1.left_stick_y);
-        } else {
-            prbot.drive.stopLeftSide();
-        }
-
-        if (Math.abs(gamepad1.right_stick_y) > .1){
-            prbot.drive.moveRightSide(gamepad1.right_stick_y);
-        } else {
-            prbot.drive.stopRightSide();
+        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.left_stick_x) > .1) {
+            yValue = gamepad1.left_stick_y;
+            xValue = gamepad1.left_stick_x;
+            leftPower = yValue - xValue;
+            rightPower = yValue + xValue;
+            prbot.drive.moveLeftSide(Range.clip(leftPower, -1.0, 1.0));
+            prbot.drive.moveRightSide(Range.clip(rightPower, -1.0, 1.0));
         }
 
         if (gamepad1.dpad_left){

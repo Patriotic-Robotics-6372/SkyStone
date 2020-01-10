@@ -36,7 +36,9 @@ public class leftRed extends LinearOpMode {
 
             prbot.drive.setMaxPower(.5);
             prbot.drive.forward();
+
             sleep(1600);
+
 
             // grab block
             prbot.lift.stop();
@@ -104,6 +106,7 @@ public class leftRed extends LinearOpMode {
             sleep(1500);
             prbot.drive.stop();
 
+
             prbot.drive.rotateLeft();
             sleep(1200);
 
@@ -113,6 +116,23 @@ public class leftRed extends LinearOpMode {
 
             prbot.drive.forward();
             sleep(1500);
+
+            //reverse
+            prbot.drive.backwards();
+            sleep(300);
+
+            //turn left
+            prbot.drive.rotateLeft();
+            sleep(400);
+            prbot.drive.stop();
+
+            //forward and park
+            prbot.pivot.down();
+            sleep(500);
+            prbot.pivot.stop();
+            prbot.drive.forward();
+            sleep(1500);
+            prbot.drive.stop();
 
             break;
 

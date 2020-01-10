@@ -23,7 +23,13 @@ public class rightBlue extends LinearOpMode {
             sleep(500);
             bot.lift.stop(); //pivots up
 
+
             bot.drive.setMaxPower(.5);
+
+            bot.lift.down();
+            sleep(1000);
+            bot.lift.stop();
+
 
             bot.drive.forward();
             bot.intake.open();

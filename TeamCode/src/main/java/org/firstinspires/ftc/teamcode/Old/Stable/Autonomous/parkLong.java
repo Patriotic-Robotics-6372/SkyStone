@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Old.Stable.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Old.Stable.Hardware.PRRobot;
 /*
@@ -7,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Old.Stable.Hardware.PRRobot;
     date: 12/5/19
     desc: simple park that goes under the bridge from back
  */
+@Disabled
 @Autonomous (name = "parkLong", group = "Stable")
 public class parkLong extends LinearOpMode {
     PRRobot prBot = new PRRobot("stable");

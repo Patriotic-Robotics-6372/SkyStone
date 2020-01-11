@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
  * Test auton to see if subsystems work
  */
 
+@Disabled
 @Autonomous (name = "Subsystem test", group = "Subsystem")
 public class prAutonTest extends LinearOpMode {
     Robot prbot = new Robot();

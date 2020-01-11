@@ -79,6 +79,16 @@ public class Telem {
         telemetry.addData("FrontRightPos", drive.getFrontRightEncoder());
     }
 
+    public void addFrontLeftEncoder(){
+        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("FrontLeftPos", drive.getFrontLeftEncoder());
+    }
+
+    public void addFrontRightEncoder(){
+        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("FrontRightPos", drive.getFrontRightEncoder());
+    }
+
     public void addBaseMode(){
         telemetry.addData("BaseMode", drive.getModes());
     }

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
  * Drivetrain subsystem
  */
@@ -12,6 +14,7 @@ public class Drivetrain implements Constants {
     private double power = STOP;
     private Status baseStatus = Status.NEUTRAL;
     private int tickGoal;
+    private Telemetry telemetry;
 
     public Drivetrain(DcMotor fL, DcMotor fR, DcMotor bL, DcMotor bR){
         frontLeft = fL;
@@ -35,13 +38,15 @@ public class Drivetrain implements Constants {
         if (has){
             frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         } else {
             frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            //backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            //backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
 
@@ -61,6 +66,10 @@ public class Drivetrain implements Constants {
             backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
+    }
+
+    public void setTelemetry(Telemetry telem){
+        this.telemetry = telem;
     }
 
     public Enum[] getZPB(){
@@ -156,11 +165,15 @@ public class Drivetrain implements Constants {
         runUsingEncoders();
         setTargetPositions(tickGoal);
         runToPositions();
-        while(anyBusy()){
+        while(getFrontLeftEncoder() < tickGoal || getFrontRightEncoder() < tickGoal){
             frontRight.setPower(power);
             frontLeft.setPower(power);
             backRight.setPower(power);
             backLeft.setPower(power);
+
+
+            telemEncoderPos();
+
         }
         stop();
     }
@@ -171,11 +184,15 @@ public class Drivetrain implements Constants {
         runUsingEncoders();
         setTargetPositions(-tickGoal);
         runToPositions();
-        while(anyBusy()){
+        while(getFrontLeftEncoder() > tickGoal || getFrontRightEncoder() > tickGoal){
             frontRight.setPower(-power);
             frontLeft.setPower(-power);
             backRight.setPower(-power);
             backLeft.setPower(-power);
+
+
+            telemEncoderPos();
+
         }
         stop();
     }
@@ -191,6 +208,10 @@ public class Drivetrain implements Constants {
             frontLeft.setPower(-(power/2));
             backRight.setPower(power);
             backLeft.setPower(0);
+
+
+            telemFrontRightPos();
+
         }
         stop();
     }
@@ -206,6 +227,10 @@ public class Drivetrain implements Constants {
             frontLeft.setPower(power);
             backRight.setPower(0);
             backLeft.setPower(power);
+
+
+            telemFrontLeftPos();
+
         }
         stop();
     }
@@ -252,5 +277,36 @@ public class Drivetrain implements Constants {
 
     public int getTickGoal(){
         return tickGoal;
+    }
+
+    public void telemEncoderPos(){
+        addTickGoal();
+        addFrontLeftEncoderPos();
+        addFrontRightEncoderPos();
+        telemetry.update();
+    }
+
+    public void telemFrontRightPos(){
+        addTickGoal();
+        addFrontRightEncoderPos();
+        telemetry.update();
+    }
+
+    public void telemFrontLeftPos(){
+        addTickGoal();
+        addFrontLeftEncoderPos();
+        telemetry.update();
+    }
+
+    public void addTickGoal(){
+        telemetry.addData("TickGoal", getTickGoal());
+    }
+
+    public void addFrontLeftEncoderPos(){
+        telemetry.addData("FrontLeft", getFrontLeftEncoder());
+    }
+
+    public void addFrontRightEncoderPos(){
+        telemetry.addData("FrontRight", getFrontRightEncoder());
     }
 }

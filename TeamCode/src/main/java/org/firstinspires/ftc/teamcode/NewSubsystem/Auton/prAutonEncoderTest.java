@@ -22,6 +22,30 @@ public class prAutonEncoderTest extends LinearOpMode {
             prbot.drive.forward(6); // should travel 6 inches in short time
             prbot.drive.setMaxPower(.4);
             prbot.drive.forward(6); // should travel same distance in longer time
+            prbot.drive.setMaxPower(.2);
+            prbot.drive.forward(6); // should travel same distance in longear time
+
+            prbot.drive.setMaxPower(.8);
+            prbot.drive.backward(6);
+            prbot.drive.setMaxPower(.4);
+            prbot.drive.backward(6);
+            prbot.drive.setMaxPower(.2);
+            prbot.drive.backward(6);
+
+            prbot.drive.setMaxPower(.8);
+            prbot.drive.rotateRight(2);
+            prbot.drive.setMaxPower(.4);
+            prbot.drive.rotateRight(2);
+            prbot.drive.setMaxPower(.2);
+            prbot.drive.rotateRight(2);
+
+            prbot.drive.setMaxPower(.8);
+            prbot.drive.rotateLeft(2);
+            prbot.drive.setMaxPower(.4);
+            prbot.drive.rotateLeft(2);
+            prbot.drive.setMaxPower(.2);
+            prbot.drive.rotateLeft(2);
+
 
         }
     }

@@ -159,6 +159,8 @@ public class Drivetrain implements Constants {
         while(anyBusy()){
             frontRight.setPower(power);
             frontLeft.setPower(power);
+            backRight.setPower(power);
+            backLeft.setPower(power);
         }
         stop();
     }
@@ -172,6 +174,38 @@ public class Drivetrain implements Constants {
         while(anyBusy()){
             frontRight.setPower(-power);
             frontLeft.setPower(-power);
+            backRight.setPower(-power);
+            backLeft.setPower(-power);
+        }
+        stop();
+    }
+
+    public void rotateLeft(double inches){
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setTargetPosition(tickGoal);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(anyBusy()){
+            frontRight.setPower(power);
+            frontLeft.setPower(-(power/2));
+            backRight.setPower(power);
+            backLeft.setPower(0);
+        }
+        stop();
+    }
+
+    public void rotateRight(double inches){
+        tickGoal = (int) (TICKS_PER_IN * inches);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setTargetPosition(tickGoal);
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(anyBusy()){
+            frontRight.setPower(-(power/2));
+            frontLeft.setPower(power);
+            backRight.setPower(0);
+            backLeft.setPower(power);
         }
         stop();
     }

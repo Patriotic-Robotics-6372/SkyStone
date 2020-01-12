@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Intake subsystem
  */
 
-public class Intake implements Constants{
+public class Intake implements Constants {
 
     private CRServo leftPinch, rightPinch;
     private double power = STOP;

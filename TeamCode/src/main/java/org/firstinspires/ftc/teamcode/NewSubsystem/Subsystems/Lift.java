@@ -9,12 +9,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Lift subsystem
  */
 
-public class Lift implements Constants{
+public class Lift implements Constants {
 
     private DcMotor lift;
     private double power = STOP;
     private Status liftStatus = Status.NEUTRAL;
-    private Telemetry telemetry;
 
     public Lift(DcMotor l){
         lift = l;
@@ -34,10 +33,6 @@ public class Lift implements Constants{
 
     public double getMaxPower(){
         return power;
-    }
-
-    public void setTelemetry(Telemetry telem){
-        this.telemetry = telem;
     }
 
     public void setEnc(boolean has){
@@ -60,18 +55,18 @@ public class Lift implements Constants{
     }
 
     public void upEnc(){
-        if (!checkForStop()){
-            lift.setPower(power);
-        } else {
+        if (checkForStop()){
             lift.setPower(-power);
+        } else {
+            lift.setPower(power);
         }
     }
 
     public void downEnc(){
-        if (!checkForStop()){
-            lift.setPower(-power);
-        } else {
+        if (checkForStop()){
             lift.setPower(power);
+        } else {
+            lift.setPower(-power);
         }
     }
 
@@ -99,4 +94,5 @@ public class Lift implements Constants{
     public double getSpeed(){
         return lift.getPower();
     }
+
 }

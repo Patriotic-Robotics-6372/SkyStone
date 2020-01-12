@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Pivot subsystem
  */
 
-public class Pivot implements Constants{
+public class Pivot implements Constants {
 
     private DcMotor leftPivot, rightPivot;
     private double power = STOP;

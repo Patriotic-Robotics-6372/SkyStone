@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -13,8 +14,9 @@ public class Drivetrain implements Constants {
     private DcMotor frontRight, frontLeft, backRight, backLeft;
     private double power = STOP;
     private Status baseStatus = Status.NEUTRAL;
-    private int tickGoal;
+    private int leftTickGoal, rightTickGoal;
     private Telemetry telemetry;
+    private ElapsedTime runtime = new ElapsedTime();
 
     public Drivetrain(DcMotor fL, DcMotor fR, DcMotor bL, DcMotor bR){
         frontLeft = fL;
@@ -36,17 +38,10 @@ public class Drivetrain implements Constants {
     
     public void setEnc(boolean has){
         if (has){
-            frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            resetEncoders();
+            runUsingEncoders();
         } else {
-            frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            //backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            //backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            runWithoutEncoders();
         }
     }
 
@@ -84,19 +79,20 @@ public class Drivetrain implements Constants {
         return power;
     }
 
+    public void setBase(double fR, double fL, double bR, double bL){
+        frontRight.setPower(fR);
+        frontLeft.setPower(fL);
+        backRight.setPower(bR);
+        backLeft.setPower(bL);
+    }
+
     public void forward(){
-        frontRight.setPower(-power);
-        frontLeft.setPower(-power);
-        backRight.setPower(-power);
-        backLeft.setPower(-power);
+        setBase(-power, -power, -power, -power);
         baseStatus = Status.FORWARDS;
     }
     
     public void backward() {
-        frontRight.setPower(power);
-        frontLeft.setPower(power);
-        backRight.setPower(power);
-        backLeft.setPower(power);
+        setBase(power, power, power, power);
         baseStatus = Status.BACKWARDS;
     }
 
@@ -109,43 +105,29 @@ public class Drivetrain implements Constants {
         frontRight.setPower(pow);
         backRight.setPower(pow);
     }
+
     public void rotateLeft(){
-        frontRight.setPower(-power);
-        frontLeft.setPower(power);
-        backRight.setPower(-power);
-        backLeft.setPower(power);
+        setBase(-power, power, -power, power);
         baseStatus = Status.LEFT;
     }
 
     public void rotateRight(){
-        frontRight.setPower(power);
-        frontLeft.setPower(-power);
-        backRight.setPower(power);
-        backLeft.setPower(-power);
+        setBase(power, -power, power, -power);
         baseStatus = Status.RIGHT;
     }
 
     public void strafeLeft(){
-        frontRight.setPower(-power);
-        frontLeft.setPower(power);
-        backRight.setPower(power);
-        backLeft.setPower(-power);
+        setBase(-power, power, power, -power);
         baseStatus = Status.LEFT;
     }
 
     public void strafeRight(){
-        frontRight.setPower(power);
-        frontLeft.setPower(-power);
-        backRight.setPower(-power);
-        backLeft.setPower(power);
+        setBase(power, -power, -power, power);
         baseStatus = Status.RIGHT;
     }
 
     public void stop(){
-        frontRight.setPower(STOP);
-        frontLeft.setPower(STOP);
-        backRight.setPower(STOP);
-        backLeft.setPower(STOP);
+        setBase(STOP, STOP, STOP, STOP);
         baseStatus = Status.NEUTRAL;
     }
 
@@ -159,104 +141,80 @@ public class Drivetrain implements Constants {
         backRight.setPower(STOP);
     }
 
-    public void forward(double inches){
-        tickGoal = (int) (TICKS_PER_IN * inches);
+    public void drive(double leftInches, double rightInches, double timeoutS){
+        leftTickGoal = (int) (TICKS_PER_IN * leftInches);
+        rightTickGoal = (int) (TICKS_PER_IN * rightInches);
         resetEncoders();
-        runUsingEncoders();
-        setTargetPositions(tickGoal);
+        setTargetPositions(rightTickGoal, leftTickGoal, rightTickGoal, leftTickGoal);
         runToPositions();
-        while(getFrontLeftEncoder() < tickGoal || getFrontRightEncoder() < tickGoal){
-            frontRight.setPower(power);
-            frontLeft.setPower(power);
-            backRight.setPower(power);
-            backLeft.setPower(power);
 
-
+        runtime.reset();
+        setBase(power, power, power, power);
+        while (anyBusy() &&
+                (runtime.seconds() < timeoutS)) {
             telemEncoderPos();
-
         }
         stop();
-    }
-
-    public void backward(double inches){
-        tickGoal = (int) (TICKS_PER_IN * inches);
-        resetEncoders();
         runUsingEncoders();
-        setTargetPositions(-tickGoal);
-        runToPositions();
-        while(getFrontLeftEncoder() > tickGoal || getFrontRightEncoder() > tickGoal){
-            frontRight.setPower(-power);
-            frontLeft.setPower(-power);
-            backRight.setPower(-power);
-            backLeft.setPower(-power);
-
-
-            telemEncoderPos();
-
-        }
-        stop();
     }
 
-    public void rotateLeft(double inches){
-        tickGoal = (int) (TICKS_PER_IN * inches);
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setTargetPosition(tickGoal);
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(anyBusy()){
-            frontRight.setPower(power);
-            frontLeft.setPower(-(power/2));
-            backRight.setPower(power);
-            backLeft.setPower(0);
-
-
-            telemFrontRightPos();
-
-        }
-        stop();
+    public void backward(double inches, double timeoutS){
+        drive(inches, inches, timeoutS);
+        baseStatus = Status.BACKWARDS;
     }
 
-    public void rotateRight(double inches){
-        tickGoal = (int) (TICKS_PER_IN * inches);
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeft.setTargetPosition(tickGoal);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(anyBusy()){
-            frontRight.setPower(-(power/2));
-            frontLeft.setPower(power);
-            backRight.setPower(0);
-            backLeft.setPower(power);
-
-
-            telemFrontLeftPos();
-
-        }
-        stop();
+    public void forward(double inches, double timeoutS){
+        drive(-inches, -inches, timeoutS);
+        baseStatus = Status.FORWARDS;
     }
 
-    public void resetEncoders(){
+    public void rotateLeft(double inches, double timeoutS){
+        drive(-inches, inches, timeoutS);
+        baseStatus = Status.LEFT;
+    }
+
+    public void rotateRight(double inches, double timeoutS){
+        drive(inches, -inches, timeoutS);
+        baseStatus = Status.RIGHT;
+    }
+
+    private void resetEncoders(){
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void runUsingEncoders(){
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public void setTargetPositions(int pos){
-        frontRight.setTargetPosition(pos);
-        frontLeft.setTargetPosition(pos);
+    public void runWithoutEncoders(){
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void runToPositions(){
+    private void setTargetPositions(int fR, int fL, int bR, int bL){
+        frontRight.setTargetPosition(fR);
+        frontLeft.setTargetPosition(fL);
+        backRight.setTargetPosition(bR);
+        backLeft.setTargetPosition(bL);
+    }
+
+    private void runToPositions(){
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public boolean anyBusy(){
-        return frontLeft.isBusy() || frontRight.isBusy();
+        return frontLeft.isBusy() || frontRight.isBusy() || backLeft.isBusy() || backRight.isBusy();
     }
 
     public Status getStatus(){
@@ -275,38 +233,82 @@ public class Drivetrain implements Constants {
         return frontLeft.getCurrentPosition();
     }
 
-    public int getTickGoal(){
-        return tickGoal;
+    public int getBackRightEncoder(){
+        return backRight.getCurrentPosition();
     }
 
-    public void telemEncoderPos(){
+    public int getBackLeftEncoder(){
+        return backLeft.getCurrentPosition();
+    }
+
+    public int getLeftTickGoal(){
+        return leftTickGoal;
+    }
+
+    public int getRightTickGoal(){
+        return rightTickGoal;
+    }
+
+    private void telemEncoderPos(){
         addTickGoal();
         addFrontLeftEncoderPos();
+        addFrontRightEncoderPos();
+        addBackLeftEncoderPos();
+        addBackRightEncoderPos();
+        telemetry.update();
+    }
+
+    private void telemFrontRightPos(){
+        addTickGoal();
         addFrontRightEncoderPos();
         telemetry.update();
     }
 
-    public void telemFrontRightPos(){
-        addTickGoal();
-        addFrontRightEncoderPos();
-        telemetry.update();
-    }
-
-    public void telemFrontLeftPos(){
+    private void telemFrontLeftPos(){
         addTickGoal();
         addFrontLeftEncoderPos();
         telemetry.update();
     }
+
+    private void telemBackRightPos(){
+        addTickGoal();
+        addBackRightEncoderPos();
+        telemetry.update();
+    }
+
+    private void telemBackLeftPos(){
+        addTickGoal();
+        addBackLeftEncoderPos();
+        telemetry.update();
+    }
+
 
     public void addTickGoal(){
-        telemetry.addData("TickGoal", getTickGoal());
+        addLeftTickGoal();
+        addRightTickGoal();
     }
 
-    public void addFrontLeftEncoderPos(){
+    public void addLeftTickGoal(){
+        telemetry.addData("LeftTickGoal", getLeftTickGoal());
+    }
+
+    public void addRightTickGoal(){
+        telemetry.addData("RightTickGoal", getRightTickGoal());
+    }
+
+    private void addFrontLeftEncoderPos(){
         telemetry.addData("FrontLeft", getFrontLeftEncoder());
     }
 
-    public void addFrontRightEncoderPos(){
+    private void addFrontRightEncoderPos(){
         telemetry.addData("FrontRight", getFrontRightEncoder());
+    }
+
+    private void addBackLeftEncoderPos(){
+        telemetry.addData("BackLeft", getBackLeftEncoder());
+    }
+
+    private void addBackRightEncoderPos(){
+        telemetry.addData("BackRight", getBackRightEncoder());
     }
 }

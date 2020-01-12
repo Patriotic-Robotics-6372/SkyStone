@@ -56,7 +56,7 @@ public class Telem {
     }
 
     public void addIntake(){
-        telemetry.addData("IntakeSpeed", intake.getSpeeds().toString());
+        telemetry.addData("IntakeSpeed", intake.getSpeeds());
         telemetry.addData("IntakeStatus", intake.getStatus());
         telemetry.addData("IntakeMaxPower", intake.getMaxPower());
     }
@@ -68,25 +68,38 @@ public class Telem {
     }
 
     public void addPivot(){
-        telemetry.addData("PivotSpeed", pivot.getSpeeds().toString());
+        telemetry.addData("PivotSpeed", pivot.getSpeeds());
         telemetry.addData("PivotStatus", pivot.getStatus());
         telemetry.addData("PivotMaxPower", pivot.getMaxPower());
     }
 
     public void addEncoders(){
-        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("LeftTickGoal", drive.getLeftTickGoal());
+        telemetry.addData("RightTickGoal", drive.getRightTickGoal());
         telemetry.addData("FrontLeftPos", drive.getFrontLeftEncoder());
         telemetry.addData("FrontRightPos", drive.getFrontRightEncoder());
+        telemetry.addData("BackLeftPos", drive.getBackLeftEncoder());
+        telemetry.addData("BackRightPos", drive.getBackRightEncoder());
     }
 
     public void addFrontLeftEncoder(){
-        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("TickGoal", drive.getLeftTickGoal());
         telemetry.addData("FrontLeftPos", drive.getFrontLeftEncoder());
     }
 
     public void addFrontRightEncoder(){
-        telemetry.addData("TickGoal", drive.getTickGoal());
+        telemetry.addData("TickGoal", drive.getRightTickGoal());
         telemetry.addData("FrontRightPos", drive.getFrontRightEncoder());
+    }
+
+    public void addBackLeftEncoder(){
+        telemetry.addData("TickGoal", drive.getLeftTickGoal());
+        telemetry.addData("BackLeftPos", drive.getBackLeftEncoder());
+    }
+
+    public void addBackRightEncoder(){
+        telemetry.addData("TickGoal", drive.getRightTickGoal());
+        telemetry.addData("BackRightPos", drive.getBackRightEncoder());
     }
 
     public void addBaseMode(){

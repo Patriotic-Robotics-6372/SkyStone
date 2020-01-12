@@ -51,9 +51,12 @@ public class prAutonEncoderTest extends LinearOpMode {
             prbot.drive.setMaxPower(.4);
             prbot.drive.rotateLeft(2);
             prbot.drive.setMaxPower(.2);
-            prbot.drive.rotateLeft(2);
+            prbot.drive.rotateLeft(2);]
+
 
             */
+
+            sleep(3000);
             break;
         }
     }

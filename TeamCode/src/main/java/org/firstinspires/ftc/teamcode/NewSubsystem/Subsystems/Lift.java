@@ -14,6 +14,7 @@ public class Lift implements Constants {
     private DcMotor lift;
     private double power = STOP;
     private Status liftStatus = Status.NEUTRAL;
+    private int heightLevel = 0;
 
     public Lift(DcMotor l){
         lift = l;
@@ -60,6 +61,25 @@ public class Lift implements Constants {
         } else {
             lift.setPower(power);
         }
+    }
+
+    public void increaseHeight(){
+        heightLevel++;
+    }
+
+    public void decreaseHeight(){
+        heightLevel--;
+    }
+
+    public void setHeight(){
+        switch (heightLevel){
+            case 0:
+
+        }
+    }
+
+    public void goToHeight(){
+
     }
 
     public void downEnc(){

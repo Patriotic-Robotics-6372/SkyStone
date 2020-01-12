@@ -6,6 +6,6 @@ interface Constants {
     int LIFT_MAX = 1000;
     int LIFT_MIN = -500;
     enum Status {
-        FORWARDS, BACKWARDS, UP, DOWN, LEFT, RIGHT, OPEN, CLOSE, NEUTRAL,
+        FORWARDS, BACKWARDS, UP, DOWN, LEFT, RIGHT, OPEN, CLOSE, NEUTRAL;
     }
 }

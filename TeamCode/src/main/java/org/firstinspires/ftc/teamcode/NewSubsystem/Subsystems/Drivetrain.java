@@ -116,6 +116,16 @@ public class Drivetrain implements Constants {
         baseStatus = Status.RIGHT;
     }
 
+    public void leftTurn(){
+        setMaxPower(.8);
+        rotateLeft(19, 5);
+    }
+
+    public void rightTurn(){
+        setMaxPower(.8);
+        rotateRight(19, 5);
+    }
+
     public void strafeLeft(){
         setBase(-power, power, power, -power);
         baseStatus = Status.LEFT;
@@ -169,12 +179,12 @@ public class Drivetrain implements Constants {
     }
 
     public void rotateLeft(double inches, double timeoutS){
-        drive(-inches, inches, timeoutS);
+        drive(inches, -inches, timeoutS);
         baseStatus = Status.LEFT;
     }
 
     public void rotateRight(double inches, double timeoutS){
-        drive(inches, -inches, timeoutS);
+        drive(-inches, inches, timeoutS);
         baseStatus = Status.RIGHT;
     }
 
@@ -214,7 +224,7 @@ public class Drivetrain implements Constants {
     }
 
     public boolean anyBusy(){
-        return frontLeft.isBusy() || frontRight.isBusy() || backLeft.isBusy() || backRight.isBusy();
+        return frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy();
     }
 
     public Status getStatus(){

@@ -22,7 +22,7 @@ public class prTeleOpEncoders extends LinearOpMode {
             // forward
 
             if (gamepad1.dpad_up) {
-                prbot.drive.forward(4);
+                //prbot.drive.forward(4);
             }
         }
     }

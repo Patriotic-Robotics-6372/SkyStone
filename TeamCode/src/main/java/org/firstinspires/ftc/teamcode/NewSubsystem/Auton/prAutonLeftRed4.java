@@ -34,6 +34,8 @@ public class prAutonLeftRed4 extends LinearOpMode {
             //prbot.intake.stop();
             prbot.lift.stop();
 
+            
+
             // go forward towards block
             prbot.drive.forward(36, 5);
             //grab block
@@ -46,7 +48,7 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.drive.rightTurn();
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
-            prbot.drive.forward(77, 10);
+            prbot.drive.forward(75.5, 10);
             // rotate towards foundation
             prbot.drive.leftTurn();
             prbot.drive.setMaxPower(.4);
@@ -66,14 +68,18 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.lift.up();
             sleep(600);
             prbot.lift.stop();
+            sleep(400);
             prbot.pivot.down();
             // back out of foundation
             prbot.drive.backward(12, 2);
+            prbot.intake.close();
+            sleep(1000);
+            prbot.intake.stop();
             // turn towards foundation alliance to park
             prbot.drive.leftTurn();
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge
-            prbot.drive.forward(28, 2);
+            prbot.drive.forward(34, 2);
             break;
         }
     }

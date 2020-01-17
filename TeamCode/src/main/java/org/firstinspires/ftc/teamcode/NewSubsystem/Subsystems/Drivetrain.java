@@ -151,6 +151,23 @@ public class Drivetrain implements Constants {
         backRight.setPower(STOP);
     }
 
+    public void driveStrafe(double leftInches, double rightInches, double timeoutS){
+        leftTickGoal = (int) (TICKS_PER_IN * leftInches);
+        rightTickGoal = (int) (TICKS_PER_IN * rightInches);
+        resetEncoders();
+        setTargetPositions(-rightTickGoal, leftTickGoal, rightTickGoal, -leftTickGoal);
+        runToPositions();
+
+        runtime.reset();
+        setBase(power, power, power, power);
+        while (anyBusy() &&
+                (runtime.seconds() < timeoutS)) {
+            telemEncoderPos();
+        }
+        stop();
+        runUsingEncoders();
+    }
+
     public void drive(double leftInches, double rightInches, double timeoutS){
         leftTickGoal = (int) (TICKS_PER_IN * leftInches);
         rightTickGoal = (int) (TICKS_PER_IN * rightInches);
@@ -166,6 +183,14 @@ public class Drivetrain implements Constants {
         }
         stop();
         runUsingEncoders();
+    }
+
+    public void strafeLeft(double inches, double timeoutS){
+        driveStrafe(inches, inches, timeoutS);
+    }
+
+    public void strafeRight(double inches, double timeoutS){
+        driveStrafe(-inches, -inches, timeoutS);
     }
 
     public void backward(double inches, double timeoutS){

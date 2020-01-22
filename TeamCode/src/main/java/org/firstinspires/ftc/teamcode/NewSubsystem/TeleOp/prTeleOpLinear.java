@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
+@Disabled
 @TeleOp (name = "TeleOp Linear", group = "Subsystem")
 public class prTeleOpLinear extends LinearOpMode {
     Robot prbot = new Robot();

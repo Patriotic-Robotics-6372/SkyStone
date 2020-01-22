@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
 //@Disabled
-@Autonomous (name = "prAuton rightBlue pulledVertical")
-public class prAutonRightBlue5 extends LinearOpMode {
+@Autonomous (name = "prAuton leftRed pulledVertical")
+public class prAutonLeftRed5 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -35,7 +35,7 @@ public class prAutonRightBlue5 extends LinearOpMode {
             prbot.lift.stop();
 
             // strafe left
-            prbot.drive.strafeRight(3, 5);
+            prbot.drive.strafeLeft(3, 5);
 
             // go forward towards block
             prbot.drive.forward(36, 5);
@@ -46,12 +46,12 @@ public class prAutonRightBlue5 extends LinearOpMode {
             prbot.pivot.down();
             prbot.drive.backward(10, 5);
             // back out of 6 skystone area
-            prbot.drive.leftTurn();
+            prbot.drive.rightTurn();
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
             prbot.drive.forward(49, 10);
             // rotate towards foundation
-            prbot.drive.strafeLeft(9, 3);
+            prbot.drive.strafeRight(9, 3);
             prbot.drive.setMaxPower(.4);
             prbot.pivot.up();
             // lift up block
@@ -64,12 +64,12 @@ public class prAutonRightBlue5 extends LinearOpMode {
             prbot.lift.down();
             sleep(600);
             prbot.lift.stop();
-            prbot.drive.strafeRight(2, 5);
             prbot.drive.strafeLeft(2, 5);
+            prbot.drive.strafeRight(2, 5);
             sleep(500);
             prbot.intake.open();
-            prbot.drive.strafeRight(2, 5);
             prbot.drive.strafeLeft(2, 5);
+            prbot.drive.strafeRight(2, 5);
             sleep(1000);
             //prbot.intake.stop();
             // remove intake from foundation
@@ -85,7 +85,7 @@ public class prAutonRightBlue5 extends LinearOpMode {
             sleep(1000);
             prbot.pivot.stop();
             prbot.intake.stop();
-            prbot.drive.strafeRight(9, 3);
+            prbot.drive.strafeLeft(9, 3);
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
             prbot.lift.down();

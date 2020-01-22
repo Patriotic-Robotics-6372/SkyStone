@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
  * desc: Teleop using subsystems.
  */
 
+@Disabled
 @TeleOp(name = "TeleOp 2P", group = "Subsystem")
 public class prTeleOpLiftEncoders extends OpMode {
     private Robot prbot = new Robot();

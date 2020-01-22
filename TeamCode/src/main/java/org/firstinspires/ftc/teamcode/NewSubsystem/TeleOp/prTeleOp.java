@@ -78,9 +78,9 @@ public class prTeleOp extends OpMode {
 
         // Pivot
 
-        if (gamepad2.dpad_up){
+        if (gamepad2.dpad_down){
             prbot.pivot.up();
-        } else if (gamepad2.dpad_down){
+        } else if (gamepad2.dpad_up){
             prbot.pivot.down();
         } else {
             prbot.pivot.stop();

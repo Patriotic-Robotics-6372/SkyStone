@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
 //@Disabled
-@Autonomous (name = "prAuton leftRed")
-public class prAutonLeftRed4 extends LinearOpMode {
+@Autonomous (name = "prAuton rightBlue")
+public class prAutonRightBlue4 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -35,7 +35,7 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.lift.stop();
 
             // strafe left
-            prbot.drive.strafeLeft(3, 5);
+            prbot.drive.strafeRight(3, 5);
 
             // go forward towards block
             prbot.drive.forward(36, 5);
@@ -51,7 +51,7 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.drive.setMaxPower(1);
             prbot.drive.forward(75, 10);
             // rotate towards foundation
-            prbot.drive.leftTurn();
+            prbot.drive.rightTurn();
             prbot.drive.setMaxPower(.4);
             prbot.pivot.up();
             // lift up block
@@ -64,12 +64,12 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.lift.down();
             sleep(600);
             prbot.lift.stop();
-            prbot.drive.strafeLeft(2, 5);
             prbot.drive.strafeRight(2, 5);
+            prbot.drive.strafeLeft(2, 5);
             sleep(500);
             prbot.intake.open();
-            prbot.drive.strafeLeft(2, 5);
             prbot.drive.strafeRight(2, 5);
+            prbot.drive.strafeLeft(2, 5);
             sleep(1000);
             //prbot.intake.stop();
             // remove intake from foundation
@@ -86,7 +86,7 @@ public class prAutonLeftRed4 extends LinearOpMode {
             prbot.pivot.stop();
             prbot.intake.stop();
             // turn towards foundation alliance to park
-            prbot.drive.leftTurn();
+            prbot.drive.rightTurn();
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge
             prbot.drive.forward(34, 2);

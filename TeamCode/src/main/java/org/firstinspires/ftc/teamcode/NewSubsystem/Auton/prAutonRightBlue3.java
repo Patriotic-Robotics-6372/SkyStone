@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems.Robot;
 
-//@Disabled
+@Disabled
 @Autonomous (name = "rightBlue3")
 public class prAutonRightBlue3 extends LinearOpMode {
     Robot prbot = new Robot();

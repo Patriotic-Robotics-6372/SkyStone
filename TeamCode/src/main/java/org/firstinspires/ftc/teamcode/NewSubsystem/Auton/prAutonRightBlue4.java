@@ -79,12 +79,15 @@ public class prAutonRightBlue4 extends LinearOpMode {
             prbot.lift.stop();
             sleep(400);
             // back out of foundation
-            prbot.drive.backward(12, 2);
+            prbot.drive.backward(6, 2);
             prbot.pivot.down();
             prbot.intake.close();
             sleep(1000);
             prbot.pivot.stop();
             prbot.intake.stop();
+            prbot.lift.down();
+            sleep(300);
+            prbot.lift.stop();
             // turn towards foundation alliance to park
             prbot.drive.rightTurn();
             prbot.drive.setMaxPower(1);

@@ -59,7 +59,7 @@ public class prAutonLeftRed5 extends LinearOpMode {
             sleep(700);
             prbot.pivot.stop();
             // get up close to foundation
-            prbot.drive.forward(9, 2);
+            prbot.drive.forward(14, 2);
             // place block
             prbot.lift.down();
             sleep(600);
@@ -79,7 +79,10 @@ public class prAutonLeftRed5 extends LinearOpMode {
             prbot.lift.stop();
             sleep(400);
             // back out of foundation
-            prbot.drive.backward(12, 2);
+            prbot.drive.backward(15, 2);
+            prbot.lift.down();
+            sleep(300);
+            prbot.lift.stop();
             prbot.pivot.down();
             prbot.intake.close();
             sleep(1000);
@@ -88,9 +91,6 @@ public class prAutonLeftRed5 extends LinearOpMode {
             prbot.drive.strafeLeft(9, 3);
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
-            prbot.lift.down();
-            sleep(300);
-            prbot.lift.stop();
             // drive distance to park under bridge
             prbot.drive.backward(14, 2);
             break;

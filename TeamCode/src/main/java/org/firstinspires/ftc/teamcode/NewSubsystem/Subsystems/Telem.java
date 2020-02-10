@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
@@ -14,6 +16,7 @@ public class Telem {
     private Intake intake;
     private Lift lift;
     private Pivot pivot;
+    private Gamepad gamepad1, gamepad2;
 
     public Telem(Drivetrain drive, Intake intake, Lift lift, Pivot pivot){
         this.drive = drive;
@@ -24,6 +27,14 @@ public class Telem {
 
     public void setTelemetry(Telemetry telemetry){
         this.telemetry = telemetry;
+    }
+
+    public void setGamepad1(Gamepad gamepad) {
+        this.gamepad1 = gamepad;
+    }
+
+    public void setGamepad2(Gamepad gamepad) {
+        this.gamepad2 = gamepad;
     }
 
     public void addSpeeds(){
@@ -108,6 +119,24 @@ public class Telem {
 
     public void addBaseZPB(){
         telemetry.addData("BaseZPB", drive.getZPB());
+    }
+
+    public void addGamepad1() {
+        telemetry.addData("Gamepad1LeftStickY", gamepad1.left_stick_y);
+        telemetry.addData("Gamepad1RightStickY", gamepad1.right_stick_y);
+        telemetry.addData("Gamepad1DpadLeft", gamepad1.dpad_left);
+        telemetry.addData("Gamepad1DpadRight", gamepad1.dpad_right);
+        telemetry.addData("Gamepad1DpadUp", gamepad1.dpad_up);
+        telemetry.addData("Gamepad1DpadDown", gamepad1.dpad_down);
+    }
+
+    public void addGamepad2() {
+        telemetry.addData("Gamepad2LeftBumper", gamepad2.left_bumper);
+        telemetry.addData("Gamepad2RightBumper", gamepad2.right_bumper);
+        telemetry.addData("Gamepad2Y", gamepad2.y);
+        telemetry.addData("Gamepad2A", gamepad2.a);
+        telemetry.addData("Gamepad2DpadUp", gamepad2.dpad_up);
+        telemetry.addData("Gamepad2DpadDown", gamepad2.dpad_down);
     }
 
     public void addAll(){

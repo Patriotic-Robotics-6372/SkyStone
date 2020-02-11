@@ -176,7 +176,7 @@ public class Drivetrain implements Constants {
      */
     public void leftTurn(){
         setMaxPower(.8);
-        rotateLeft(19.5, 5);
+        rotateLeft(20, 5);
     }
 
     /**
@@ -184,7 +184,7 @@ public class Drivetrain implements Constants {
      */
     public void rightTurn(){
         setMaxPower(.8);
-        rotateRight(19.5, 5);
+        rotateRight(20, 5);
     }
 
     /**

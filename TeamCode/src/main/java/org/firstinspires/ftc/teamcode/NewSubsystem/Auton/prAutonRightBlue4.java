@@ -17,7 +17,7 @@ public class prAutonRightBlue4 extends LinearOpMode {
         prbot.drive.setTelemetry(telemetry);
         prbot.drive.setBrake(true);
         prbot.drive.setEnc(true);
-        prbot.drive.setMaxPower(1);
+        prbot.drive.setMaxPower(.5);
         prbot.intake.setMaxPower(1);
         prbot.lift.setMaxPower(.8);
         prbot.pivot.setMaxPower(.5);
@@ -36,6 +36,12 @@ public class prAutonRightBlue4 extends LinearOpMode {
 
             // strafe left
             prbot.drive.strafeRight(3, 5);
+            prbot.drive.stop();
+            prbot.drive.moveLeftSide(.2);
+            sleep(500);
+            prbot.drive.stopRightSide();
+            prbot.drive.setMaxPower(1);
+            sleep(500);
 
             // go forward towards block
             prbot.drive.forward(36, 5);
@@ -49,17 +55,19 @@ public class prAutonRightBlue4 extends LinearOpMode {
             prbot.drive.leftTurn();
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
+            prbot.intake.close();
             prbot.drive.forward(75, 10);
             // rotate towards foundation
             prbot.drive.rightTurn();
             prbot.drive.setMaxPower(.4);
+            prbot.intake.close();
             prbot.pivot.up();
             // lift up block
             prbot.lift.up();
             sleep(700);
             prbot.pivot.stop();
             // get up close to foundation
-            prbot.drive.forward(9, 2);
+            prbot.drive.forward(10.5, 2);
             // place block
             prbot.lift.down();
             sleep(600);
@@ -79,7 +87,7 @@ public class prAutonRightBlue4 extends LinearOpMode {
             prbot.lift.stop();
             sleep(400);
             // back out of foundation
-            prbot.drive.backward(6, 2);
+            prbot.drive.backward(7.5, 2);
             prbot.pivot.down();
             prbot.intake.close();
             sleep(1000);

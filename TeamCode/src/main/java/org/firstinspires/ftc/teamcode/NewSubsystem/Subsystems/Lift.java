@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.NewSubsystem.Subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+//import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
  * Lift subsystem
@@ -14,7 +14,7 @@ public class Lift implements Constants {
     private DcMotor lift;
     private double power = STOP;
     private Status liftStatus = Status.NEUTRAL;
-    private int heightLevel = 0;
+    //private int heightLevel = 0;
 
     public Lift(DcMotor l){
         lift = l;
@@ -35,6 +35,7 @@ public class Lift implements Constants {
     public double getMaxPower(){
         return power;
     }
+    /*
 
     public void setEnc(boolean has){
         if (has) {
@@ -45,6 +46,8 @@ public class Lift implements Constants {
         }
     }
 
+     */
+
     public void up(){
         lift.setPower(power);
         liftStatus = Status.UP;
@@ -54,6 +57,7 @@ public class Lift implements Constants {
         lift.setPower(-power);
         liftStatus = Status.DOWN;
     }
+    /*
 
     public void upEnc(){
         if (checkForStop()){
@@ -101,6 +105,7 @@ public class Lift implements Constants {
     public int getLiftEncoder(){
         return lift.getCurrentPosition();
     }
+     */
 
     public void stop(){
         lift.setPower(STOP);

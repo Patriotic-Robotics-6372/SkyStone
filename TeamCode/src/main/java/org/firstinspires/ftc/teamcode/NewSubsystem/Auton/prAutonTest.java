@@ -89,5 +89,12 @@ public class prAutonTest extends LinearOpMode {
         prbot.telem.addAll();
         prbot.telem.update();
         sleep(5000);
+
+
+
+
+        prbot.drive.drive(5, 5, 3);
+
+
     }
 }

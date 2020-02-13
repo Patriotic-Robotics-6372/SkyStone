@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.pivot;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.pivot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
 
 public class Pivot implements Constants {
 
@@ -33,11 +33,16 @@ public class Pivot implements Constants {
     public void up() {
         leftPivot.setPower(power);
         rightPivot.setPower(power);
-        pivotStatus = Status.UP;
+        setStatus(Status.UP);
     }
 
     public void down() {
         leftPivot.setPower(-power);
         rightPivot.setPower(-power);
+        setStatus(Status.DOWN);
+    }
+
+    public void setStatus(Status status) {
+        pivotStatus = status;
     }
 }

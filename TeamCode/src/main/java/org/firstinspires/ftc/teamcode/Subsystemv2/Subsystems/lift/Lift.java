@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.lift;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.lift;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
 
 public class Lift implements Constants {
 
@@ -87,16 +87,16 @@ public class Lift implements Constants {
     public void updateLevel() {
         switch (currentLevel) {
             case 0:
-                move(LEVEL_ONE);
+                move(LEVEL_ZERO);
                 break;
             case 1:
-                move(LEVEL_TWO);
+                move(LEVEL_ONE);
                 break;
             case 2:
                 move(LEVEL_THREE);
                 break;
             case 3:
-                move(LEVEL_FOUR);
+                move(LEVEL_THREE);
                 break;
             default:
                 break;

@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.drivetrain;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
 
 /**
  * Date: 2/11/20

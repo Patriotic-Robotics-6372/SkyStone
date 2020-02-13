@@ -1,6 +1,11 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.pivot;
+package org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.pivot;
 
-public class Pivot extends Constants {
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.Constants;
+
+public class Pivot implements Constants {
 
     private final DcMotor leftPivot, rightPivot;
     private double power, currentSpeed, goalSpeed, speedRate;
@@ -9,23 +14,25 @@ public class Pivot extends Constants {
     public Pivot(DcMotor lP, DcMotor rP) {
         this.leftPivot = lP;
         this.rightPivot = rP;
-        
+
         init();
     }
 
     private void init() {
-        leftPivot.setDirection();
-        rightPivot.setDirection();
+        leftPivot.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
 
         power = STOP;
     }
 
     public void setPivot(double lPPower, double rPPower) {
-       leftPivot.setPower(lPPower);
-       rightPivot.setPower(rPPower);
+        leftPivot.setPower(lPPower);
+        rightPivot.setPower(rPPower);
     }
 
-    public
+    public void up() {
+        leftPivot.setPower(power);
+        rightPivot.setPower(power);
         pivotStatus = Status.UP;
     }
 
@@ -33,7 +40,4 @@ public class Pivot extends Constants {
         leftPivot.setPower(-power);
         rightPivot.setPower(-power);
     }
-
-    public void stop() {
-        leftPivot.
 }

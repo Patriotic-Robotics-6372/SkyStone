@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.drivetrain;
+package org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.Constants;
 
 /**
  * Date: 2/11/20
@@ -103,14 +103,20 @@ public class Drivetrain implements Constants {
         backRight.setPower(power);
     }
 
+    public void setStatus(Status status) {
+        this.baseStatus = status;
+    }
+
     public void pivotTurnLeft(double speed) {
         setLeftSide(speed);
         setRightSide(-speed);
+        setStatus(Status.LEFT);
     }
 
     public void pivotTurnRight(double speed) {
         setLeftSide(-speed);
         setRightSide(speed);
+        setStatus(Status.RIGHT);
     }
 
     public void stopBase() {
@@ -144,10 +150,12 @@ public class Drivetrain implements Constants {
 
     public void forward(double inches) {
         drive(-inches, -inches, -inches, -inches, power, power, power, power);
+        setStatus(Status.FORWARDS);
     }
 
     public void backward(double inches) {
         drive(inches, inches, inches, inches, power, power, power, power);
+        setStatus(Status.BACKWARDS);
     }
 
     public void strafe(double leftInches, double rightInches) {
@@ -156,10 +164,12 @@ public class Drivetrain implements Constants {
 
     public void strafeLeft(double inches) {
         strafe(inches, inches);
+        setStatus(Status.LEFT);
     }
 
     public void strafeRight(double inches) {
         strafe(-inches, -inches);
+        setStatus(Status.RIGHT);
     }
 
     private void setTargetPositions(int fL, int fR, int bL, int bR){

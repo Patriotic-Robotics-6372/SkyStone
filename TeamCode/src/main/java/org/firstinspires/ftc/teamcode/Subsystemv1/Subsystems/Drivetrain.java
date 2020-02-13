@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystemv1.Subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -19,7 +20,7 @@ public class Drivetrain implements Constants {
     private ElapsedTime runtime = new ElapsedTime();
 
     public Drivetrain(DcMotor fL, DcMotor fR, DcMotor bL, DcMotor bR){
-        frontLeft = fL;
+        this.frontLeft = fL;
         frontRight = fR;
         backLeft = bL;
         backRight = bR;
@@ -30,7 +31,7 @@ public class Drivetrain implements Constants {
      * Initialize directions of motors
      */
     public void init(){
-        frontRight.setDirection(DcMotor.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.FORWARD);

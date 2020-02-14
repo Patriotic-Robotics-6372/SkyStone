@@ -13,9 +13,9 @@ public class DigitalButton implements Button {
     private String currentButton;
     private boolean currentState, previousState;
 
-    public DigitalButton(Gamepad gamepad, int button) {
-        this.gamepad = gamepad;
-        this.button = button;
+    public DigitalButton(/*Gamepad gamepad, int button*/) {
+        //this.gamepad = gamepad;
+        //this.button = button;
     }
 
 

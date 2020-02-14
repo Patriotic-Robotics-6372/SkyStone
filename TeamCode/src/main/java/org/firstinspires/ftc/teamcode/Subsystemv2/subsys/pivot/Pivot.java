@@ -31,18 +31,28 @@ public class Pivot implements Constants {
     }
 
     public void up() {
-        leftPivot.setPower(power);
-        rightPivot.setPower(power);
+        setPivot(power, power);
         setStatus(Status.UP);
     }
 
     public void down() {
-        leftPivot.setPower(-power);
-        rightPivot.setPower(-power);
+        setPivot(-power, -power);
         setStatus(Status.DOWN);
+    }
+
+    public void stop() {
+        setPivot(STOP, STOP);
+    }
+
+    public void setMaxPower(double power) {
+        this.power = power;
     }
 
     public void setStatus(Status status) {
         pivotStatus = status;
+    }
+
+    public Status getStatus() {
+        return pivotStatus;
     }
 }

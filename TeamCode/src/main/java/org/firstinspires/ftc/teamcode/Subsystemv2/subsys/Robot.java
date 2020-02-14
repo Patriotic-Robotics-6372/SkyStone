@@ -30,15 +30,31 @@ public class Robot {
         this.lift = new Lift(hwMap.dcMotor.get("lift"));
         this.pivot = new Pivot(hwMap.dcMotor.get("leftPivot"), hwMap.dcMotor.get("rightPivot"));
         this.colorSensor = new SensorColor(hwMap.colorSensor.get("sensor_color"));
-        this.telem = new Telem(this);
+        this.telem = new Telem(this, telemetry);
         this.telemetry = telemetry;
     }
 
-    public void setMode(String mode) {
+    public void setMode(Constants.Status mode) {
         switch (mode) {
-            case "normal":
+            case NORMAL:
+                drive.setMaxPower(1);
+                drive.useBrake(false);
+                drive.useEncoders(false);
+                intake.setMaxPower(1);
+                lift.setMaxPower(.8);
+                lift.useBrake(true);
+                lift.useEncoders(false);
+                pivot.setMaxPower(.5);
                 break;
-            case "speed":
+            case AUTO:
+                drive.setMaxPower(1);
+                drive.useBrake(true);
+                drive.useEncoders(true);
+                intake.setMaxPower(1);
+                lift.setMaxPower(.8);
+                lift.useBrake(true);
+                lift.useEncoders(true);
+                pivot.setMaxPower(.5);
                 break;
         }
     }
@@ -47,7 +63,7 @@ public class Robot {
         return drive;
     }
 
-    public IMU getImu() {
+    public IMU getIMU() {
         return imu;
     }
 
@@ -65,6 +81,10 @@ public class Robot {
 
     public SensorColor getColorSensor() {
         return colorSensor;
+    }
+
+    public Telem getTelem() {
+        return telem;
     }
 
     public Telemetry getTelemetry() {

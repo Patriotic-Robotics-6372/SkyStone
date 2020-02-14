@@ -32,7 +32,8 @@ public interface Constants {
         NEUTRAL,
         NORTH, SOUTH, EAST, WEST,
         RED, GREEN, BLUE,
-        DARK, LIGHT;
+        DARK, LIGHT,
+        NORMAL, AUTO;
     }
 }
 

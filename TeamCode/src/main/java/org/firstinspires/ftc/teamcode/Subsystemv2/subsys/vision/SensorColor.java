@@ -21,13 +21,13 @@ public class SensorColor implements Constants {
     }
 
     public void turnOnLED() {
-        colorSensor.enableLed(true);
         led = true;
+        colorSensor.enableLed(led);
     }
 
     public void turnOffLED() {
-        colorSensor.enableLed(false);
         led = false;
+        colorSensor.enableLed(led);
     }
 
     public boolean getLEDState() {

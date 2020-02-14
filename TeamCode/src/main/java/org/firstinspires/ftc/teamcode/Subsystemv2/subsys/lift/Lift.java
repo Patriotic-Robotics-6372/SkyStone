@@ -93,7 +93,7 @@ public class Lift implements Constants {
                 move(LEVEL_ONE);
                 break;
             case 2:
-                move(LEVEL_THREE);
+                move(LEVEL_TWO);
                 break;
             case 3:
                 move(LEVEL_THREE);
@@ -121,6 +121,10 @@ public class Lift implements Constants {
 
     public int getCurrentLevel() {
         return currentLevel;
+    }
+
+    public int getTickGoal() {
+        return tickGoal;
     }
 
     public DcMotor getLift() {

@@ -1,10 +1,11 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Tests;
+package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu.IMU;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 
 public class IMUTest extends LinearOpMode {
     @Override
@@ -21,9 +22,12 @@ public class IMUTest extends LinearOpMode {
         IMU imu = new IMU(hardwareMap.get(BNO055IMU.class, "imu"));
         imu.initialize(parameters);
 
+        Telem telem = new Telem(imu, telemetry);
+
         waitForStart();
         while (opModeIsActive()) {
-
+            telem.addIMU();
+            telem.update();
         }
     }
 }

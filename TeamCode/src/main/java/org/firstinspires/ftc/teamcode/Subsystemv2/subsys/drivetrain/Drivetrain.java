@@ -103,6 +103,22 @@ public class Drivetrain implements Constants {
         backRight.setPower(power);
     }
 
+    public void forward() {
+        setBase(-power, -power, -power, -power);
+    }
+
+    public void backward() {
+        setBase(power, power, power, power);
+    }
+
+    public void strafeLeft() {
+        setBase(-power, power, power, -power);
+    }
+
+    public void strafeRight() {
+        setBase(power, -power, -power, power);
+    }
+
     public void setStatus(Status status) {
         this.baseStatus = status;
     }
@@ -119,7 +135,7 @@ public class Drivetrain implements Constants {
         setStatus(Status.RIGHT);
     }
 
-    public void stopBase() {
+    public void stop() {
         setBase(STOP);
     }
 
@@ -144,7 +160,7 @@ public class Drivetrain implements Constants {
         while (allBusy()) {
 
         }
-        stopBase();
+        stop();
         setRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
@@ -229,5 +245,9 @@ public class Drivetrain implements Constants {
 
     public int getbRTickGoal() {
         return bRTickGoal;
+    }
+
+    public Status getStatus() {
+        return baseStatus;
     }
 }

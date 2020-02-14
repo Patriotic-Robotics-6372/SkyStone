@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
+package org.firstinspires.ftc.teamcode.Subsystemv2.Tests;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.imu.IMU;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu.IMU;
 
 public class IMUTest extends LinearOpMode {
     @Override

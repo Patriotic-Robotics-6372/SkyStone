@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.telemetry;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Robot;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
 public class Telem {
 

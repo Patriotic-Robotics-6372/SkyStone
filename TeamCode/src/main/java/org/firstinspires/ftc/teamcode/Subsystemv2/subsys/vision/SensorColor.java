@@ -1,12 +1,15 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.vision;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision;
+
+import android.graphics.Color;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
 public class SensorColor implements Constants {
 
     ColorSensor colorSensor;
+    float hsvValues[] = {0F,0F,0F};
     boolean led;
 
     public SensorColor(ColorSensor cS) {
@@ -47,15 +50,16 @@ public class SensorColor implements Constants {
         return colorSensor.alpha();
     }
 
-    public int getHue() {
-        return colorSensor.argb();
+    public float getHue() {
+        Color.RGBToHSV(getRed() * 8, getGreen() * 8, getBlue() * 8, hsvValues);
+        return hsvValues[0];
     }
 
     public boolean isSkystone() {
         if (!getLEDState()) {
             turnOnLED();
         }
-        if (getHue() > 90) {
+        if (getHue() < HUE_SKYSTONE_MAX && getHue() > HUE_SKYSTONE_MIN) {
             return true;
         } else {
             return false;
@@ -66,20 +70,31 @@ public class SensorColor implements Constants {
         if (!getLEDState()) {
             turnOnLED();
         }
-        if (!isSkystone() && getHue() < 50) {
+        if (getHue() < HUE_BLOCK_MAX && getHue() > HUE_BLOCK_MIN) {
             return true;
         } else {
             return false;
         }
     }
 
-    public Status getColor() {
-        if (getRed() > getGreen() && getRed() > getBlue()) {
-            return Status.RED;
-        } else if (getGreen() > getBlue()) {
-            return Status.GREEN;
+    public boolean isNothing() {
+        if (!getLEDState()) {
+            turnOnLED();
+        }
+        if (getHue() < HUE_NOTHING_MAX && getHue() > HUE_NOTHING_MIN) {
+            return true;
         } else {
-            return Status.BLUE;
+            return false;
+        }
+    }
+
+    public String getColor() {
+        if (getRed() > getGreen() && getRed() > getBlue()) {
+            return "RED";
+        } else if (getGreen() > getBlue()) {
+            return "GREEN";
+        } else {
+            return "BLUE";
         }
     }
 

@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.pivot;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
 public class Pivot implements Constants {
 

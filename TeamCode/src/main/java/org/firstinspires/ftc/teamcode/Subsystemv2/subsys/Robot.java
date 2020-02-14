@@ -1,16 +1,16 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.drivetrain.Drivetrain;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.imu.IMU;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.intake.Intake;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.lift.Lift;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.pivot.Pivot;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.telemetry.Telem;
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.vision.SensorColor;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.drivetrain.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu.IMU;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.intake.Intake;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot.Pivot;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
 
 public class Robot {
 

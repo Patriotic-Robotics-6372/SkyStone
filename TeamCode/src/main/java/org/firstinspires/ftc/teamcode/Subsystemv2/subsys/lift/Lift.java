@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.lift;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
 public class Lift implements Constants {
 

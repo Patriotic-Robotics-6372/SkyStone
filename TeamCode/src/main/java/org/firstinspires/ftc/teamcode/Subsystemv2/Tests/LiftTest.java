@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.Subsystems.lift.Lift;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
+
 
 @TeleOp (name = "LiftTest", group = "Test")
 public class LiftTest extends LinearOpMode {

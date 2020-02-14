@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys;
 
 public interface Constants {
     int STOP = 0;
@@ -16,6 +16,13 @@ public interface Constants {
     int GAMEPAD_B = 1;
     int GAMEPAD_X = 2;
     int GAMEPAD_Y = 3;
+
+    float HUE_SKYSTONE_MIN = 70;
+    float HUE_SKYSTONE_MAX = 105;
+    float HUE_BLOCK_MIN = 35;
+    float HUE_BLOCK_MAX = 45;
+    float HUE_NOTHING_MIN = 125;
+    float HUE_NOTHING_MAX = 150;
 
     enum Status {
         FORWARDS, BACKWARDS,

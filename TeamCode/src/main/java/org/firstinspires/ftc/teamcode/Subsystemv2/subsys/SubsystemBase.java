@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys;
 
 public interface SubsystemBase {
     public void setMaxSpeed();

@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.intake;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.intake;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.Constants;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
 public class Intake implements Constants {
 

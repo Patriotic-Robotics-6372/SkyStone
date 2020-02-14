@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.input;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input;
 
 public interface Button {
     public boolean isPressed();

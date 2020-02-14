@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.subsystems.imu;
+package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;

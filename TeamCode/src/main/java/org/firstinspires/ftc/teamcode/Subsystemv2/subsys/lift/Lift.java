@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
 public class Lift implements Constants {
@@ -11,6 +12,7 @@ public class Lift implements Constants {
     private double power, currentSpeed, goalSpeed, speedRate;
     private Status liftStatus = Status.NEUTRAL;
     private int tickGoal, currentLevel;
+    private Telemetry telem;
 
     public Lift(DcMotor l) {
         this.lift = l;
@@ -21,6 +23,10 @@ public class Lift implements Constants {
 
         power = STOP;
         currentLevel = 0;
+    }
+
+    public void setTelemetry(Telemetry telem) {
+        this.telem = telem;
     }
 
     public void useEncoders(boolean use) {
@@ -47,7 +53,10 @@ public class Lift implements Constants {
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lift.setPower(power);
         while (lift.isBusy()) {
-
+            telem.addData("TickGoal", getTickGoal());
+            telem.addData("CurrentPos", lift.getCurrentPosition());
+            telem.addData("Speed", lift.getPower());
+            telem.update();
         }
         stop();
         lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

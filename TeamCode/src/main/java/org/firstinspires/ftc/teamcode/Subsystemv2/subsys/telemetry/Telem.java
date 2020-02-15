@@ -66,15 +66,15 @@ public class Telem {
     }
 
     public void addDrivetrain() {
-        telem.addData("Status", drive.getStatus());
+        telem.addData("drivetrainStatus", drive.getStatus());
     }
 
     public void addIMU() {
-        robot.getIMU().updateAngles();
+        imu.updateAngles();
         telem.addLine()
-                .addData("Heading", robot.getIMU().getFirstAngle())
-                .addData("Roll", robot.getIMU().getSecondAngle())
-                .addData("Pitch", robot.getIMU().getThirdAngle());
+                .addData("Heading", imu.getFirstAngle())
+                .addData("Roll", imu.getSecondAngle())
+                .addData("Pitch", imu.getThirdAngle());
     }
 
     public void addGamepad1() {
@@ -86,17 +86,17 @@ public class Telem {
     }
 
     public void addIntake() {
-        telem.addData("Status", intake.getStatus());
+        telem.addData("intakeStatus", intake.getStatus());
     }
 
     public void addLift() {
-        telem.addData("Status", lift.getStatus());
+        telem.addData("liftStatus", lift.getStatus());
         telem.addData("Level", lift.getCurrentLevel());
         telem.addData("TickGoal", lift.getTickGoal());
     }
 
     public void addPivot() {
-        telem.addData("Status", pivot.getStatus());
+        telem.addData("pivotStatus", pivot.getStatus());
     }
 
     public void addColorSensor() {
@@ -122,12 +122,12 @@ public class Telem {
     public void addAll() {
         addDrivetrain();
         addIMU();
-        addGamepad1();
-        addGamepad2();
+        //addGamepad1();
+        //addGamepad2();
         addIntake();
         addLift();
         addPivot();
-        addColorSensor();
+        //addColorSensor();
     }
 
     public void update() {

@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
-public class prTeleOpv2 extends LinearOpMode {
+@TeleOp(name = "TeleOpv2Linear")
+public class prTeleOpv2Linear extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -71,8 +73,8 @@ public class prTeleOpv2 extends LinearOpMode {
 
             // Telemetry
 
-            prbot.getTelem().addAll();
-            prbot.getTelem().update();
+            //prbot.getTelem().addAll();
+            //prbot.getTelem().update();
 
         }
     }

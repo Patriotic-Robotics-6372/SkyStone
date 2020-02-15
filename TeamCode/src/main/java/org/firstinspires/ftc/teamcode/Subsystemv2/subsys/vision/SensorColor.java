@@ -81,7 +81,14 @@ public class SensorColor implements Constants {
         if (!getLEDState()) {
             turnOnLED();
         }
+        /*
         if (getHue() < HUE_NOTHING_MAX && getHue() > HUE_NOTHING_MIN) {
+            return true;
+        } else {
+            return false;
+        }
+         */
+        if (!isSkystone() && !isBlock()) {
             return true;
         } else {
             return false;

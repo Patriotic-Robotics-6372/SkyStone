@@ -1,9 +1,7 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Tests;
+package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.DigitalButton;
 
 @TeleOp (name = "ButtonTest", group = "Test")
 public class ButtonTest extends LinearOpMode {

@@ -4,6 +4,8 @@ public interface Constants {
     int STOP = 0;
 
     double TICKS_PER_IN = 1120/(4*Math.PI);
+    double THROTTLE_ON = 0.5;
+    double THROTTLE_OFF = 1;
 
     int LEVEL_ZERO = 0;
     int LEVEL_ONE = 300;
@@ -23,6 +25,10 @@ public interface Constants {
     float HUE_BLOCK_MAX = 45;
     float HUE_NOTHING_MIN = 125;
     float HUE_NOTHING_MAX = 150;
+
+    enum Block {
+        ONE, TWO, THREE;
+    }
 
     enum Status {
         FORWARDS, BACKWARDS,

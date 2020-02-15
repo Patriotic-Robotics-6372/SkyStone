@@ -1,9 +1,7 @@
-package org.firstinspires.ftc.teamcode.Subsystemv2.Tests;
+package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 
@@ -15,9 +13,11 @@ public class LiftTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Lift lift = new Lift(hardwareMap.dcMotor.get("lift"));
-        lift.setMaxPower(.5);
+        lift.setMaxPower(.15);
+        lift.setTelemetry(telemetry);
         waitForStart();
         while (opModeIsActive()) {
+            /*
             if (gamepad1.left_bumper && toggle2) {
                 lift.updateLevel();
                 toggle = true;
@@ -29,6 +29,8 @@ public class LiftTest extends LinearOpMode {
             if (!toggle) {
                 toggle2 = true;
             }
+            */
+            lift.updateLevel();
             if (gamepad1.dpad_up) {
                 lift.increaseLevel();
             }
@@ -55,6 +57,7 @@ public class LiftTest extends LinearOpMode {
             }
             telemetry.addData("Level", lift.getCurrentLevel());
             telemetry.addData("Current Power", lift.getLift().getPower());
+            telemetry.update();
         }
     }
 }

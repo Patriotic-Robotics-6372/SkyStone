@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 public class Drivetrain implements Constants {
 
     private final DcMotor frontLeft, frontRight, backLeft, backRight;
-    private double power, currentSpeed, goalSpeed, speedRate;
+    private double power, currentSpeed, goalSpeed, speedRate, speedPercentage;
     private Status baseStatus = Status.NEUTRAL;
     private int fLTickGoal, fRTickGoal, bLTickGoal, bRTickGoal;
 
@@ -65,6 +65,18 @@ public class Drivetrain implements Constants {
         backRight.setZeroPowerBehavior(zpb);
     }
 
+    public void throttleOn() {
+        speedPercentage = THROTTLE_ON;
+    }
+
+    public void throttleOff() {
+        speedPercentage = THROTTLE_OFF;
+    }
+
+    public double getSpeedPercentage() {
+        return speedPercentage;
+    }
+
     public void setMaxPower(double power) {
         this.power = power;
     }
@@ -84,39 +96,39 @@ public class Drivetrain implements Constants {
     }
 
     public void setLeftSide(double fL, double bL) {
-        frontLeft.setPower(fL);
-        backLeft.setPower(bL);
+        frontLeft.setPower(fL * speedPercentage);
+        backLeft.setPower(bL  * speedPercentage);
     }
 
     public void setLeftSide(double power) {
-        frontLeft.setPower(power);
-        backLeft.setPower(power);
+        frontLeft.setPower(power  * speedPercentage);
+        backLeft.setPower(power  * speedPercentage);
     }
 
     public void setRightSide(double fR, double bR) {
-        frontRight.setPower(fR);
-        backRight.setPower(bR);
+        frontRight.setPower(fR * speedPercentage);
+        backRight.setPower(bR * speedPercentage);
     }
 
     public void setRightSide(double power) {
-        frontRight.setPower(power);
-        backRight.setPower(power);
+        frontRight.setPower(power * speedPercentage);
+        backRight.setPower(power * speedPercentage);
     }
 
     public void forward() {
-        setBase(-power, -power, -power, -power);
+        setBase(-power * speedPercentage, -power * speedPercentage, -power * speedPercentage, -power * speedPercentage);
     }
 
     public void backward() {
-        setBase(power, power, power, power);
+        setBase(power * speedPercentage, power * speedPercentage, power * speedPercentage, power * speedPercentage);
     }
 
     public void strafeLeft() {
-        setBase(-power, power, power, -power);
+        setBase(-power * speedPercentage, power * speedPercentage, power * speedPercentage, -power * speedPercentage);
     }
 
     public void strafeRight() {
-        setBase(power, -power, -power, power);
+        setBase(power * speedPercentage, -power * speedPercentage, -power * speedPercentage, power * speedPercentage);
     }
 
     public void setStatus(Status status) {
@@ -124,14 +136,14 @@ public class Drivetrain implements Constants {
     }
 
     public void pivotTurnLeft(double speed) {
-        setLeftSide(speed);
-        setRightSide(-speed);
+        setLeftSide(speed * speedPercentage);
+        setRightSide(-speed * speedPercentage);
         setStatus(Status.LEFT);
     }
 
     public void pivotTurnRight(double speed) {
-        setLeftSide(-speed);
-        setRightSide(speed);
+        setLeftSide(-speed * speedPercentage);
+        setRightSide(speed * speedPercentage);
         setStatus(Status.RIGHT);
     }
 
@@ -156,7 +168,7 @@ public class Drivetrain implements Constants {
         setRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setTargetPositions(fLTickGoal, fRTickGoal, bLTickGoal, bRTickGoal);
         setRunMode(DcMotor.RunMode.RUN_TO_POSITION);
-        setBase(fLPower, fRPower, bLPower, bRPower);
+        setBase(fLPower * speedPercentage, fRPower * speedPercentage, bLPower * speedPercentage, bRPower * speedPercentage);
         while (allBusy()) {
 
         }
@@ -165,17 +177,17 @@ public class Drivetrain implements Constants {
     }
 
     public void forward(double inches) {
-        drive(-inches, -inches, -inches, -inches, power, power, power, power);
+        drive(-inches, -inches, -inches, -inches, power * speedPercentage, power * speedPercentage, power * speedPercentage, power * speedPercentage);
         setStatus(Status.FORWARDS);
     }
 
     public void backward(double inches) {
-        drive(inches, inches, inches, inches, power, power, power, power);
+        drive(inches, inches, inches, inches, power * speedPercentage, power * speedPercentage, power * speedPercentage, power * speedPercentage);
         setStatus(Status.BACKWARDS);
     }
 
     public void strafe(double leftInches, double rightInches) {
-        drive(leftInches, -rightInches, -leftInches, rightInches, power, power, power, power);
+        drive(leftInches, -rightInches, -leftInches, rightInches, power * speedPercentage, power * speedPercentage, power * speedPercentage, power * speedPercentage);
     }
 
     public void strafeLeft(double inches) {

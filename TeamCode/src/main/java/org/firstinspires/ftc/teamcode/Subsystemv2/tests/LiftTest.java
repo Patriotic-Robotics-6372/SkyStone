@@ -3,57 +3,27 @@ package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.Controller;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 
 
 @TeleOp (name = "LiftTest", group = "Test")
 public class LiftTest extends LinearOpMode {
-    boolean toggle = false;
-    boolean toggle2 = true;
     @Override
     public void runOpMode() throws InterruptedException {
         Lift lift = new Lift(hardwareMap.dcMotor.get("lift"));
         lift.setMaxPower(.15);
         lift.setTelemetry(telemetry);
+        Controller gp1 = new Controller();
         waitForStart();
         while (opModeIsActive()) {
-            /*
-            if (gamepad1.left_bumper && toggle2) {
-                lift.updateLevel();
-                toggle = true;
-                toggle2 = false;
-            }
-            if (!gamepad1.left_bumper) {
-                toggle = false;
-            }
-            if (!toggle) {
-                toggle2 = true;
-            }
-            */
-            lift.updateLevel();
-            if (gamepad1.dpad_up) {
+            gp1.updatePrevious();
+            gp1.getA().setState(gamepad1.a);
+            gp1.getY().setState(gamepad1.y);
+            if (gp1.getY().isPressed()) {
                 lift.increaseLevel();
-            }
-            if (gamepad1.dpad_down) {
+            } else if (gp1.getA().isPressed()) {
                 lift.decreaseLevel();
-            }
-            if (gamepad1.a) {
-                lift.setLevel(1);
-            }
-            if (gamepad1.b) {
-                lift.setLevel(2);
-            }
-            if (gamepad1.x) {
-                lift.setLevel(3);
-            }
-            if (gamepad1.y) {
-                lift.setLevel(4);
-            }
-            if (gamepad1.dpad_left) {
-                lift.setLevel(0);
-            }
-            if (gamepad1.dpad_right) {
-                lift.setLevel(4);
             }
             telemetry.addData("Level", lift.getCurrentLevel());
             telemetry.addData("Current Power", lift.getLift().getPower());

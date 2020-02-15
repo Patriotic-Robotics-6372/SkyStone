@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu.IMU;
+import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.Controller;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.intake.Intake;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot.Pivot;
@@ -14,14 +15,16 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
 
 public class Robot {
 
-    Drivetrain drive;
-    IMU imu;
-    Intake intake;
-    Lift lift;
-    Pivot pivot;
-    SensorColor colorSensor;
-    Telem telem;
-    Telemetry telemetry;
+    private Drivetrain drive;
+    private IMU imu;
+    private Intake intake;
+    private Lift lift;
+    private Pivot pivot;
+    private SensorColor colorSensor;
+    private Telem telem;
+    private Controller gp1;
+    private Controller gp2;
+    private Telemetry telemetry;
 
     public void init(HardwareMap hwMap, Telemetry telemetry) {
         this.drive = new Drivetrain(hwMap.dcMotor.get("frontLeft"), hwMap.dcMotor.get("frontRight"), hwMap.dcMotor.get("backLeft"), hwMap.dcMotor.get("backRight"));
@@ -31,6 +34,8 @@ public class Robot {
         this.pivot = new Pivot(hwMap.dcMotor.get("leftPivot"), hwMap.dcMotor.get("rightPivot"));
         this.colorSensor = new SensorColor(hwMap.colorSensor.get("sensor_color"));
         this.telem = new Telem(this, telemetry);
+        this.gp1 = new Controller();
+        this.gp2 = new Controller();
         this.telemetry = telemetry;
     }
 
@@ -85,6 +90,14 @@ public class Robot {
 
     public Telem getTelem() {
         return telem;
+    }
+
+    public Controller getGp1() {
+        return gp1;
+    }
+
+    public Controller getGp2() {
+        return gp2;
     }
 
     public Telemetry getTelemetry() {

@@ -19,8 +19,8 @@ public class Telem {
     Lift lift;
     Pivot pivot;
     SensorColor colorSensor;
-    Controller gamepad_1;
-    Controller gamepad_2;
+    Controller gp1;
+    Controller gp2;
     Telemetry telem;
 
 
@@ -67,6 +67,7 @@ public class Telem {
 
     public void addDrivetrain() {
         telem.addData("drivetrainStatus", drive.getStatus());
+        telem.addData("speedPercentage", drive.getSpeedPercentage());
     }
 
     public void addIMU() {

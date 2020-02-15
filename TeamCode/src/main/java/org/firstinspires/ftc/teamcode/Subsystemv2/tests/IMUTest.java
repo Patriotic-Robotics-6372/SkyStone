@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.imu.IMU;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 
+@TeleOp (name = "IMUTest", group = "Test")
 public class IMUTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

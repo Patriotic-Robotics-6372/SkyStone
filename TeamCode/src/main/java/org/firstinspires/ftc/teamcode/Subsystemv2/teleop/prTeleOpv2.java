@@ -18,7 +18,10 @@ public class prTeleOpv2 extends OpMode {
     @Override
     public void loop() {
 
-        if (gamepad1.left_bumper) {
+        prbot.getGp1().getLeftBumper().previous();
+        prbot.getGp1().getLeftBumper().setState(gamepad1.left_bumper);
+        prbot.getGp1().getLeftBumper().isPressed();
+        if (prbot.getGp1().getLeftBumper().getToggle()) {
             prbot.getDrivetrain().throttleOn();
         } else {
             prbot.getDrivetrain().throttleOff();
@@ -72,6 +75,8 @@ public class prTeleOpv2 extends OpMode {
         } else {
             prbot.getPivot().stop();
         }
+
+        prbot.getTelem().addDrivetrain();
 
     }
 }

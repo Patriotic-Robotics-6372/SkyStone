@@ -6,4 +6,6 @@ public interface Button {
     public boolean isPressed();
     public boolean isHeld();
     public boolean isReleased();
+    public boolean getCurrentState();
+    public boolean getPreviousState();
 }

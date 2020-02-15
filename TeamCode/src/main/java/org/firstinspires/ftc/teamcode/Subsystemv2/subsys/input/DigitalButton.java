@@ -8,54 +8,59 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 @Disabled
 public class DigitalButton implements Button {
 
-    private Gamepad gamepad;
-    private int button;
-    private String currentButton;
     private boolean currentState, previousState;
+    private boolean toggle = false;
 
-    public DigitalButton(/*Gamepad gamepad, int button*/) {
-        //this.gamepad = gamepad;
-        //this.button = button;
+    public DigitalButton() {
+
     }
 
-
-    public void setButton(int button) {
-        switch (button) {
-            case Constants.GAMEPAD_A:
-                currentButton = "gamepad.a";
-                break;
-            case Constants.GAMEPAD_B:
-                currentButton = "gamepad.b";
-                break;
-            case Constants.GAMEPAD_X:
-                currentButton = "gamepad.x";
-                break;
-            case Constants.GAMEPAD_Y:
-                currentButton = "gamepad.y";
-                break;
-        }
+    public void pressed() {
+        currentState = true;
     }
 
-    public boolean updateState(boolean state) {
-        if (state) {
-            currentState = state;
-        }
-        return false;
+    public void previous() {
+        previousState = currentState;
+    }
+
+    public void released() {
+        currentState = false;
+    }
+
+    public void setState(boolean state) {
+        currentState = state;
     }
 
     @Override
     public boolean isPressed() {
-        return false;
+        if (currentState == true && previousState == false) {
+            toggle = !toggle;
+        }
+        return currentState == true && previousState == false;
     }
 
     @Override
     public boolean isHeld() {
-        return false;
+        return currentState == true && previousState == true;
     }
 
     @Override
     public boolean isReleased() {
-        return false;
+        return currentState == false && previousState == true;
+    }
+
+    @Override
+    public boolean getCurrentState() {
+        return currentState;
+    }
+
+    @Override
+    public boolean getPreviousState() {
+        return previousState;
+    }
+
+    public boolean getToggle() {
+        return toggle;
     }
 
 }

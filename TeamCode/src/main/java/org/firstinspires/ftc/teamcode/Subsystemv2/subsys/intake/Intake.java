@@ -18,7 +18,7 @@ public class Intake implements Constants {
 
     public void init(){
         leftPinch.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightPinch.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightPinch.setDirection(DcMotorSimple.Direction.FORWARD);
 
         power = STOP;
     }
@@ -37,12 +37,12 @@ public class Intake implements Constants {
     }
 
     public void open() {
-        setIntake(power, power);
+        setIntake(power, -power);
         setStatus(Status.OPEN);
     }
 
     public void close() {
-        setIntake(-power, -power);
+        setIntake(-power, power);
         setStatus(Status.CLOSE);
     }
 
@@ -57,6 +57,14 @@ public class Intake implements Constants {
 
     public Status getStatus(){
         return intakeStatus;
+    }
+
+    public CRServo getLeftPinch() {
+        return leftPinch;
+    }
+
+    public CRServo getRightPinch() {
+        return rightPinch;
     }
 
 }

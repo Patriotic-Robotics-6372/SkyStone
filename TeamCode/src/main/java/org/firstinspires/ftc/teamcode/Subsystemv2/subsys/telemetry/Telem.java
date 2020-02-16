@@ -68,6 +68,10 @@ public class Telem {
     public void addDrivetrain() {
         telem.addData("drivetrainStatus", drive.getStatus());
         telem.addData("speedPercentage", drive.getSpeedPercentage());
+        telem.addData("frontLeft", drive.getFrontLeft().getPower());
+        telem.addData("frontRight", drive.getFrontRight().getPower());
+        telem.addData("backLeft", drive.getBackLeft().getPower());
+        telem.addData("backRight", drive.getBackRight().getPower());
     }
 
     public void addIMU() {
@@ -88,6 +92,8 @@ public class Telem {
 
     public void addIntake() {
         telem.addData("intakeStatus", intake.getStatus());
+        telem.addData("leftPinchPower", intake.getLeftPinch().getPower());
+        telem.addData("rightPinchPower", intake.getRightPinch().getPower());
     }
 
     public void addLift() {

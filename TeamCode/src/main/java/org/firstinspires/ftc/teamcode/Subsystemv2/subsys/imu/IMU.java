@@ -32,6 +32,7 @@ public class IMU {
         param.loggingEnabled      = true;
         param.loggingTag          = "IMU";
         param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        initialize(param);
     }
 
     public void initialize(BNO055IMU.Parameters parameters) {
@@ -57,6 +58,18 @@ public class IMU {
 
     public String getThirdAngle() {
         return formatAngle(angles.angleUnit, angles.thirdAngle);
+    }
+
+    public float getFirstAngleNum() {
+        return Float.parseFloat(getFirstAngle());
+    }
+
+    public float getSecondAngleNum() {
+        return Float.parseFloat(getSecondAngle());
+    }
+
+    public float getThirdAngleNum() {
+        return Float.parseFloat(getThirdAngle());
     }
 
     String formatAngle(AngleUnit angleUnit, double angle) {

@@ -28,7 +28,7 @@ public class Robot {
 
     public void init(HardwareMap hwMap, Telemetry telemetry) {
         this.drive = new Drivetrain(hwMap.dcMotor.get("frontLeft"), hwMap.dcMotor.get("frontRight"), hwMap.dcMotor.get("backLeft"), hwMap.dcMotor.get("backRight"));
-        this.imu = new IMU(hwMap.get(BNO055IMU.class, "imu"));
+        this.imu = new IMU(hwMap.get(BNO055IMU.class, "imu 1"));
         this.intake = new Intake(hwMap.crservo.get("leftPinch"), hwMap.crservo.get("rightPinch"));
         this.lift = new Lift(hwMap.dcMotor.get("lift"));
         this.pivot = new Pivot(hwMap.dcMotor.get("leftPivot"), hwMap.dcMotor.get("rightPivot"));
@@ -43,6 +43,7 @@ public class Robot {
         switch (mode) {
             case NORMAL:
                 drive.setMaxPower(1);
+                drive.setSpeedPercentage(1);
                 drive.useBrake(false);
                 drive.useEncoders(false);
                 intake.setMaxPower(1);
@@ -53,6 +54,7 @@ public class Robot {
                 break;
             case AUTO:
                 drive.setMaxPower(1);
+                drive.setSpeedPercentage(1);
                 drive.useBrake(true);
                 drive.useEncoders(true);
                 intake.setMaxPower(1);

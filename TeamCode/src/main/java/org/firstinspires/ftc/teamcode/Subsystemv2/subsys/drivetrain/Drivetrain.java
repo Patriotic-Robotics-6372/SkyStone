@@ -73,6 +73,10 @@ public class Drivetrain implements Constants {
         speedPercentage = THROTTLE_OFF;
     }
 
+    public void setSpeedPercentage(double sP) {
+        speedPercentage = sP;
+    }
+
     public double getSpeedPercentage() {
         return speedPercentage;
     }
@@ -96,8 +100,8 @@ public class Drivetrain implements Constants {
     }
 
     public void setLeftSide(double fL, double bL) {
-        frontLeft.setPower(fL);
-        backLeft.setPower(bL);
+        frontLeft.setPower(fL * speedPercentage);
+        backLeft.setPower(bL * speedPercentage);
     }
 
     public void setLeftSide(double power) {
@@ -106,8 +110,8 @@ public class Drivetrain implements Constants {
     }
 
     public void setRightSide(double fR, double bR) {
-        frontRight.setPower(fR);
-        backRight.setPower(bR);
+        frontRight.setPower(fR * speedPercentage);
+        backRight.setPower(bR * speedPercentage);
     }
 
     public void setRightSide(double power) {
@@ -124,11 +128,11 @@ public class Drivetrain implements Constants {
     }
 
     public void strafeLeft() {
-        setBase(-power, power, power, -power);
+        setBase(power, -power, -power, power);
     }
 
     public void strafeRight() {
-        setBase(power, -power, -power, power);
+        setBase(-power, power, power, -power);
     }
 
     public void setStatus(Status status) {
@@ -257,6 +261,22 @@ public class Drivetrain implements Constants {
 
     public int getbRTickGoal() {
         return bRTickGoal;
+    }
+
+    public DcMotor getFrontLeft() {
+        return frontLeft;
+    }
+
+    public DcMotor getFrontRight() {
+        return frontRight;
+    }
+
+    public DcMotor getBackLeft() {
+        return backLeft;
+    }
+
+    public DcMotor getBackRight() {
+        return backRight;
     }
 
     public Status getStatus() {

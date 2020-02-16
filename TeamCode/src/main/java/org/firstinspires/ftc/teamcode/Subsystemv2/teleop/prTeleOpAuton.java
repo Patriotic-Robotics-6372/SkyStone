@@ -14,6 +14,11 @@ public class prTeleOpAuton extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
 
+            prbot.getGp1().getX().previous();
+            prbot.getGp1().getX().setState(gamepad1.x);
+            prbot.getGp1().getX().isPressed();
+
+
         }
     }
 }

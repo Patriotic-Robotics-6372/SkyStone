@@ -13,6 +13,11 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot.Pivot;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
 
+/**
+ * Date: 2/15/20
+ * Author: Jacob Marinas
+ * The container class to hold all subsystems.
+ */
 public class Robot {
 
     private Drivetrain drive;
@@ -39,6 +44,10 @@ public class Robot {
         this.telemetry = telemetry;
     }
 
+    /**
+     * Sets parameters for each of the subsystems using presets
+     * @param mode to set
+     */
     public void setMode(Constants.Status mode) {
         switch (mode) {
             case NORMAL:
@@ -66,42 +75,72 @@ public class Robot {
         }
     }
 
+    /**
+     * @return drivetrain subsystem
+     */
     public Drivetrain getDrivetrain() {
         return drive;
     }
 
+    /**
+     * @return imu subsystem
+     */
     public IMU getIMU() {
         return imu;
     }
 
+    /**
+     * @return intake subsytem
+     */
     public Intake getIntake() {
         return intake;
     }
 
+    /**
+     * @return lift subsystem
+     */
     public Lift getLift() {
         return lift;
     }
 
+    /**
+     * @return pivot subsystem
+     */
     public Pivot getPivot() {
         return pivot;
     }
 
+    /**
+     * @return color sensor subsystem
+     */
     public SensorColor getColorSensor() {
         return colorSensor;
     }
 
+    /**
+     * @return telem subsystem
+     */
     public Telem getTelem() {
         return telem;
     }
 
+    /**
+     * @return gamepad1 controller class
+     */
     public Controller getGp1() {
         return gp1;
     }
 
+    /**
+     * @return gamepad2 controller class
+     */
     public Controller getGp2() {
         return gp2;
     }
 
+    /**
+     * @return telemetry used in main program
+     */
     public Telemetry getTelemetry() {
         return telemetry;
     }

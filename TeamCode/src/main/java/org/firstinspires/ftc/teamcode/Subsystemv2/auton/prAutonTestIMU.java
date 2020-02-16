@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/15/20
+ * Author: Jacob Marinas
+ * Autonomous that attempts to turn 90 degrees using imu values
+ */
 @Autonomous (name = "AutonTestIMU", group = "Test")
 public class prAutonTestIMU extends LinearOpMode {
     Robot prbot = new Robot();

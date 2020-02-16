@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/15/20
+ * Author: Jacob Marinas
+ * TeleOp that can strafe using the sticks.
+ */
 @TeleOp(name = "TeleopWhele", group = "Test")
 public class prTeleOpWhele extends LinearOpMode {
     Robot prbot = new Robot();

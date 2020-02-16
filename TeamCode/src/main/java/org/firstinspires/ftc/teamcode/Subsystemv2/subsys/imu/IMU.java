@@ -18,10 +18,10 @@ import java.util.Locale;
  */
 public class IMU {
 
-    BNO055IMU imu;
+    private BNO055IMU imu;
 
-    Orientation angles;
-    Acceleration gravity;
+    private Orientation angles;
+    private Acceleration gravity;
 
     public IMU(BNO055IMU imu) {
         this.imu = imu;
@@ -35,39 +35,66 @@ public class IMU {
         initialize(param);
     }
 
+    /**
+     * @param parameters to initialize
+     */
     public void initialize(BNO055IMU.Parameters parameters) {
         imu.initialize(parameters);
     }
 
+    /**
+     * @return Orientation object of angles
+     */
     public Orientation getAngles() {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         return angles;
     }
 
+    /**
+     * Update angles to orientation object of angles
+     */
     public void updateAngles() {
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
     }
 
+    /**
+     * @return string of first angle
+     */
     public String getFirstAngle() {
         return formatAngle(angles.angleUnit, angles.firstAngle);
     }
 
+    /**
+     * @return string of second angle
+     */
     public String getSecondAngle() {
         return formatAngle(angles.angleUnit, angles.secondAngle);
     }
 
+    /**
+     * @return stringof third angle
+     */
     public String getThirdAngle() {
         return formatAngle(angles.angleUnit, angles.thirdAngle);
     }
 
+    /**
+     * @return float of first angle
+     */
     public float getFirstAngleNum() {
         return Float.parseFloat(getFirstAngle());
     }
 
+    /**
+     * @return float of second angle
+     */
     public float getSecondAngleNum() {
         return Float.parseFloat(getSecondAngle());
     }
 
+    /**
+     * @return float of third angle
+     */
     public float getThirdAngleNum() {
         return Float.parseFloat(getThirdAngle());
     }
@@ -78,5 +105,12 @@ public class IMU {
 
     String formatDegrees(double degrees){
         return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
+    }
+
+    /**
+     * @return the imu
+     */
+    public BNO055IMU getIMU() {
+        return imu;
     }
 }

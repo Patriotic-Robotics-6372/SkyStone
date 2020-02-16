@@ -7,6 +7,11 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.Controller;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.intake.Intake;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Test program to check intake functionality and data
+ */
 @TeleOp (name = "IntakeTest", group = "Test")
 public class IntakeTest extends LinearOpMode {
     @Override

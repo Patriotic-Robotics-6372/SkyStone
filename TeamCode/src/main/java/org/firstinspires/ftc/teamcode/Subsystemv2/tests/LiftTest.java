@@ -6,7 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.Controller;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 
-
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Test program to check lift functionality and data. In particular, the lift levels.
+ */
 @TeleOp (name = "LiftTest", group = "Test")
 public class LiftTest extends LinearOpMode {
     @Override

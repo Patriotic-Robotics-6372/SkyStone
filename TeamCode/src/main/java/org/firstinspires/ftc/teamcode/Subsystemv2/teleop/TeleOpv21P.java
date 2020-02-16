@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/15/20
+ * Author: Jacob Marinas
+ * TeleOp that has all controls on one controller
+ */
 @TeleOp (name = "TeleOpv2P1")
 public class TeleOpv21P extends LinearOpMode {
     Robot prbot = new Robot();

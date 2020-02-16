@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Autonomous that figures out which version of the autonomous to run
+ */
 @Autonomous(name = "AutonTest", group = "Test")
 public class prAutonTest extends LinearOpMode {
     Robot prbot = new Robot();

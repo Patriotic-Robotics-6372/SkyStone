@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Test program to check drivetrain functionality and data
+ */
 @TeleOp (name = "DrivetrainTest", group = "Test")
 public class DrivetrainTest extends LinearOpMode {
     @Override

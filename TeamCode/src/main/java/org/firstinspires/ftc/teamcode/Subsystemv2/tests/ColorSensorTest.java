@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Test program to check color sensor data
+ */
 @TeleOp (name = "ColorSensorTest", group = "Test")
 public class ColorSensorTest extends LinearOpMode {
     @Override

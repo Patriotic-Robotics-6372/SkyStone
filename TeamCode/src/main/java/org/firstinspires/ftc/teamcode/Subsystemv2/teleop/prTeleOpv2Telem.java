@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/13/20
+ * Author: Jacob Marinas
+ * TeleOp to display all telemetry of each subsystem
+ */
 @TeleOp(name = "TeleOpv2Telem")
 public class prTeleOpv2Telem extends LinearOpMode {
     Robot prbot = new Robot();

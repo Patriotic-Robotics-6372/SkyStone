@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
+/**
+ * Date: 2/12/20
+ * Author: Jacob Marinas
+ * Container class to hold DigitalButton and AnalogButton classes for each input
+ */
 public class Controller implements Constants {
 
     private AnalogButton left_stick_x;
@@ -48,30 +53,79 @@ public class Controller implements Constants {
         //this.gamepad = gamepad;
     }
 
+    /**
+     * @return A button
+     */
     public DigitalButton getA() {
         return a;
     }
 
+    /**
+     * @return B button
+     */
     public DigitalButton getB() {
         return b;
     }
 
+    /**
+     * @return X button
+     */
     public DigitalButton getX() {
         return x;
     }
 
+    /**
+     * @return Y button
+     */
     public DigitalButton getY() {
         return y;
     }
 
+    /**
+     * @return Left bumper button
+     */
     public DigitalButton getLeftBumper() {
         return left_bumper;
     }
 
+    /**
+     * @return Right bumper button
+     */
     public DigitalButton getRightBumper() {
         return right_bumper;
     }
 
+    /**
+     * @return Dpad up button
+     */
+    public DigitalButton getDpadUp() {
+        return dpad_up;
+    }
+
+    /**
+     * @return Dpad down button
+     */
+    public DigitalButton getDpadDown() {
+        return dpad_down;
+    }
+
+    /**
+     * @return Dpad left button
+     */
+    public DigitalButton getDpadLeft() {
+        return dpad_left;
+    }
+
+    /**
+     * @return Dpad right button
+     */
+    public DigitalButton getDpadRight() {
+        return dpad_right;
+    }
+
+    /**
+     * Sets previousState to currentState of all buttons
+     */
     public void updatePrevious() {
         a.previous();
         b.previous();
@@ -85,6 +139,19 @@ public class Controller implements Constants {
         right_stick_button.previous();
     }
 
+    /**
+     * Sets state of currentState to gamepad buttons
+     * @param a state
+     * @param b state 
+     * @param x state 
+     * @param y state
+     * @param dpad_up state
+     * @param dpad_down state
+     * @param dpad_left state
+     * @param dpad_right state
+     * @param right_stick_button state
+     * @param left_stick_button state
+     */
     public void updateCurrent(boolean a, boolean b, boolean x, boolean y,
                               boolean dpad_up, boolean dpad_down, boolean dpad_left, boolean dpad_right,
                               boolean right_stick_button, boolean left_stick_button) {

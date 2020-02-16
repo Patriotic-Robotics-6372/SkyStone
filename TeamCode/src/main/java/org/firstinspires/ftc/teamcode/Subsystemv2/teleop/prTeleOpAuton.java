@@ -5,6 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/16/20
+ * Author: Jacob Marinas
+ * Teleop that uses automation for the lift.
+ */
 public class prTeleOpAuton extends LinearOpMode {
     Robot prbot = new Robot();
     @Override

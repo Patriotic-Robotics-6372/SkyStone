@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/13/20
+ * Author: Jacob Marinas
+ * TeleOp to test linearOpMode functionality
+ */
 @TeleOp(name = "TeleOpv2Linear")
 public class prTeleOpv2Linear extends LinearOpMode {
     Robot prbot = new Robot();

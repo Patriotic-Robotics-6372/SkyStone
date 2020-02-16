@@ -5,6 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 
+/**
+ * Date: 2/15/20
+ * Author: Jacob Marinas
+ * Autonomous that attempts to move lift by encoder counts
+ */
 @Autonomous(name = "AutonLift", group = "Test")
 public class prAutonLift extends LinearOpMode {
     @Override

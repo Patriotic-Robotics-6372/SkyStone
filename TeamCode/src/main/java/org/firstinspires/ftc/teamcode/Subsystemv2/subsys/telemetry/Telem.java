@@ -10,6 +10,11 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot.Pivot;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
 
+/**
+ * Date: 2/16/20
+ * Author: Jacob Marinas
+ * Telemetry statements can be called for each of the subsystems here.
+ */
 public class Telem {
 
     Robot robot;
@@ -22,7 +27,6 @@ public class Telem {
     Controller gp1;
     Controller gp2;
     Telemetry telem;
-
 
     public Telem(Robot robot, Telemetry telem) {
         this.robot = robot;
@@ -65,6 +69,12 @@ public class Telem {
         this.telem = telem;
     }
 
+    /**
+     * Telemetry for drivetrain
+     * | Status
+     * | speedPercentage
+     * | power of each motor
+     */
     public void addDrivetrain() {
         telem.addData("drivetrainStatus", drive.getStatus());
         telem.addData("speedPercentage", drive.getSpeedPercentage());
@@ -74,6 +84,10 @@ public class Telem {
         telem.addData("backRight", drive.getBackRight().getPower());
     }
 
+    /**
+     * Telemetry for imu
+     * | Angles for yaw, pitch, roll
+     */
     public void addIMU() {
         imu.updateAngles();
         telem.addLine()
@@ -82,30 +96,58 @@ public class Telem {
                 .addData("Pitch", imu.getThirdAngle());
     }
 
+    /**
+     * Telemetry for gamepad1
+     */
     public void addGamepad1() {
 
     }
 
+    /**
+     * Telemetry for gamepad2
+     */
     public void addGamepad2() {
 
     }
 
+    /**
+     * Telemetry for intake
+     * | Status
+     * | power of each motor
+     */
     public void addIntake() {
         telem.addData("intakeStatus", intake.getStatus());
         telem.addData("leftPinchPower", intake.getLeftPinch().getPower());
         telem.addData("rightPinchPower", intake.getRightPinch().getPower());
     }
 
+    /**
+     * Telemetry for lift
+     * | Status
+     * | Current Level
+     * | TickGoal
+     */
     public void addLift() {
         telem.addData("liftStatus", lift.getStatus());
         telem.addData("Level", lift.getCurrentLevel());
         telem.addData("TickGoal", lift.getTickGoal());
     }
 
+    /**
+     * Telemetry for pivot
+     * | Status
+     */
     public void addPivot() {
         telem.addData("pivotStatus", pivot.getStatus());
     }
 
+    /**
+     * Telemetry for color sensor
+     * | Checks if seeing Skystone, Block, Nothing
+     * | RGB values
+     * | Alpha
+     * | Hue
+     */
     public void addColorSensor() {
         if (colorSensor.isSkystone()) {
             telem.addData("What I am seeing", "Skystone");
@@ -126,6 +168,9 @@ public class Telem {
                 .addData("isNothing", colorSensor.isNothing());
     }
 
+    /**
+     * Telemetry for all subsystems
+     */
     public void addAll() {
         addDrivetrain();
         addIMU();
@@ -137,6 +182,9 @@ public class Telem {
         //addColorSensor();
     }
 
+    /**
+     * Updates telemetry onto phone
+     */
     public void update() {
         telem.update();
     }

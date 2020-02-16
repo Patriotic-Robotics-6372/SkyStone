@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * Teleop using basic drive. Has toggle for speed of drivetrain
+ */
 @TeleOp (name = "TeleOpv2")
 public class prTeleOpv2 extends OpMode {
     Robot prbot = new Robot();

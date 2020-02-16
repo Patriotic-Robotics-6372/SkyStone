@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Marinas
+ * The lift subsystem. It can use encoders to go to an exact height we want it to go, for going up and down a level.
+ */
 public class Lift implements Constants {
 
     DcMotor lift;
@@ -18,6 +23,9 @@ public class Lift implements Constants {
         this.lift = l;
     }
 
+    /**
+     * Sets direction of lift motor and sets their power and currentLevel to 0
+     */
     public void init(){
         lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -25,10 +33,16 @@ public class Lift implements Constants {
         currentLevel = 0;
     }
 
+    /**
+     * @param telem of main program
+     */
     public void setTelemetry(Telemetry telem) {
         this.telem = telem;
     }
 
+    /**
+     * @param use RUN_USING_ENCODER
+     */
     public void useEncoders(boolean use) {
         if (use) {
             lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -38,6 +52,9 @@ public class Lift implements Constants {
         }
     }
 
+    /**
+     * @param use ZeroPowerBehavior.BRAKE
+     */
     public void useBrake(boolean use) {
         if (use) {
             lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -46,6 +63,10 @@ public class Lift implements Constants {
         }
     }
 
+    /**
+     * Encoder method for moving lift 
+     * @param ticks to travel to
+     */
     public void move(int ticks) {
         tickGoal = ticks;
         //lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -62,37 +83,58 @@ public class Lift implements Constants {
         lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
+    /**
+     * Basic up movement by power
+     */
     public void up() {
         lift.setPower(power);
         setStatus(Status.UP);
     }
 
+    /**
+     * Basic down movement by power
+     */
     public void down() {
         lift.setPower(-power);
         setStatus(Status.DOWN);
     }
 
+    /**
+     * Sets lift to 0
+     */
     public void stop() {
         lift.setPower(STOP);
         setStatus(Status.NEUTRAL);
     }
 
+    /**
+     * Increases currentLevel by 1
+     */
     public void increaseLevel() {
         if (currentLevel + 1 <= MAX_LEVEL) {
             currentLevel++;
         }
     }
 
+    /**
+     * Decreases currentLevel by 1
+     */
     public void decreaseLevel() {
         if (currentLevel - 1 >= MIN_LEVEL) {
             currentLevel--;
         }
     }
 
+    /**
+     * @param level of currentLevel
+     */
     public void setLevel(int level) {
         currentLevel = level;
     }
 
+    /**
+     * Updates position of lift motor
+     */
     public void updateLevel() {
         switch (currentLevel) {
             case 0:
@@ -112,30 +154,51 @@ public class Lift implements Constants {
         }
     }
 
+    /**
+     * @param power out of 1 of the max power
+     */
     public void setMaxPower(double power) {
         this.power = power;
     }
 
+    /**
+     * @param status of subsystem
+     */
     public void setStatus(Status status) {
         this.liftStatus = status;
     }
 
+    /**
+     * @return power
+     */
     public double getMaxPower() {
         return power;
     }
 
+    /**
+     * @return status of subsystem
+     */
     public Status getStatus() {
         return liftStatus;
     }
 
+    /**
+     * @return currentLevel
+     */
     public int getCurrentLevel() {
         return currentLevel;
     }
 
+    /**
+     * @return tickGoal of lift
+     */
     public int getTickGoal() {
         return tickGoal;
     }
 
+    /**
+     * @return lift motor
+     */
     public DcMotor getLift() {
         return lift;
     }

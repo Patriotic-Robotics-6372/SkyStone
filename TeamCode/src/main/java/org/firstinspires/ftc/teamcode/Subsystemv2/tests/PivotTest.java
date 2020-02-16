@@ -6,6 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.pivot.Pivot;
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
 
+/**
+ * Date: 2/14/20
+ * Author: Jacob Mairnas
+ * Test program to check pivot functionality and data
+ */
 @TeleOp (name = "PivotTest", group = "Test")
 public class PivotTest extends LinearOpMode {
     @Override

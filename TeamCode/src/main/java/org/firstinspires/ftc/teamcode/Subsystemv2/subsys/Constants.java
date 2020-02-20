@@ -14,9 +14,9 @@ public interface Constants {
 
     // Tick counts used in lift encoder methods
     int LEVEL_ZERO = 0;
-    int LEVEL_ONE = 300;
-    int LEVEL_TWO = 600;
-    int LEVEL_THREE = 900;
+    int LEVEL_ONE = 1120;
+    int LEVEL_TWO = 2240;
+    int LEVEL_THREE = 3360;
     int MIN_LEVEL = 0;
     int MAX_LEVEL = 3;
 

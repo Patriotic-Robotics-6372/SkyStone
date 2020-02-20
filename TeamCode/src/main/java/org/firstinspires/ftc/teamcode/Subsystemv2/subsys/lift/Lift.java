@@ -16,7 +16,7 @@ public class Lift implements Constants {
     DcMotor lift;
     private double power, currentSpeed, goalSpeed, speedRate;
     private Status liftStatus = Status.NEUTRAL;
-    private int tickGoal, currentLevel;
+    private int tickGoal, currentLevel, currentTick;
     private Telemetry telem;
 
     public Lift(DcMotor l) {
@@ -137,20 +137,23 @@ public class Lift implements Constants {
      */
     public void updateLevel() {
         switch (currentLevel) {
-            case 0:
-                move(LEVEL_ZERO);
-                break;
-            case 1:
-                move(LEVEL_ONE);
-                break;
-            case 2:
-                move(LEVEL_TWO);
-                break;
-            case 3:
-                move(LEVEL_THREE);
-                break;
-            default:
-                break;
+                case 0:
+                    currentTick = LEVEL_ZERO;
+                    break;
+                case 1:
+                    currentTick = LEVEL_ONE;
+                    break;
+                case 2:
+                    currentTick = LEVEL_TWO;
+                    break;
+                case 3:
+                    currentTick = LEVEL_THREE;
+                    break;
+                default:
+                    break;
+            }
+        if (lift.getCurrentPosition() > getCurrentTick() + 10 || lift.getCurrentPosition() < getCurrentTick() - 10) {
+            move(currentTick);
         }
     }
 
@@ -194,6 +197,13 @@ public class Lift implements Constants {
      */
     public int getTickGoal() {
         return tickGoal;
+    }
+
+    /**
+     * @return currentTick
+     */
+    public int getCurrentTick() {
+        return currentTick;
     }
 
     /**

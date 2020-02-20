@@ -131,6 +131,8 @@ public class Telem {
         telem.addData("liftStatus", lift.getStatus());
         telem.addData("Level", lift.getCurrentLevel());
         telem.addData("TickGoal", lift.getTickGoal());
+        telem.addData("CurrentPos", lift.getLift().getCurrentPosition());
+        telem.addData("CurrentTick", lift.getCurrentTick());
     }
 
     /**

@@ -149,6 +149,18 @@ public class Lift implements Constants {
                 case 3:
                     currentTick = LEVEL_THREE;
                     break;
+                case 4:
+                    currentTick = LEVEL_FOUR;
+                    break;
+                case 5:
+                    currentTick = LEVEL_FIVE;
+                    break;
+                case -1:
+                    currentTick = LEVEL_SUBONE;
+                    break;
+                case -2:
+                    currentTick = LEVEL_SUBTWO;
+                    break;
                 default:
                     break;
             }

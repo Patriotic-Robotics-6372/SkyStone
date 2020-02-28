@@ -17,6 +17,18 @@ public interface Constants {
     int LEVEL_ONE = 1120;
     int LEVEL_TWO = 2240;
     int LEVEL_THREE = 3360;
+    int LEVEL_FOUR = 4480;
+    int LEVEL_FIVE = 5600;
+    int LEVEL_SUBONE = -1120;
+    int LEVEL_SUBTWO = -2240;
+    /*
+    int LEVEL_ZERO = -2240;
+    int LEVEL_ONE = -1120;
+    int LEVEL_TWO = 0;
+    int LEVEL_THREE = 1120;
+    int LEVEL_FOUR = 2240;
+    int LEVEL_FIVE = 3360;
+     */
     int MIN_LEVEL = 0;
     int MAX_LEVEL = 3;
 

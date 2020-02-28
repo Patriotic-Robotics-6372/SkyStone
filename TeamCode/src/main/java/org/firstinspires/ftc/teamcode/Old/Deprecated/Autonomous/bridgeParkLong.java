@@ -33,6 +33,7 @@ public class bridgeParkLong extends LinearOpMode {
         waitForStart();
 
         goForward(1,1,2800);
+        goForward(1,1, 2800);
     }
 
     public void goForward (double leftPower, double rightPower,int milliseconds){

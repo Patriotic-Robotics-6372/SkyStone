@@ -16,6 +16,7 @@ public class prAutonLeftRed5 extends LinearOpMode {
         prbot.drive.setTelemetry(telemetry);
         prbot.drive.setBrake(true);
         prbot.drive.setEnc(true);
+        prbot.lift.setBrake(false);
         prbot.drive.setMaxPower(.5);
         prbot.intake.setMaxPower(1);
         prbot.lift.setMaxPower(.8);
@@ -53,11 +54,13 @@ public class prAutonLeftRed5 extends LinearOpMode {
             prbot.pivot.down();
             prbot.drive.backward(10, 5);
             // back out of 6 skystone area
-            prbot.drive.rightTurn();
+            //prbot.drive.rightTurn();
+            //prbot.drive.rotateRight(1.2, 1);
+            prbot.drive.rotateRight(19, 3);
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
             prbot.intake.close();
-            prbot.drive.forward(49, 10);
+            prbot.drive.forward(71, 10);
             // rotate towards foundation
             prbot.drive.strafeRight(9, 3);
             prbot.drive.setMaxPower(.4);
@@ -98,6 +101,7 @@ public class prAutonLeftRed5 extends LinearOpMode {
             prbot.pivot.stop();
             prbot.intake.stop();
             prbot.drive.strafeLeft(9, 3);
+            prbot.drive.rotateLeft(2, 1);
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge

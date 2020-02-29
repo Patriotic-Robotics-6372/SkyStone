@@ -23,7 +23,7 @@ public class Lift implements Constants {
     }
 
     public void init(){
-        lift.setDirection(DcMotorSimple.Direction.REVERSE);
+        lift.setDirection(DcMotorSimple.Direction.FORWARD);
 
         stop();
     }
@@ -34,6 +34,14 @@ public class Lift implements Constants {
 
     public double getMaxPower(){
         return power;
+    }
+
+    public void setBrake(boolean has) {
+        if (has) {
+            lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        } else {
+            lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        }
     }
     /*
 

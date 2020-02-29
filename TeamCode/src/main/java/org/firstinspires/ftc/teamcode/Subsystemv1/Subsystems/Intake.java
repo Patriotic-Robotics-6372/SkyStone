@@ -21,8 +21,8 @@ public class Intake implements Constants {
     }
 
     public void init(){
-        leftPinch.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightPinch.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftPinch.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightPinch.setDirection(DcMotorSimple.Direction.FORWARD);
 
         stop();
     }

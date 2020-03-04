@@ -100,12 +100,12 @@ public class prAutonRightBlue5 extends LinearOpMode {
             sleep(1000);
             prbot.pivot.stop();
             prbot.intake.stop();
-            prbot.drive.strafeRight(9, 3);
+            //prbot.drive.strafeRight(9, 3);
             prbot.drive.rotateRight(2, 2);
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge
-            prbot.drive.backward(14, 2);
+            prbot.drive.backward(30, 2);
             break;
         }
     }

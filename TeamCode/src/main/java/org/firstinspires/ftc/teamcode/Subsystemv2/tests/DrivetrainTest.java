@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
  * Author: Jacob Marinas
  * Test program to check drivetrain functionality and data
  */
+@Disabled
 @TeleOp (name = "DrivetrainTest", group = "Test")
 public class DrivetrainTest extends LinearOpMode {
     @Override

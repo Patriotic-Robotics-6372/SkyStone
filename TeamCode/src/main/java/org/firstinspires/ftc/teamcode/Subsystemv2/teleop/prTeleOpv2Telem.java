@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
  * Author: Jacob Marinas
  * TeleOp to display all telemetry of each subsystem
  */
+@Disabled
 @TeleOp(name = "TeleOpv2Telem")
 public class prTeleOpv2Telem extends LinearOpMode {
     Robot prbot = new Robot();

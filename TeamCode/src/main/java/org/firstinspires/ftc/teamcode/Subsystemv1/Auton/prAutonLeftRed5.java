@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv1.Subsystems.Robot;
 
 //@Disabled
-@Autonomous (name = "prAuton leftRed pulledVertical")
+@Autonomous (name = "prAuton leftRed pulledHorizonal")
 public class prAutonLeftRed5 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override

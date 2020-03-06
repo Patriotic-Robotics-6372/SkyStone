@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
  * Author: Jacob Marinas
  * Test program to check IMU functionality and data
  */
+@Disabled
 @TeleOp (name = "IMUTest", group = "Test")
 public class IMUTest extends LinearOpMode {
     @Override

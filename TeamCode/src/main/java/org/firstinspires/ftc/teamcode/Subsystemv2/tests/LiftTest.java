@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.telemetry.Telem;
  * Author: Jacob Marinas
  * Test program to check lift functionality and data. In particular, the lift levels.
  */
+@Disabled
 @TeleOp (name = "LiftTest", group = "Test")
 public class LiftTest extends LinearOpMode {
     @Override

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Author: Jacob Marinas
  * Test program for checking toggle logic
  */
+@Disabled
 @TeleOp (name = "ToggleTest", group = "Test")
 public class ToggleTest extends LinearOpMode {
     boolean currentState, previousState, state;

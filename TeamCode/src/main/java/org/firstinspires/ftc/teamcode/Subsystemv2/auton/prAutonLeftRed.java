@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Constants;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.Robot;
  * Author: Jacob Marinas
  * Autonomous template
  */
+@Disabled
 @Autonomous (name = "AutonLeftRedv2", group = "NewAuton")
 public class prAutonLeftRed extends LinearOpMode {
     Robot prbot = new Robot();

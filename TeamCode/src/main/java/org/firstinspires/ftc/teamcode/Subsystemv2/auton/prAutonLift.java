@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.lift.Lift;
  * Author: Jacob Marinas
  * Autonomous that attempts to move lift by encoder counts
  */
+@Disabled
 @Autonomous(name = "AutonLift", group = "Test")
 public class prAutonLift extends LinearOpMode {
     @Override

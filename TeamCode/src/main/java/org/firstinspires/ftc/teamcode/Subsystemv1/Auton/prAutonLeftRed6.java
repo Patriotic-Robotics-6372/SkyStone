@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv1.Subsystems.Robot;
 
 //@Disabled
-@Autonomous (name = "prAuton rightBlue pulledHorizontal")
-public class prAutonRightBlue5 extends LinearOpMode {
+@Autonomous (name = "prAuton leftRed pulledVertical")
+public class prAutonLeftRed6 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -37,9 +37,9 @@ public class prAutonRightBlue5 extends LinearOpMode {
             sleep(3000);
 
             // strafe left
-            prbot.drive.strafeRight(3, 5);
+            prbot.drive.strafeLeft(3, 5);
             prbot.drive.stop();
-            prbot.drive.moveLeftSide(.2);
+            prbot.drive.moveRightSide(.2);
             sleep(500);
             prbot.drive.stopRightSide();
             prbot.drive.setMaxPower(1);
@@ -54,15 +54,15 @@ public class prAutonRightBlue5 extends LinearOpMode {
             prbot.pivot.down();
             prbot.drive.backward(10, 5);
             // back out of 6 skystone area
-            //prbot.drive.leftTurn();
-            //prbot.drive.rotateLeft(1.2, 1);
-            prbot.drive.rotateLeft(19, 3);
+            //prbot.drive.rightTurn();
+            //prbot.drive.rotateRight(1.2, 1);
+            prbot.drive.rotateRight(19, 3);
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
             prbot.intake.close();
-            prbot.drive.forward(71, 10);
+            prbot.drive.forward(51, 10);
             // rotate towards foundation
-            prbot.drive.strafeLeft(9, 3);
+            prbot.drive.strafeRight(9, 3);
             prbot.drive.setMaxPower(.4);
             prbot.intake.close();
             prbot.pivot.up();
@@ -76,12 +76,12 @@ public class prAutonRightBlue5 extends LinearOpMode {
             prbot.lift.down();
             sleep(600);
             prbot.lift.stop();
-            prbot.drive.strafeRight(2, 5);
             prbot.drive.strafeLeft(2, 5);
+            prbot.drive.strafeRight(2, 5);
             sleep(500);
             prbot.intake.open();
-            prbot.drive.strafeRight(2, 5);
             prbot.drive.strafeLeft(2, 5);
+            prbot.drive.strafeRight(2, 5);
             sleep(1000);
             //prbot.intake.stop();
             // remove intake from foundation
@@ -100,12 +100,12 @@ public class prAutonRightBlue5 extends LinearOpMode {
             sleep(1000);
             prbot.pivot.stop();
             prbot.intake.stop();
-            //prbot.drive.strafeRight(9, 3);
-            prbot.drive.rotateRight(2, 2);
+            //prbot.drive.strafeLeft(9, 3);
+            prbot.drive.rotateLeft(2, 1);
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge
-            prbot.drive.backward(30, 2);
+            prbot.drive.backward(16, 2);
             break;
         }
     }

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.vision.SensorColor;
  * Author: Jacob Marinas
  * Test program to check color sensor data
  */
+@Disabled
 @TeleOp (name = "ColorSensorTest", group = "Test")
 public class ColorSensorTest extends LinearOpMode {
     @Override

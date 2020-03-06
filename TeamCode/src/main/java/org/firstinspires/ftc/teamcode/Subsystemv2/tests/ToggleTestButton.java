@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystemv2.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Subsystemv2.subsys.input.DigitalButton;
  * Author: Jacob Marinas
  * Test program to check toggle logic through the DigitalButton class
  */
+@Disabled
 @TeleOp (name = "ToggleTestButton", group = "Test")
 public class ToggleTestButton extends LinearOpMode {
     boolean press, hold, release;

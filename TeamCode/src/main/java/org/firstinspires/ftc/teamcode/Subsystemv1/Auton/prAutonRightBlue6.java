@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Subsystemv1.Subsystems.Robot;
 
 //@Disabled
-@Autonomous (name = "prAuton rightBlue pulledHorizontal")
-public class prAutonRightBlue5 extends LinearOpMode {
+@Autonomous (name = "prAuton rightBlue pulledVertical")
+public class prAutonRightBlue6 extends LinearOpMode {
     Robot prbot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
@@ -60,7 +60,7 @@ public class prAutonRightBlue5 extends LinearOpMode {
             // turn towards alliance bridge
             prbot.drive.setMaxPower(1);
             prbot.intake.close();
-            prbot.drive.forward(71, 10);
+            prbot.drive.forward(51, 10);
             // rotate towards foundation
             prbot.drive.strafeLeft(9, 3);
             prbot.drive.setMaxPower(.4);
@@ -105,7 +105,7 @@ public class prAutonRightBlue5 extends LinearOpMode {
             // turn towards foundation alliance to park
             prbot.drive.setMaxPower(1);
             // drive distance to park under bridge
-            prbot.drive.backward(30, 2);
+            prbot.drive.backward(16, 2);
             break;
         }
     }
